@@ -8,7 +8,7 @@
 
 Este repositorio contiene el análisis estadístico del dataset *Default of Credit Card Clients* (UCI, Taiwan 2005), desarrollado como parte de la Evaluación Formativa 1 del curso MCDI501.
 
-El objetivo es analizar y predecir el comportamiento de pago de clientes de tarjetas de crédito, aplicando estadística descriptiva, estimación paramétrica y pruebas de hipótesis para apoyar la toma de decisiones en gestión de riesgo crediticio.
+El objetivo es caracterizar el comportamiento de pago de clientes de tarjetas de crédito mediante estadística descriptiva, estimación paramétrica y pruebas de hipótesis, sentando las bases para el desarrollo posterior de modelos predictivos que apoyen la toma de decisiones en gestión de riesgo crediticio.
 
 ## Dataset
 
