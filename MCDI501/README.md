@@ -31,14 +31,14 @@ MCDI501/
 ├── data/
 │   └── raw/
 │       ├── UCI_Credit_Card_con_faltantes.csv   # Dataset con valores faltantes (MCAR)
-│       ├── UCI_Credit_Card.csv                 # Dataset original sin faltantes
-│       └── fig_*.png                           # Figuras exportadas (histogramas, boxplots, IC, tests)
+│       └── UCI_Credit_Card.csv                 # Dataset original sin faltantes
+├── figures/                                    # Figuras exportadas (histogramas, boxplots, IC, tests)
+│   └── fig_*.png
 ├── notebooks/
 │   └── F1_semana1.ipynb                        # Análisis EDA e inferencial (Sumativa 1 — Fase 2)
 ├── src/
 │   └── data_loading.py                         # Módulo de carga de datos (cargar_datos)
 ├── requirements.txt                            # Dependencias del proyecto
-└── README.md
 ```
 
 ## Instalación y Uso
