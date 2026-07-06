@@ -23,13 +23,25 @@ tras el preprocesamiento de la Sumativa 1 (imputación mediana/moda, n = 30,000)
 
 **Correlación inestable — usar con cautela:** AGE – DEFAULT (r=0.014), amplitud relativa del IC ≈169%. No se recomienda como variable predictiva relevante por sí sola.
 
-## 3. Observaciones influyentes identificadas (jackknife)
+## 3. Historial de pagos (PAY_0–PAY_6) — hallazgo nuevo de esta fase (Sección 6.1)
+
+No evaluado en S1 ni en las Secciones 1–5 de esta fase. `PAY_0` resultó ser **la variable con la asociación más fuerte y más estable con el incumplimiento de todo el análisis**:
+
+| Variable | V de Cramér vs. DEFAULT | IC 95% bootstrap | Amplitud relativa |
+|---|---|---|---|
+| PAY_0 (más reciente) | 0.390 | [0.3779 ; 0.4027] | 6.4% |
+| PAY_2 | 0.340 | [0.3277 ; 0.3538] | 7.7% |
+| PAY_6 (más antiguo) | 0.251 | [0.2380 ; 0.2647] | 10.7% |
+
+`PAY_0` (V ≈ 0.39) supera en magnitud de asociación a `LIMIT_BAL`–`DEFAULT` (r = -0,144) por más de 2,5 veces, con una amplitud relativa de IC (6.4%) más baja que cualquier correlación no monetaria de la Sección 3.1. La tasa de incumplimiento salta de forma no lineal entre "sin atraso" (~13%–17%) y "con atraso" (34%–77%), y las seis variables están fuertemente autocorrelacionadas entre sí (ρ Spearman hasta 0,82 entre meses consecutivos) — **no usarlas todas sin control de colinealidad** en un modelo lineal para S3.
+
+## 4. Observaciones influyentes identificadas (jackknife)
 
 Clientes con `LIMIT_BAL` en el percentil superior (hasta NT$1.000.000) concentran la mayor influencia individual sobre la media de `LIMIT_BAL`, aunque ninguna observación domina el resultado (desplazamiento marginal por observación < NT$30). Se recomienda para S3: (a) inspeccionar estos casos como parte de un análisis de outliers en el modelado predictivo, (b) evaluar transformaciones (log) o técnicas robustas (RobustScaler, modelos basados en árboles) menos sensibles a esta asimetría.
 
-## 4. Recomendaciones metodológicas para S3
+## 5. Recomendaciones metodológicas para S3
 
-1. **Modelos predictivos**: priorizar `LIMIT_BAL`, el historial de pagos (`PAY_0`...`PAY_6`, no evaluado en profundidad aquí) y variables derivadas de las facturas por sobre variables débiles como `AGE`, cuya relación con el default es estadísticamente detectable pero de magnitud práctica despreciable.
+1. **Modelos predictivos**: priorizar `PAY_0` (la variable individual más fuertemente asociada al incumplimiento encontrada en esta fase, ver Sección 3 de este informe), `LIMIT_BAL` y variables derivadas de las facturas, por sobre variables débiles como `AGE`. Evitar incluir `PAY_0`...`PAY_6` completas sin control de colinealidad, dada su fuerte autocorrelación mensual (ver Sección 3).
 2. **Manejo de outliers**: no eliminar automáticamente los outliers de `LIMIT_BAL` — el análisis de robustez muestra que, si bien desplazan la media puntual, no afectan la significancia de las pruebas de hipótesis; considerar en su lugar transformaciones o modelos robustos a colas pesadas.
 3. **Supuestos distribucionales**: al construir estimaciones de riesgo/exposición (p. ej. pérdida esperada), usar Lognormal u otra distribución de cola derecha en lugar de Normal para variables monetarias, dado que la elección de distribución cambia los resultados en ~4%.
 4. **Validación continua**: mantener el patrón de esta Sumativa 2 (bootstrap/permutación) como chequeo de sanidad cuando se reentrenen modelos en S3, especialmente si cambia el tamaño o la composición de la muestra.
