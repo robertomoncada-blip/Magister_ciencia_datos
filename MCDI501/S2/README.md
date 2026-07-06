@@ -62,7 +62,7 @@ S2/
 
 ```bash
 git clone https://github.com/robertomoncada-blip/Magister_ciencia_datos.git
-cd Magister_ciencia_datos/MCDI501
+cd Magister_ciencia_datos/MCDI501/S2
 ```
 
 ### 2. Crear entorno virtual e instalar dependencias
