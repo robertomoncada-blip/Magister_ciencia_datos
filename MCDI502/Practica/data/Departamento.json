@@ -1,0 +1,26 @@
+[
+  {
+    "Codigo": 1,
+    "Nombre": "RRHH"
+  },
+  {
+    "Codigo": 2,
+    "Nombre": "Administracion"
+  },
+  {
+    "Codigo": 3,
+    "Nombre": "Contabilidad"
+  },
+  {
+    "Codigo": 4,
+    "Nombre": "Logistica"
+  },
+  {
+    "Codigo": 5,
+    "Nombre": "Ventas"
+  },
+  {
+    "Codigo": 6,
+    "Nombre": "Informatica"
+  }
+]
