@@ -61,7 +61,7 @@ Esta Fase 1 se limita a la definición del problema, la exploración descriptiva
 
 - Python 3.12+
 
-## Instalación
+## Instalación (en carpeta raiz del proyecto MCDI504)
 
 ```bash
 python3 -m venv .venv
