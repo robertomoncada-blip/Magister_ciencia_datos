@@ -1,6 +1,6 @@
 # AI Impact on Jobs 2030
 
-Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 a 3 del proyecto: definición del problema, implementación de modelos de regresión y desarrollo de modelos de clasificación mediante redes neuronales.
+Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 a 4 del proyecto: definición del problema, implementación de modelos de regresión, desarrollo de modelos de clasificación mediante redes neuronales y evaluación y validación del modelo final.
 
 **Curso:** MCDI504 - Machine Learning I
 **Grupo:** 5
@@ -18,6 +18,7 @@ Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 
 - **Fase 1 – Definición y Orientación de la Situación:** definición del problema, exploración descriptiva inicial de los datos y justificación del enfoque de aprendizaje (clasificación supervisada multiclase). No se entrena ningún modelo predictivo en esta etapa.
 - **Fase 2 – Búsqueda y Recopilación de Información:** implementación y comparación de modelos de regresión supervisada (regresión lineal multivariable, árbol de decisión y red neuronal MLP) sobre una variable objetivo continua derivada del dataset.
 - **Fase 3 – Desarrollo del Proyecto:** implementación y comparación de modelos de clasificación supervisada mediante redes neuronales (MLP) con una, dos y tres capas ocultas, para predecir `Risk_Category`.
+- **Fase 4 – Evaluación y Validación del Modelo:** evaluación del desempeño de siete modelos de clasificación (KNN, árbol de decisión, SVM, Naive Bayes y las tres arquitecturas MLP) mediante matriz de confusión y métricas de clasificación, selección del modelo campeón y validación de la estabilidad de sus métricas mediante K-Fold Cross-Validation estratificada (k=5).
 
 ## Estructura del proyecto
 
@@ -28,7 +29,8 @@ Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 
 ├── docs/
 │   ├── MCDI504_S1_1_GRUPO5.pdf/.docx       # Informe entregable Fase 1
 │   ├── MCDI504_F2_1_GRUPO5.pdf/.docx       # Informe entregable Fase 2
-│   └── MCDI504_S3_2_GRUPO5.docx            # Informe entregable Fase 3
+│   ├── MCDI504_S3_2_GRUPO5.pdf/.docx       # Informe entregable Fase 3
+│   └── MCDI504_S4_2_GRUPO5.pdf/.docx       # Informe entregable Fase 4
 ├── figures/                                # Gráficos generados por los notebooks
 │   ├── boxplot_salario_experiencia.png     # Fase 1
 │   ├── boxplot_indices_habilidades.png
@@ -36,11 +38,13 @@ Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 
 │   ├── pvalores_pearson.png
 │   ├── kdd_proceso.png
 │   ├── f2_*.png                            # Fase 2 (regresión)
-│   └── f3_*.png                            # Fase 3 (redes neuronales)
+│   ├── f3_*.png                            # Fase 3 (redes neuronales)
+│   └── f4_*.png                            # Fase 4 (evaluación y validación)
 ├── notebooks/
 │   ├── F1_Definicion.ipynb                 # Notebook Fase 1
 │   ├── F2_Regresion.ipynb                  # Notebook Fase 2
-│   └── F3_RedesNeuronales.ipynb            # Notebook Fase 3
+│   ├── F3_RedesNeuronales.ipynb            # Notebook Fase 3
+│   └── F4_EvaluacionValidacion.ipynb       # Notebook Fase 4
 ├── requirements.txt
 └── Readme.md
 ```
@@ -91,6 +95,21 @@ Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 
 9. Evaluación de desempeño de redes neuronales
 10. Comparación de arquitecturas de redes neuronales
 11. Conclusiones
+12. Referencias
+
+### F4_EvaluacionValidacion.ipynb
+
+1. Contexto y objetivo de la Fase 4
+2. Librerías necesarias
+3. Carga y preparación del conjunto de datos (variables predictoras, partición Hold-Out 80/20 estratificada, escalado, función auxiliar de evaluación)
+4. Modelos de clasificación tradicionales (KNN, árbol de decisión, SVM, Naive Bayes)
+5. Modelos de redes neuronales retomados de la Fase 3 (MLP de una, dos y tres capas ocultas)
+6. Reporte tabulado comparativo de métricas de todos los modelos
+7. Selección y evaluación detallada del modelo campeón (matriz de confusión, reporte de clasificación, curvas ROC One-vs-Rest)
+8. Validación cruzada K-Fold estratificada del modelo campeón
+9. Justificación de la técnica de validación utilizada
+10. Coherencia metodológica de validación
+11. Conclusiones técnicas de desempeño y validación
 12. Referencias
 
 ## Requisitos
