@@ -1,8 +1,8 @@
-# AI Impact on Jobs 2030
+# Análisis exploratorio reproducible del dataset Titanic
 
-Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 a 4 del proyecto: definición del problema, implementación de modelos de regresión, desarrollo de modelos de clasificación mediante redes neuronales y evaluación y validación del modelo final.
+Proyecto de la asignatura **MCDI503 – Exploración Inteligente para la Ciencia de Datos**. Fase 1: implementación inicial del análisis exploratorio de datos (EDA) reproducible.
 
-**Curso:** MCDI504 - Machine Learning I
+**Curso:** MCDI503 - Exploración Inteligente para la Ciencia de Datos
 **Grupo:** 5
 
 **Integrantes:**
@@ -13,110 +13,50 @@ Proyecto de la asignatura **MCDI504 – Machine Learning I**. Cubre las Fases 1 
 
 ## Descripción
 
-**NextWork Advisory** es una consultora ficticia de estrategia de talento y planificación de fuerza laboral. El proyecto utiliza el dataset **AI Impact on Jobs 2030** (3.000 perfiles laborales) para evaluar si es posible construir un modelo capaz de estimar el nivel de riesgo de automatización (`Risk_Category`: Low / Medium / High) de un cargo hacia 2030, a partir de características observables como salario, experiencia, educación, exposición a la IA y perfil de habilidades.
+El proyecto trabaja con el dataset **Titanic** (891 pasajeros, 12 variables; fuente: Kaggle, *Titanic - Machine Learning from Disaster*), que combina información demográfica, socioeconómica y de composición familiar de los pasajeros del RMS Titanic.
 
-- **Fase 1 – Definición y Orientación de la Situación:** definición del problema, exploración descriptiva inicial de los datos y justificación del enfoque de aprendizaje (clasificación supervisada multiclase). No se entrena ningún modelo predictivo en esta etapa.
-- **Fase 2 – Búsqueda y Recopilación de Información:** implementación y comparación de modelos de regresión supervisada (regresión lineal multivariable, árbol de decisión y red neuronal MLP) sobre una variable objetivo continua derivada del dataset.
-- **Fase 3 – Desarrollo del Proyecto:** implementación y comparación de modelos de clasificación supervisada mediante redes neuronales (MLP) con una, dos y tres capas ocultas, para predecir `Risk_Category`.
-- **Fase 4 – Evaluación y Validación del Modelo:** evaluación del desempeño de siete modelos de clasificación (KNN, árbol de decisión, SVM, Naive Bayes y las tres arquitecturas MLP) mediante matriz de confusión y métricas de clasificación, selección del modelo campeón y validación de la estabilidad de sus métricas mediante K-Fold Cross-Validation estratificada (k=5).
+- **Fase 1 – Implementación inicial del EDA reproducible:** carga y revisión inicial del dataset, diagnóstico de calidad (valores faltantes), exploración descriptiva univariada y bivariada frente a `Survived`, documentación trazable de cinco decisiones exploratorias (indicadores de completitud para `Cabin` y `Age`, imputación puntual de `Embarked`, construcción de `FamilySize`/`IsAlone` y extracción de `Title`), detección preliminar de valores atípicos mediante IQR y síntesis de hallazgos iniciales. No se realiza imputación definitiva, codificación final ni modelado predictivo en esta fase.
 
 ## Estructura del proyecto
 
 ```
 .
 ├── data/
-│   └── AI_Impact_on_Jobs_2030.csv          # Dataset original (3.000 registros)
+│   └── Titanic-Dataset.csv                     # Dataset original (891 registros)
 ├── docs/
-│   ├── MCDI504_S1_1_GRUPO5.pdf/.docx       # Informe entregable Fase 1
-│   ├── MCDI504_F2_1_GRUPO5.pdf/.docx       # Informe entregable Fase 2
-│   ├── MCDI504_S3_2_GRUPO5.pdf/.docx       # Informe entregable Fase 3
-│   └── MCDI504_S4_2_GRUPO5.pdf/.docx       # Informe entregable Fase 4
-├── figures/                                # Gráficos generados por los notebooks
-│   ├── boxplot_salario_experiencia.png     # Fase 1
-│   ├── boxplot_indices_habilidades.png
-│   ├── correlacion_pearson.png
-│   ├── pvalores_pearson.png
-│   ├── kdd_proceso.png
-│   ├── f2_*.png                            # Fase 2 (regresión)
-│   ├── f3_*.png                            # Fase 3 (redes neuronales)
-│   └── f4_*.png                            # Fase 4 (evaluación y validación)
+│   ├── f1_s01_evaluacion_entregable.docx       # Informe entregable Fase 1, versión extensa (6 p.)
+│   └── f1_s01_evaluacion_entregable_4p.docx    # Informe entregable Fase 1, versión compacta (4 p.)
+├── figures/                                    # Gráficos generados por el notebook
+│   ├── f1_titanic_dist_age_fare.png
+│   ├── f1_titanic_frecuencias_categoricas.png
+│   ├── f1_titanic_supervivencia_categoricas.png
+│   ├── f1_titanic_boxplots_survived.png
+│   ├── f1_titanic_familia_titulo.png
+│   └── f1_titanic_correlacion.png
 ├── notebooks/
-│   ├── F1_Definicion.ipynb                 # Notebook Fase 1
-│   ├── F2_Regresion.ipynb                  # Notebook Fase 2
-│   ├── F3_RedesNeuronales.ipynb            # Notebook Fase 3
-│   └── F4_EvaluacionValidacion.ipynb       # Notebook Fase 4
+│   └── mcdi503_f1_sumativo_grupo5.ipynb        # Notebook Fase 1
 ├── requirements.txt
-└── Readme.md
+└── README.md
 ```
 
-## Contenido de los notebooks
+## Contenido del notebook
 
-### F1_Definicion.ipynb
+### mcdi503_f1_sumativo_grupo5.ipynb
 
-1. Contexto y definición del problema
-2. Librerías necesarias
-3. Carga de la base de datos
-4. Análisis descriptivo inicial
-5. Visualización de la distribución con boxplot
-6. Transformación de variables categóricas ordinales
-7. Matriz de correlación de Pearson
-8. Matriz de p-valores
-9. Normalización de datos (Min-Max)
-10. Base de datos normalizada completa
-11. Relación con la metodología KDD
-12. Clasificación del tipo de aprendizaje
-13. Comparación de enfoques
-14. Conclusiones
-
-### F2_Regresion.ipynb
-
-1. Contexto y objetivo de la Fase 2
-2. Librerías necesarias
-3. Carga del conjunto de datos
-4. Descripción del conjunto de datos y preprocesamiento (variables, valores faltantes, relación `Job_Title`–objetivo, codificación, partición train/test, escalado, distribución del target)
-5. Modelo de regresión lineal multivariable
-6. Modelo de árbol de decisión para regresión
-7. Modelo de red neuronal (MLP) para regresión
-8. Evaluación de modelos de regresión
-9. Comparación de modelos
-10. Conclusiones
-11. Referencias
-
-### F3_RedesNeuronales.ipynb
-
-1. Contexto y objetivo de la Fase 3
-2. Librerías necesarias
-3. Carga del conjunto de datos
-4. Descripción del dataset y preparación para redes neuronales (variables, codificación, partición train/test, escalado)
-5. Análisis exploratorio inicial y preparación de datos (distribución de clases de `Risk_Category`, relación `Job_Title`–`Risk_Category`)
-6. Red neuronal con una capa oculta
-7. Red neuronal con dos capas ocultas
-8. Red neuronal con tres capas ocultas
-9. Evaluación de desempeño de redes neuronales
-10. Comparación de arquitecturas de redes neuronales
-11. Conclusiones
-12. Referencias
-
-### F4_EvaluacionValidacion.ipynb
-
-1. Contexto y objetivo de la Fase 4
-2. Librerías necesarias
-3. Carga y preparación del conjunto de datos (variables predictoras, partición Hold-Out 80/20 estratificada, escalado, función auxiliar de evaluación)
-4. Modelos de clasificación tradicionales (KNN, árbol de decisión, SVM, Naive Bayes)
-5. Modelos de redes neuronales retomados de la Fase 3 (MLP de una, dos y tres capas ocultas)
-6. Reporte tabulado comparativo de métricas de todos los modelos
-7. Selección y evaluación detallada del modelo campeón (matriz de confusión, reporte de clasificación, curvas ROC One-vs-Rest)
-8. Validación cruzada K-Fold estratificada del modelo campeón
-9. Justificación de la técnica de validación utilizada
-10. Coherencia metodológica de validación
-11. Conclusiones técnicas de desempeño y validación
-12. Referencias
+1. Identificación del proyecto
+2. Contexto y objetivo exploratorio
+3. Carga y revisión inicial de datos
+4. Exploración preliminar
+5. Decisiones y transformaciones iniciales
+6. Resultados e interpretación inicial
+7. Supuestos y limitaciones
+8. Cierre del avance
 
 ## Requisitos
 
 - Python 3.12+
 
-## Instalación (en carpeta raiz del proyecto MCDI504)
+## Instalación (en carpeta raíz del proyecto MCDI503)
 
 ```bash
 python3 -m venv .venv
@@ -128,21 +68,16 @@ pip install -r requirements.txt
 
 ```bash
 source .venv/bin/activate
-jupyter notebook notebooks/
+jupyter lab notebooks/
 ```
 
-Cada notebook carga el dataset desde `../data/AI_Impact_on_Jobs_2030.csv` y guarda las figuras generadas en `../figures/`, por lo que debe ejecutarse con `notebooks/` como directorio de trabajo (comportamiento por defecto al abrirlo desde Jupyter en esa carpeta).
+El notebook carga el dataset desde `../data/Titanic-Dataset.csv` y guarda las figuras generadas en `../figures/`, por lo que debe ejecutarse con `notebooks/` como directorio de trabajo (comportamiento por defecto al abrirlo desde Jupyter en esa carpeta).
 
 ## Referencias
 
-- Fayyad, U., Piatetsky-Shapiro, G., & Smyth, P. (1996). From data mining to knowledge discovery in databases. *AI Magazine*, *17*(3), 37-54.
-- Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep learning*. MIT Press. https://www.deeplearningbook.org/
-- pandas development team. (s. f.). *pandas documentation*. https://pandas.pydata.org/docs/
-- Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., & Duchesnay, É. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research*, *12*, 2825-2830.
-- Ruete, D. (2026a). *Introducción al Machine Learning* [Apunte]. Universidad Andrés Bello, Santiago, Chile.
-- Ruete, D. (2026b). *Relación entre ML y Metodología KDD* [Apunte]. Universidad Andrés Bello, Santiago, Chile.
-- Ruete, D. (2026c). *Fase 1: Estadística descriptiva, correlación y normalización de datos* [Apunte]. Universidad Andrés Bello, Santiago, Chile.
-- Ruete, D. (2026d). *Fase 3: Redes neuronales para clasificación supervisada* [Apunte]. Universidad Andrés Bello, Santiago, Chile.
-- scikit-learn developers. (s. f.). *scikit-learn documentation*. https://scikit-learn.org/stable/documentation.html
-- scikit-learn Developers. (2026a). *`sklearn.neural_network.MLPClassifier`*. scikit-learn. https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html
-- scikit-learn Developers. (2026b). *Metrics and scoring: quantifying the quality of predictions*. scikit-learn. https://scikit-learn.org/stable/modules/model_evaluation.html
+- Kaggle. (s. f.). *Titanic - Machine Learning from Disaster* [Conjunto de datos]. https://www.kaggle.com/c/titanic
+- McKinney, W. (2010). Data structures for statistical computing in Python. *Proceedings of the 9th Python in Science Conference*, 56-61. https://doi.org/10.25080/Majora-92bf1922-00a
+- Paraíso, S. (2026). *Resumen aplicado del libro: EDA mínimo viable* [Apunte]. Universidad Andrés Bello, Santiago, Chile.
+- The pandas development team. (2026). *pandas documentation* (versión 3.0) [Documentación de software]. https://pandas.pydata.org/docs/
+- Waskom, M. L. (2021). Seaborn: Statistical data visualization. *Journal of Open Source Software, 6*(60), 3021. https://doi.org/10.21105/joss.03021
+- Wilson, G., Bryan, J., Cranston, K., Kitzes, J., Nederbragt, L., & Teal, T. K. (2017). Good enough practices in scientific computing. *PLOS Computational Biology, 13*(6), e1005510. https://doi.org/10.1371/journal.pcbi.1005510
