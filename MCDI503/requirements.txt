@@ -3,4 +3,5 @@ numpy>=2.0
 matplotlib>=3.10
 seaborn>=0.13
 scipy>=1.15
+scikit-learn>=1.5
 jupyterlab>=4.5
