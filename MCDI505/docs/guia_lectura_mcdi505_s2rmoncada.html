@@ -208,7 +208,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
 <section class="stack">
   <div class="note">
     <div class="eyebrow">Cómo usar esta guía</div>
-    <p>Ábrela al lado del notebook y avanza sección por sección. Cada ficha dice qué hace el código, qué conviene mirar y qué resultado salió en la ejecución. Las cifras son las del Run All de octubre de 2026; si vuelves a ejecutar con otras versiones de las librerías pueden cambiar en el tercer decimal.</p>
+    <p>Ábrela al lado del notebook y avanza sección por sección. Cada ficha dice qué hace el código, qué conviene mirar y qué resultado salió en la ejecución. Las cifras, y la numeración de tablas y figuras, corresponden a la versión ajustada del notebook (octubre de 2026). Si ejecutas con otras versiones de las librerías, las cifras pueden cambiar en el tercer decimal.</p>
   </div>
   <div class="note warn">
     <div class="eyebrow">Lo que esta guía no hace</div>
@@ -242,7 +242,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="col stack">
     <p>El notebook es autocontenido. Necesita el archivo <code>consumo_electrico_litoral.csv</code> en la misma carpeta (o en <code>datos/</code>) y estas librerías: <code>numpy</code>, <code>pandas</code>, <code>scipy</code>, <code>matplotlib</code> y <code>statsmodels</code>. Desde la raíz del repositorio:</p>
     <div class="tbl"><table><tbody><tr><td class="mono">python -m pip install -r MCDI505/requirements.txt</td></tr></tbody></table></div>
-    <p>Después basta con <b>Run All</b>. Las 27 celdas de código corren de principio a fin sin pasos manuales.</p>
+    <p>Después basta con <b>Run All</b>. Las 26 celdas de código corren de principio a fin sin pasos manuales.</p>
   </div>
   <figure>
     <div class="split" role="img" aria-label="Partición de 120 meses: 96 de entrenamiento (2015 a 2022), 12 de validación (2023) y 12 de prueba (2024)">
@@ -307,7 +307,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="sec-head">
     <div class="eyebrow">Ficha §2</div>
     <h2>Preparación de los datos y continuidad con la Sumativa 1</h2>
-    <div class="cells">Celdas 4–9 · Tabla 0</div>
+    <div class="cells">Celdas 4–9</div>
   </div>
   <div class="parts">
     <div><h4>Qué hace</h4><ul>
@@ -316,19 +316,19 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
       <li>Rellena tres meses faltantes por interpolación temporal.</li>
       <li>Reemplaza el atípico de noviembre de 2017 por su valor esperado.</li>
       <li>Crea dos indicadoras del COVID-19 para usarlas como regresores.</li>
-      <li>Recalcula 16 cifras de la Sumativa 1 para comprobar que la base es la misma.</li>
+      <li>Recalcula 7 cifras de la Sumativa 1 para comprobar que la base es la misma.</li>
     </ul></div>
     <div><h4>Qué mirar</h4><ul>
       <li>Que el periodo de trabajo diga <b>108 observaciones</b> y la prueba <b>12</b>.</li>
       <li>Los meses interpolados y el valor que reemplaza a nov-2017.</li>
-      <li>La columna «coincide» de la Tabla 0: todas deben decir «Sí».</li>
+      <li>La «Lectura» de la sección 2.4: debe decir que los 7 resultados coinciden. Si alguno no coincide, aparece la Tabla 0 con el detalle.</li>
     </ul></div>
   </div>
   <div class="facts">
     <div class="fact"><span class="v">2016-08 · 2019-02 · 2022-06</span><span class="l">meses interpolados por fallas de telemetría</span></div>
     <div class="fact"><span class="v">118,96 → 109,86</span><span class="l">GWh en nov-2017 (recalibración de medidores)</span></div>
     <div class="fact"><span class="v">23 + 3 meses</span><span class="l">indicador COVID (mar-2020 a ene-2022) e indicador del mínimo (abr–jun 2020)</span></div>
-    <div class="fact"><span class="v">16 de 16</span><span class="l">resultados de la Sumativa 1 que coinciden</span></div>
+    <div class="fact"><span class="v">7 de 7</span><span class="l">resultados de la Sumativa 1 que coinciden</span></div>
   </div>
   <div class="think"><span class="eyebrow">Para pensar</span><p>El atípico de 2017 se corrige y el COVID-19 no se borra. ¿Qué diferencia de naturaleza entre ambos eventos justifica tratarlos distinto?</p></div>
 </section>
@@ -338,7 +338,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="sec-head">
     <div class="eyebrow">Ficha §3</div>
     <h2>Estacionariedad y transformaciones</h2>
-    <div class="cells">Celdas 10–19 · Figuras 1–3 · Tablas 1–2 · Decisiones 1 y 2</div>
+    <div class="cells">Celdas 10–19 · Figuras 1–2 · Tablas 1–2 · Decisiones 1 y 2</div>
   </div>
   <div class="parts">
     <div><h4>Qué hace</h4><ul>
@@ -377,18 +377,19 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="sec-head">
     <div class="eyebrow">Ficha §4</div>
     <h2>Identificación y estimación de modelos</h2>
-    <div class="cells">Celdas 21–28 · Figura 4 · Tablas 3–5</div>
+    <div class="cells">Celdas 20–28 · Figura 3 · Tablas 3–4</div>
   </div>
   <div class="parts">
     <div><h4>Qué hace</h4><ul>
       <li>Calcula ACF y PACF de la serie estacionaria <code>w</code> (n = 95) hasta 24 rezagos.</li>
       <li>Traduce los rezagos significativos a órdenes sugeridos con una regla explícita.</li>
       <li>Arma 16 candidatos: AR, MA, ARMA, dos ARIMA sin estacionalidad y ocho SARIMA. Todos llevan los regresores COVID-19.</li>
-      <li>Estima cada uno dos veces: hasta 2022 (para validar) y hasta 2023 (para AIC, BIC y residuos).</li>
+      <li>Estima cada uno dos veces, con hasta 1.000 iteraciones del optimizador: hasta 2022 (para validar) y hasta 2023 (para AIC, BIC y residuos). Registra si cada estimación convergió.</li>
     </ul></div>
     <div><h4>Qué mirar</h4><ul>
       <li>Qué barras cruzan la banda punteada, y en qué rezagos.</li>
-      <li>En la Tabla 4, la columna «ARMA no signif.»: indica parámetros que quizá sobran.</li>
+      <li>En la Tabla 3, la columna «ARMA no signif.»: indica parámetros que quizá sobran.</li>
+      <li>La columna «convergió» de la Tabla 3: SARIMA(2,1,0)(0,1,1)₁₂ no converge en la estimación de validación y queda fuera de la elección.</li>
       <li>Los ARIMA sin estacionalidad tienen logL mucho menor, pero no se comparan por AIC con el resto (ver §5).</li>
     </ul></div>
   </div>
@@ -432,11 +433,11 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
         </svg>
       </div>
     </div>
-    <figcaption>Solo se muestran los rezagos que el notebook resume en su tabla (1, 2, 3, 4, 6, 12 y 24); el eje horizontal no es continuo. La línea punteada es la banda de ±0,201 (n = 95). En rojo, los rezagos significativos. La Figura 4 del notebook muestra los 24 rezagos completos.</figcaption>
+    <figcaption>Solo se muestran los rezagos que el notebook resume en su tabla (1, 2, 3, 4, 6, 12 y 24); el eje horizontal no es continuo. La línea punteada es la banda de ±0,201 (n = 95). En rojo, los rezagos significativos. La Figura 3 del notebook muestra los 24 rezagos completos.</figcaption>
   </figure>
   <div class="col stack">
     <p><b>Cómo lo lee el notebook.</b> En los rezagos cortos (1 a 3) no hay nada significativo, así que sugiere p = 0 y q = 0. En el rezago 12 la ACF corta (pico solo en 12) y la PACF decae (12 y 24): ese patrón apunta a un MA estacional, Q = 1. El candidato sugerido es <b>SARIMA(0,1,0)(0,1,1)₁₂</b>.</p>
-    <p>Ese candidato es solo el punto de partida. Más adelante (Tabla 8) no pasa Ljung-Box (p = 0,004 en el rezago 12). Con n = 95 los correlogramas son ruidosos, y por eso el notebook prueba también modelos vecinos.</p>
+    <p>Ese candidato es solo el punto de partida. Más adelante (Tabla 6) no pasa Ljung-Box (p = 0,004 en el rezago 12). Con n = 95 los correlogramas son ruidosos, y por eso el notebook prueba también modelos vecinos.</p>
   </div>
   <div class="think"><span class="eyebrow">Para pensar</span><p>En el modelo sugerido el indicador COVID tiene valor-p 0,051, y en el modelo final baja a 0,001. ¿Por qué la significancia de un mismo regresor puede cambiar según los términos ARMA que lo acompañan?</p></div>
 </section>
@@ -446,34 +447,35 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="sec-head">
     <div class="eyebrow">Ficha §5</div>
     <h2>Selección del modelo y prueba final 2024</h2>
-    <div class="cells">Celdas 30–35 · Figuras 5–7 · Tablas 6–9 · Decisión 3</div>
+    <div class="cells">Celdas 29–35 · Figura 4 · Tablas 5–7 · Decisión 3</div>
   </div>
   <div class="parts">
     <div><h4>Qué hace</h4><ul>
       <li>Calcula RMSE, MAE, MAPE, MASE y sesgo del pronóstico 2023 de cada candidato y del ingenuo estacional.</li>
       <li>Ordena los modelos comparables (mismos d y D) por el promedio de sus rankings en AIC, BIC, RMSE y MASE.</li>
-      <li>Elige el primero de ese orden que pase Ljung-Box en los rezagos 12 y 24.</li>
+      <li>Elige el primero de ese orden que cumpla dos condiciones: que su estimación converja y que sus residuos pasen Ljung-Box en los rezagos 12 y 24.</li>
       <li>Pronostica 2024 una sola vez con el modelo elegido.</li>
     </ul></div>
     <div><h4>Qué mirar</h4><ul>
-      <li>Tabla 7: el puntaje combina cuatro criterios; ningún criterio decide solo.</li>
-      <li>Tabla 8: la columna «pasa Ljung-Box» filtra el ranking.</li>
-      <li>Figura 7: si los puntos reales de 2024 caen dentro de la banda del 95 %.</li>
+      <li>Tabla 6: el puntaje combina cuatro criterios; ningún criterio decide solo.</li>
+      <li>Tabla 6: las columnas «convergió» y «LB p» filtran el ranking.</li>
+      <li>Tabla 5: el ARIMA sin estacionalidad y el ingenuo, que solo se comparan por pronóstico.</li>
+      <li>Figura 4: si los puntos reales de 2024 caen dentro de la banda del 95 %.</li>
     </ul></div>
   </div>
   <div class="tbl"><table>
-    <thead><tr><th>Modelo (extracto de la Tabla 7)</th><th class="num">AIC</th><th class="num">BIC</th><th class="num">RMSE 2023</th><th class="num">MASE</th><th class="num">Puntaje</th></tr></thead>
+    <thead><tr><th>Modelo (extracto de la Tabla 6)</th><th class="num">AIC</th><th class="num">BIC</th><th class="num">RMSE 2023</th><th class="num">MASE</th><th class="num">Puntaje</th></tr></thead>
     <tbody>
-      <tr class="sel"><td><b>SARIMA(0,1,1)(0,1,1)₁₂</b></td><td class="num">−391,08</td><td class="num">−378,31</td><td class="num">5,75</td><td class="num">0,81</td><td class="num">2,50</td></tr>
-      <tr><td>SARIMA(1,1,1)(0,1,1)₁₂</td><td class="num">−389,36</td><td class="num">−374,04</td><td class="num">5,70</td><td class="num">0,80</td><td class="num">2,75</td></tr>
-      <tr><td>SARIMA(1,1,1)(1,1,1)₁₂</td><td class="num">−386,92</td><td class="num">−369,04</td><td class="num">5,67</td><td class="num">0,79</td><td class="num">3,50</td></tr>
-      <tr><td>SARIMA(2,1,1)(0,1,1)₁₂</td><td class="num">−385,57</td><td class="num">−367,69</td><td class="num">5,40</td><td class="num">0,75</td><td class="num">3,50</td></tr>
+      <tr class="sel"><td><b>SARIMA(0,1,1)(0,1,1)₁₂</b></td><td class="num">−391,08</td><td class="num">−378,31</td><td class="num">5,75</td><td class="num">0,81</td><td class="num">1,50</td></tr>
+      <tr><td>SARIMA(1,1,1)(0,1,1)₁₂</td><td class="num">−389,36</td><td class="num">−374,04</td><td class="num">5,70</td><td class="num">0,80</td><td class="num">1,75</td></tr>
+      <tr><td>SARIMA(1,1,1)(1,1,1)₁₂</td><td class="num">−387,40</td><td class="num">−369,53</td><td class="num">5,78</td><td class="num">0,81</td><td class="num">4,00</td></tr>
+      <tr><td>SARIMA(2,1,0)(0,1,1)₁₂ <span class="muted">(no converge)</span></td><td class="num">−388,65</td><td class="num">−373,33</td><td class="num">6,09</td><td class="num">0,86</td><td class="num">4,25</td></tr>
       <tr><td>SARIMA(0,1,0)(0,1,1)₁₂ <span class="muted">(sugerido)</span></td><td class="num">−372,03</td><td class="num">−361,81</td><td class="num">7,34</td><td class="num">1,07</td><td class="num">8,00</td></tr>
-      <tr><td>ARMA(2,1) [d=1, D=1] <span class="muted">(mejor no estacional)</span></td><td class="num">−352,17</td><td class="num">−336,85</td><td class="num">7,12</td><td class="num">1,00</td><td class="num">9,25</td></tr>
+      <tr><td>ARMA(2,1) [d=1, D=1] <span class="muted">(mejor no estacional)</span></td><td class="num">−352,17</td><td class="num">−336,85</td><td class="num">7,09</td><td class="num">1,00</td><td class="num">9,25</td></tr>
       <tr class="ref"><td>Ingenuo estacional</td><td class="num">—</td><td class="num">—</td><td class="num">7,29</td><td class="num">1,01</td><td class="num">—</td></tr>
     </tbody>
   </table></div>
-  <p class="col">El SARIMA(2,1,1)(0,1,1)₁₂ tiene el menor RMSE de validación (5,40 GWh), pero dos parámetros más; AIC y BIC lo penalizan y queda cuarto. El elegido es el mejor en AIC y en BIC, y su RMSE es solo 0,35 GWh mayor.</p>
+  <p class="col">El SARIMA(1,1,1)(0,1,1)₁₂ pronostica 2023 apenas mejor (RMSE 5,70 frente a 5,75 GWh), pero tiene un parámetro más, y AIC y BIC lo penalizan. El elegido es el mejor en AIC y en BIC. El SARIMA(2,1,0)(0,1,1)₁₂ queda cuarto, pero aunque estuviera primero no sería elegible porque su estimación no converge.</p>
 
   <figure>
     <div class="bars" role="img" aria-label="RMSE en GWh. Validación 2023: modelo 5,75, ingenuo 7,29. Prueba 2024: modelo 4,44, ingenuo 8,19.">
@@ -512,7 +514,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
       </tbody>
     </table></div>
   </div>
-  <div class="think"><span class="eyebrow">Para pensar</span><p>El MA estacional vale −0,96, muy cerca de −1, y su error estándar es casi igual al coeficiente. ¿Qué pasa con un término MA cuando se acerca a −1 (piensa en invertibilidad)? ¿Basta un valor-p alto para eliminarlo, si sin él el modelo no pasa Ljung-Box?</p></div>
+  <div class="think"><span class="eyebrow">Para pensar</span><p>El MA estacional vale −0,96, muy cerca de −1, y su error estándar es casi igual al coeficiente; el notebook lo señala en una nota técnica bajo los coeficientes. ¿Qué pasa con un término MA cuando se acerca a −1 (piensa en invertibilidad)? ¿Basta un valor-p alto para eliminarlo, o qué otra evidencia mirarías antes?</p></div>
 </section>
 
 <!-- §6 -->
@@ -520,19 +522,19 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="sec-head">
     <div class="eyebrow">Ficha §6</div>
     <h2>Diagnóstico de residuos</h2>
-    <div class="cells">Celdas 37–42 · Figura 8 · Tablas 10–12</div>
+    <div class="cells">Celdas 36–42 · Figura 5 · Tablas 8–10</div>
   </div>
   <div class="parts">
     <div><h4>Qué hace</h4><ul>
       <li>Toma los 95 residuos válidos (descarta los 13 primeros, que la diferenciación deja sin pronóstico).</li>
       <li>Grafica residuos estandarizados, histograma, Q-Q y ACF.</li>
-      <li>Aplica un test por supuesto y resume en la Tabla 11.</li>
+      <li>Aplica un test por supuesto y resume en la Tabla 9.</li>
       <li>Reestima el modelo sin regresores COVID-19 para medir cuánto aportan.</li>
     </ul></div>
     <div><h4>Qué mirar</h4><ul>
       <li>En el Q-Q, si los extremos se separan de la recta (colas pesadas).</li>
       <li>En la ACF de residuos, cuántas barras salen de la banda: con 24 rezagos se espera alrededor de 1 por azar.</li>
-      <li>En la Tabla 12, cuánto cambian AIC y Jarque-Bera al quitar los regresores.</li>
+      <li>En la Tabla 10, cuánto cambian AIC y Jarque-Bera al quitar los regresores.</li>
     </ul></div>
   </div>
   <div class="tbl"><table>
@@ -560,13 +562,13 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   <div class="sec-head">
     <div class="eyebrow">Fichas §7 a §10</div>
     <h2>Conclusiones, cierre con la Sumativa 1 y entrega</h2>
-    <div class="cells">Celdas 44–52 · Tabla 13</div>
+    <div class="cells">Celdas 43–51 · Tabla 11</div>
   </div>
   <div class="col stack">
     <p><b>§7 Conclusiones.</b> Se generan con las cifras calculadas: estacionariedad con log + d = 1 + D = 1, modelo de líneas aéreas elegido, ventaja clara sobre el ingenuo en 2023 y 2024, residuos sin problemas. Las limitaciones son igual de importantes: solo 9 años de datos con dos afectados por el COVID-19, enfoque univariado (la temperatura, con ρ = +0,69 en la Sumativa 1, queda para un SARIMAX futuro) y datos sintéticos.</p>
-    <p><b>§7.1 Cierre del ciclo.</b> La Tabla 13 revisa las seis implicancias que dejó la Sumativa 1 y cómo se abordó cada una. Sirve como resumen de todo el informe.</p>
+    <p><b>§7.1 Cierre del ciclo.</b> La Tabla 11 revisa las seis implicancias que dejó la Sumativa 1 y cómo se abordó cada una. Sirve como resumen de todo el informe.</p>
     <p><b>§9 Declaración de IA.</b> Tiene filas marcadas <code>[COMPLETAR]</code> que solo el autor puede confirmar.</p>
-    <p><b>§10 Lista de verificación.</b> La celda lee el archivo <i>guardado</i> para contar palabras y figuras. Si se ejecuta antes de guardar (o en una ejecución automática como la de octubre), informa «0 figuras guardadas» aunque el notebook tenga 8 figuras guardadas. Guarda y vuelve a ejecutar solo esa celda para obtener la cuenta real. Las 11 marcas <code>[COMPLETAR]</code> pendientes corresponden a los recuadros de interpretación y a la declaración de IA.</p>
+    <p><b>§10 Lista de verificación.</b> La celda lee el archivo <i>guardado</i> y muestra solo los requisitos por revisar. Estima la extensión con 450 palabras de prosa, 3 figuras o 45 filas de tabla por página, sin contar el código; la versión ajustada da unas 14,7 páginas. Guarda antes de ejecutarla: si no, cuenta la versión anterior del archivo. Las 11 marcas <code>[COMPLETAR]</code> pendientes corresponden a los recuadros de interpretación y a la declaración de IA. Al completar cada recuadro, reemplaza las preguntas guía por tu texto de 4 a 6 líneas; si las dejas y escribes debajo, la extensión supera las 15 páginas.</p>
   </div>
 </section>
 
@@ -581,7 +583,8 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
     <li><b>Comparar AIC entre distintas diferenciaciones.</b> Con otro d o D la verosimilitud se calcula sobre otras observaciones. Por eso los ARIMA con D = 0 solo se juzgan por pronóstico.</li>
     <li><b>«No rechazo H₀, entonces H₀ es verdadera».</b> Un Ljung-Box con p = 0,24 no prueba ruido blanco; dice que no hay evidencia de autocorrelación con estos datos.</li>
     <li><b>Leer el KPSS p = 0,100 como exacto.</b> statsmodels lo trunca entre 0,01 y 0,10; 0,100 significa «0,10 o más».</li>
-    <li><b>Eliminar todo coeficiente con valor-p alto.</b> El MA estacional tiene p = 0,32, pero el modelo sin él (el sugerido) no pasa Ljung-Box.</li>
+    <li><b>Eliminar todo coeficiente con valor-p alto.</b> El MA estacional tiene p = 0,32, pero está cerca de −1, donde el error estándar es poco preciso. Un valor-p alto en esa zona no basta para quitar el término.</li>
+    <li><b>Comparar modelos que no convergieron.</b> Si el optimizador se detiene antes de converger, AIC, BIC y pronósticos de ese modelo no son confiables. El notebook lo revisa con la columna «convergió».</li>
     <li><b>Mirar 2024 para volver a elegir modelo.</b> Si la prueba influye en la elección, deja de ser prueba. El notebook la usa una sola vez.</li>
     <li><b>Olvidar la escala.</b> El modelo trabaja en logaritmos, pero las métricas se calculan en GWh después de aplicar la exponencial.</li>
   </ul>
@@ -595,11 +598,11 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   </div>
   <div>
     <details><summary>1. Si ADF da p = 0,04 y KPSS da p = 0,01, ¿qué veredicto asigna la regla del notebook?</summary><p class="ans">Discrepante. El ADF rechaza la raíz unitaria (apunta a estacionaria) y el KPSS rechaza la estacionariedad. Los tests no están de acuerdo.</p></details>
-    <details><summary>2. ¿Por qué el ARIMA(2,1,1) no aparece en el ranking de la Tabla 7, si su MASE (0,94) es menor que 1?</summary><p class="ans">Porque usa D = 0 y el resto usa D = 1. Sus AIC y BIC no son comparables, así que se evalúa solo por pronóstico. Aun así, su RMSE de validación (8,02 GWh) es peor que el del modelo elegido (5,75).</p></details>
+    <details><summary>2. ¿Por qué el ARIMA(2,1,1) no aparece en el ranking de la Tabla 6, si su MASE (0,94) es menor que 1?</summary><p class="ans">Porque usa D = 0 y el resto usa D = 1. Sus AIC y BIC no son comparables, así que se evalúa solo por pronóstico. Aun así, su RMSE de validación (7,99 GWh) es peor que el del modelo elegido (5,75).</p></details>
     <details><summary>3. ¿Cuántas observaciones se pierden al aplicar d = 1 y D = 1 con s = 12, y dónde se nota en el notebook?</summary><p class="ans">13 (1 + 12). Por eso la serie <code>w</code> tiene n = 95 en vez de 108, y el diagnóstico descarta los primeros 13 residuos (<code>BURN</code>).</p></details>
     <details><summary>4. Un modelo tiene MASE = 1,07 en validación. ¿Le gana al ingenuo estacional?</summary><p class="ans">No. Un MASE mayor que 1 significa que su error absoluto medio es mayor que el del ingenuo estacional dentro del entrenamiento.</p></details>
     <details><summary>5. ¿Por qué el pronóstico de 2024 casi no cambia al quitar los regresores COVID-19 (4,44 vs 4,77 GWh)?</summary><p class="ans">Porque en 2024 ambos indicadores valen cero. Los regresores cambian cómo se estiman los demás parámetros (y mejoran mucho el AIC y la normalidad), pero no entran directamente en el pronóstico de ese año.</p></details>
-    <details><summary>6. Si el modelo elegido no hubiera pasado Ljung-Box, ¿qué habría hecho la regla de selección?</summary><p class="ans">Habría pasado al siguiente modelo del ranking que sí lo pase. Si ninguno lo pasara, se queda el de mejor puntaje y la limitación se discute en la sección 6.</p></details>
+    <details><summary>6. Si el modelo elegido no hubiera pasado Ljung-Box o no hubiera convergido, ¿qué habría hecho la regla de selección?</summary><p class="ans">Habría pasado al siguiente modelo del ranking que cumpla ambas condiciones. Si ninguno las cumpliera, se queda el de mejor puntaje y la limitación se discute en la sección 6.</p></details>
   </div>
 </section>
 
@@ -610,7 +613,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
     <li>Box, G. E. P., Jenkins, G. M., Reinsel, G. C. y Ljung, G. M. (2015). <i>Time series analysis: Forecasting and control</i> (5.ª ed.). Wiley.</li>
     <li>Hyndman, R. J. y Koehler, A. B. (2006). Another look at measures of forecast accuracy. <i>International Journal of Forecasting, 22</i>(4).</li>
   </ul>
-  <p>Guía de apoyo al notebook <code>mcdi505_s2rmoncada.ipynb</code> (MCDI505, Magíster en Ciencia de Datos, UNAB Online). Las cifras provienen de su ejecución completa en octubre de 2026.</p>
+  <p>Guía de apoyo al notebook <code>mcdi505_s2rmoncada.ipynb</code> (MCDI505, Magíster en Ciencia de Datos, UNAB Online). Las cifras provienen de la ejecución completa de su versión ajustada (octubre de 2026).</p>
 </footer>
 
 </div>
