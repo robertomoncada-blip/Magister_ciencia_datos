@@ -1,10 +1,10 @@
 # Validación — `mcdi505_f2rmoncada.ipynb` frente a la Rúbrica Formativa 2 (f2_s2)
 
-- **Fecha de revisión:** 11 de octubre de 2026, quinta revisión del día (anteriores: 9 y 11 de octubre)
-- **Versión revisada:** archivo de trabajo con los textos del autor, las correcciones de los criterios 1 a 6 y la propuesta de sección «5. Discusión» (sin commit; base `7f9b77c`). Sin marcas `[AUTOR]` ni `[COMPLETAR]`
+- **Fecha de revisión:** 11 de octubre de 2026, sexta revisión (anteriores: 9 y 11 de octubre)
+- **Versión revisada:** commit `78937ef` más la sección «5. Discusión» reescrita por el autor (sin commit). Sin marcas `[AUTOR]`, `[COMPLETAR]` ni de propuesta
 - **Ejecución de control:** «Reiniciar kernel y ejecutar todo» (kernel nuevo): **5/5 celdas de código, ejecutadas en orden (1 a 5) y sin errores**
 - **Rúbrica:** `Rúbrica_formativa_f2_s2`, 6 criterios de 9 puntos (total 54)
-- **Alcance:** corrección de los criterios 1 y 2; validación completa de resultados; concordancia de los textos `[AUTOR]` y de la Hoja de decisiones con la ejecución. Es una estimación de cumplimiento, no una nota.
+- **Alcance:** validación completa de resultados tras las correcciones del autor; concordancia de todos los textos y de la Hoja de decisiones con la ejecución; extensión y formato. Es una estimación de cumplimiento, no una nota.
 
 ## Resumen
 
@@ -15,10 +15,23 @@
 | 3 | Selección y comparación (ID 2.1) | Excelente | 9 | **Resuelto.** Rezago 24 de Ljung-Box, «RMSE móvil de 25,90 GWh» y una frase sobre E y F |
 | 4 | Diagnóstico de residuos (ID 2.2) | Excelente | 9 | **Resuelto.** Tipeo corregido, «no se rechaza que sean ruido blanco» con el rezago 24 cerca del umbral, e «intervalo de predicción» con prueba binomial |
 | 5 | Ortografía y redacción | Excelente | 9 | **Resuelto.** Declaración de IA corregida, «Limitaciones:» en las conclusiones y celda 4 |
-| 6 | Formato y entrega | Bueno | 6 | Extensión (~10,1 páginas), marcas y ejemplo de la Hoja resueltos. Pendientes: reescribir la propuesta de Discusión, encabezado formal y nombre de archivo |
+| 6 | Formato y entrega | Bueno | 6 | Discusión reescrita por el autor. Pendientes: extensión de **~9,9 páginas** (falta ~0,1), párrafo de instrucciones en el encabezado y nombre de archivo |
 | | **Total estimado** | | **51 / 54** (54 si se resuelven los pendientes del criterio 6) | |
 
-**Resultado de la validación:** todas las cifras de los textos del autor, de la Hoja de decisiones y de la nueva propuesta de Discusión tienen respaldo en las salidas de la ejecución. Se comprobó de forma automática: cada número del texto se buscó en las salidas con el mismo redondeo. Lo pendiente es redacción y formato (criterios 5 y 6).
+**Resultado de la validación (sexta revisión):** todas las cifras de los textos del autor, incluida la Discusión reescrita, y de la Hoja de decisiones tienen respaldo en las salidas de la ejecución (comprobación automática con el mismo redondeo). No quedan marcas pendientes. Lo único abierto es de formato (criterio 6).
+
+### Revisión de la Discusión reescrita por el autor (celda 17, 326 palabras)
+| Afirmación | Resultado ejecutado | Estado |
+|---|---|---|
+| A: menor RMSE móvil (5,78 GWh), autocorrelación (Ljung-Box p = 0,019) | 5,782; p = 0,019 en el rezago 24 | ✅ ⚠️ opcional: indicar «en el rezago 24» |
+| E y F: MAE móvil 6,03 y 6,10 frente a 6,64 de B; p = 0,031 y 0,030 | 6,033; 6,096; 6,644; 0,031; 0,030 | ✅ |
+| C y G no mejoran al ingenuo (RMSE móvil 8,30 y 8,51 GWh); p = 0,047 y 0,003 | 8,299; 8,505 frente a 7,721; 0,047; 0,003 | ✅ |
+| ARIMA sin estacionalidad: RMSE móvil 25,90 GWh | 25,900 | ✅ |
+| «B es el único modelo con residuos sin autocorrelación y un error menor que la referencia» | B es el único elegible (Tabla 3) | ✅ |
+| Indicador abril-junio 2020: Jarque-Bera 0,226 frente a 0,001; Ljung-Box 0,039; cobertura 94,4 % (binomial p = 0,701) | Iguales (sección 4) | ✅ |
+| Error promedio de B 6,64 GWh = 6,2 % de 107,65 GWh; RMSE 7,8 % menor que el ingenuo | Iguales (sección 3) | ✅ |
+| «El efecto de COVID-19 fue de −6,0 %» | −5,987 % en el modelo B | ✅ ⚠️ precisar «en el modelo B» |
+| Redacción | — | ⚠️ falta un espacio en «estacionalidad anual.En consecuencia»; sobra una línea en blanco antes de «Implicancias» |
 
 ---
 
@@ -86,7 +99,7 @@ Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta
 | 13 | Interpretación, sección 3 | A con el mejor puntaje (5,78 GWh); Ljung-Box p = 0,019 (rezago 24); E y F 7,16 y 7,19 GWh; B: AIC −300,9, BIC −291,2, RMSE móvil 7,12; −7,8 % frente al naive (7,72); MAE 6,64 frente a 6,66; ARIMA 25,90 | ✅ 🔧 |
 | 14 | Método, sección 4 | — | ✅ |
 | 16 | Interpretación, sección 4 | Ljung-Box 0,355 y 0,061; Jarque-Bera 0,001; Shapiro-Wilk 0,019; sin mar-jun 2020: 0,215 y 0,111; ARCH-LM 0,639; F 0,246; cobertura 94,4 % (binomial p = 0,701) | ✅ 🔧 |
-| 17 | **5. Discusión (propuesta nueva)** | 22 cifras: A 5,78 y 0,019; E y F 6,03 y 6,10 (MAE), 0,031 y 0,030; C y G 8,30 y 8,51, 0,047 y 0,003; D 25,90; 0,226, 0,001 y 0,039; 94,4 % y 0,701; 6,64 GWh = 6,2 % de 107,65 GWh; −7,8 %; −6,0 % | ✅ Pendiente: reescritura del autor |
+| 17 | **5. Discusión** (reescrita por el autor) | 22 cifras, todas respaldadas (ver la tabla de revisión arriba) | ✅ ⚠️ espacio en «anual.En» |
 | 19 | Conclusiones (antes celda 18) | Puntos 1 a 5, incluidos 0,226 y 0,039 | ✅ ⚠️ «Limitaciones, la validación…» → «Limitaciones: la validación…» |
 
 ---
@@ -103,23 +116,23 @@ Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta
 |---|---|---|
 | Notebook ejecutable | ✅ Cumple | 5/5 celdas en orden, sin errores, desde un kernel nuevo |
 | Textos duplicados (borradores generados) | ✅ Resuelto por el autor | Se eliminaron las 5 celdas de borrador |
-| **Extensión 10–15 páginas** | Cumple (justo) | Unas **10,3 páginas** (sin contar código), con la propuesta de Discusión. Al quitar el aviso del recuadro queda en ~10,2; la reescritura no debería acortar la sección |
+| **Extensión 10–15 páginas** | **No cumple por poco** | Unas **9,9 páginas** (3.349 palabras, 5 figuras, 36 filas de tabla; sin contar código). La Discusión reescrita pasó de ~470 a 326 palabras. Faltan **~50 palabras** de contenido propio; por ejemplo, desarrollar en la Discusión cómo usar el intervalo de predicción como margen de compra, o por qué se prefiere validez de residuos sobre precisión |
 | Marcas `[AUTOR]` | ✅ Resuelto | El autor las quitó todas |
-| Encabezado (celda 0) | No cumple | «Estado de este borrador», «El miércoles entregue…» y archivo `mcdi505_s2rmoncada.ipynb`. Hace falta un encabezado formal (programa, curso, fecha) |
+| Encabezado (celda 0) | Parcial | El autor agregó programa, curso, archivo y fecha. Queda el párrafo de instrucciones «Este es el único notebook… El miércoles entregue…»; conviene reemplazarlo por una o dos frases de presentación del informe (así no se pierde extensión) |
 | Ejemplo ilustrativo bajo la Hoja | ✅ Resuelto | El autor lo eliminó |
 | Nombre de archivo | Revisar | `mcdi505_f2rmoncada.ipynb` frente al formato `sigla_sXinicialapellido`; confirmar con el docente |
-| Declaración de IA y coherencia | ⚠️ | Ortografía corregida. Si se conserva parte de la redacción de la propuesta «5. Discusión», la declaración debe mencionarlo |
-| Propuesta «5. Discusión» | Pendiente del autor | Es un borrador destacado en un recuadro rojo con la etiqueta «PROPUESTA PENDIENTE DE REESCRITURA»; al reescribirlo hay que quitar el recuadro. Debe reescribirse con palabras propias, y la declaración de IA debe mencionarlo si se mantiene parte de su redacción |
+| Declaración de IA y coherencia | ✅ Cumple | Ortografía corregida; la Discusión está reescrita por el autor, así que la declaración es coherente |
+| Propuesta «5. Discusión» | ✅ Resuelto por el autor | Reescrita con palabras propias, sin recuadro de propuesta; todas sus cifras concuerdan |
 | Referencias APA | ✅ Cumple | 13 referencias, todas citadas |
 
 ---
 
 ## 4. Plan de acción para la entrega
 
-1. **Reescribir la propuesta «5. Discusión»** con palabras propias, quitar su marca y verificar que la extensión se mantenga en ≥ 10 páginas.
+1. ~~Reescribir la propuesta «5. Discusión»~~ **Hecho por el autor.** Corregir «anual.En» y, si se quiere, precisar «rezago 24» y «en el modelo B».
 2. ~~Ortografía de la declaración de IA~~ **Hecho.**
 3. ~~Agregar ~1 página de contenido propio~~ **Propuesta agregada** (ver punto 1). ~~«Limitaciones:»~~ **Hecho.**
-4. **Formato:** encabezado formal (programa, curso, fecha; sin «Estado de este borrador» ni instrucciones) y confirmar el nombre de archivo. ~~Marca `[AUTOR]` y ejemplo de la Hoja~~ **Hecho.**
+4. **Formato y extensión:** reemplazar el párrafo de instrucciones del encabezado por una presentación breve, agregar ~50 palabras de contenido propio para llegar a 10 páginas y confirmar el nombre de archivo.
 5. **Reiniciar kernel y ejecutar todo**, guardar y verificar que no haya errores.
 
 ---
@@ -134,3 +147,5 @@ Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta
 - **11 de octubre (cuarta revisión):** criterio 3 (rezago 24, RMSE móvil del ARIMA, mención de E y F) y celda 4 (criterio 5) corregidos; propuesta de sección «5. Discusión» con todas sus cifras respaldadas; extensión estimada de ~10,1 páginas.
 - **11 de octubre (quinta revisión):** ortografía de la declaración de IA y «Limitaciones:» corregidos; el autor quitó las marcas `[AUTOR]` y el ejemplo de la Hoja; ejecución limpia (5/5, sin errores), ~10,1 páginas.
 - **11 de octubre (18:18–18:21):** un guardado desde VS Code sobrescribió el archivo con una versión anterior y se perdieron la sección «5. Discusión» y cinco correcciones (celda 4, celda 13, consumo medio impreso, «Limitaciones:» y ortografía de la declaración). Se repusieron respetando los cambios propios del autor (encabezado de la celda 0 y tercera fila de la declaración, cuya ortografía también se corrigió). La Discusión quedó en la **celda 17**, destacada en un recuadro rojo. Ejecución limpia (5/5), ~10,3 páginas.
+
+- **11 de octubre (sexta revisión):** el autor reescribió la Discusión (326 palabras) y quitó el recuadro; ejecución limpia (5/5) y todas las cifras respaldadas; extensión ~9,9 páginas.
