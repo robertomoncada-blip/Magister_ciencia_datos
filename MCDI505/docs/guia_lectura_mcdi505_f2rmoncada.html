@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siete candidatos, un SARIMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura (~68ch), fichas por sección con "en simple" + "qué mirar" + cifras; misma familia visual que la guía de la Sumativa 2 */
+:root {
+  --bg: #f4f5f8;
+  --surface: #ffffff;
+  --ink: #1b1d26;
+  --muted: #5b6072;
+  --line: #d9dce5;
+  --accent: #b30338;
+  --accent-soft: #f7e3ea;
+  --blue: #0057b8;
+  --blue-soft: #e2ecf8;
+  --track: #e9ebf1;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --measure: 68ch;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111319; --surface: #191c24; --ink: #e6e8ef; --muted: #a0a6b8; --line: #2d3241;
+    --accent: #ff6f93; --accent-soft: #3a1823; --blue: #7fb2ff; --blue-soft: #16253c; --track: #262a36;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111319; --surface: #191c24; --ink: #e6e8ef; --muted: #a0a6b8; --line: #2d3241;
+  --accent: #ff6f93; --accent-soft: #3a1823; --blue: #7fb2ff; --blue-soft: #16253c; --track: #262a36;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 1.06rem; line-height: 1.62; padding: 0 20px; }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 48px 80px; display: grid; gap: 56px; }
+.col { max-width: var(--measure); }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 800; font-stretch: 78%; letter-spacing: -0.01em; }
+h2 { font-size: 1.7rem; font-weight: 700; font-stretch: 85%; }
+h3 { font-size: 1.12rem; font-weight: 700; font-stretch: 92%; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+code { font-family: var(--f-mono); font-size: 0.86em; background: var(--track); padding: 1px 5px; border-radius: 3px; }
+.eyebrow { font-family: var(--f-display); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); }
+.muted { color: var(--muted); }
+.stack { display: grid; gap: 16px; }
+.stack-lg { display: grid; gap: 28px; }
+
+header { display: grid; gap: 18px; border-bottom: 1px solid var(--line); padding-bottom: 32px; }
+.lede { font-size: 1.2rem; max-width: 60ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); }
+.meta b { color: var(--ink); font-weight: 500; }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px 22px; display: grid; gap: 10px; max-width: var(--measure); }
+.note.warn { border-color: var(--accent); }
+
+nav ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 24px; }
+nav a { color: var(--ink); text-decoration: none; display: flex; gap: 10px; padding: 4px 0; border-bottom: 1px dotted var(--line); }
+nav a:hover { color: var(--accent); }
+nav .n { font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); min-width: 2.2em; padding-top: 3px; }
+
+.split { display: grid; grid-template-columns: 72fr 12fr 12fr 12fr 12fr; gap: 3px; }
+.split div { height: 34px; border-radius: 3px; display: flex; align-items: center; padding: 0 8px; font-family: var(--f-mono); font-size: 0.72rem; white-space: nowrap; overflow: hidden; color: var(--ink); }
+.split .tr { background: var(--track); }
+.split .mv { background: var(--blue-soft); }
+.split .va { background: var(--accent-soft); }
+.split .no { background: transparent; border: 1px dashed var(--line); color: var(--muted); }
+.split-lab { display: grid; grid-template-columns: 72fr 12fr 12fr 12fr 12fr; gap: 3px; font-family: var(--f-mono); font-size: 0.7rem; color: var(--muted); }
+.split-lab span { text-align: center; }
+.split-lab span:first-child { text-align: left; }
+
+.flow { list-style: none; margin: 0; padding: 0; display: grid; }
+.flow li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+.flow li:last-child { border-bottom: 1px solid var(--line); }
+.flow .k { font-family: var(--f-display); font-weight: 800; font-stretch: 75%; font-size: 1.5rem; color: var(--accent); line-height: 1; padding-top: 2px; }
+.flow .q { color: var(--muted); font-style: italic; }
+
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--f-display); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); background: var(--bg); }
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.sel td { background: var(--accent-soft); }
+tr.ref td { color: var(--muted); }
+.pill { display: inline-block; font-family: var(--f-display); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.si { background: var(--accent); color: var(--surface); }
+.pill.no { border: 1px solid var(--line); color: var(--muted); }
+
+dl.gloss { margin: 0; display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr; border-top: 1px solid var(--line); }
+dl.gloss dt, dl.gloss dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); }
+dl.gloss dt { font-family: var(--f-display); font-weight: 700; font-stretch: 90%; padding-right: 16px; }
+@media (max-width: 560px) { dl.gloss { grid-template-columns: 1fr; } dl.gloss dt { border-bottom: 0; padding-bottom: 0; } }
+
+.sec { display: grid; gap: 18px; padding-top: 8px; }
+.sec-head { display: grid; gap: 6px; }
+.cells { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); }
+.simple { font-size: 1.12rem; max-width: var(--measure); border-left: 3px solid var(--accent); padding-left: 16px; }
+.parts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px; }
+.parts > div { display: grid; gap: 6px; align-content: start; }
+.parts h4 { margin: 0; font-family: var(--f-display); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
+.parts ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+@media (max-width: 640px) { .parts { grid-template-columns: 1fr; } }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.fact { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; align-content: start; }
+.fact .v { font-family: var(--f-mono); font-size: 1.08rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.fact .l { font-size: 0.84rem; color: var(--muted); line-height: 1.35; }
+
+.think { border-left: 3px solid var(--blue); padding: 4px 0 4px 16px; max-width: var(--measure); display: grid; gap: 4px; }
+.think .eyebrow { color: var(--blue); }
+
+figure { margin: 0; display: grid; gap: 8px; }
+figcaption { font-size: 0.86rem; color: var(--muted); max-width: var(--measure); }
+.bars { display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; }
+.bar-row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 10px; align-items: center; font-size: 0.86rem; }
+.bar-row .who { color: var(--muted); }
+.bar-track { position: relative; height: 20px; }
+.bar-fill { height: 100%; border-radius: 0 4px 4px 0; background: var(--muted); opacity: 0.45; }
+.bar-fill.sel { background: var(--accent); opacity: 1; }
+.bar-fill.ref { background: var(--blue); opacity: 1; }
+.bar-val { position: absolute; top: 0; font-family: var(--f-mono); font-size: 0.78rem; color: var(--ink); line-height: 20px; padding-left: 6px; white-space: nowrap; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.82rem; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--c); opacity: var(--o, 1); }
+@media (max-width: 480px) { .bar-row { grid-template-columns: 1fr; gap: 2px; } }
+
+.traps { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.traps li { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; max-width: var(--measure); }
+.traps b { font-family: var(--f-display); font-stretch: 90%; }
+
+details { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); max-width: var(--measure); }
+details + details { margin-top: 8px; }
+summary { cursor: pointer; padding: 14px 18px; list-style: none; display: grid; grid-template-columns: 1fr auto; gap: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "Ver respuesta"; font-family: var(--f-display); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding-top: 4px; white-space: nowrap; }
+details[open] summary::after { content: "Ocultar"; }
+details .ans { padding: 0 18px 16px; color: var(--muted); }
+
+footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 0.9rem; color: var(--muted); display: grid; gap: 10px; max-width: var(--measure); }
+footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">MCDI505 · Formativa 2 · Guía de lectura</div>
+  <h1>Siete candidatos, un SARIMA</h1>
+  <p class="lede">Una guía en lenguaje sencillo para leer el notebook <code>mcdi505_f2rmoncada.ipynb</code>: cómo se pasa del consumo eléctrico mensual a un modelo que sirve para pronosticar, y por qué ganó el modelo que ganó.</p>
+  <div class="meta">
+    <span>Autor del notebook <b>Roberto Moncada</b></span>
+    <span>Datos <b>consumo_gwh · 2015 a 2023</b></span>
+    <span>Modelo elegido <b>B · SARIMA(0,1,1)(0,1,1)₁₂</b></span>
+    <span>Cifras de la ejecución <b>octubre 2026</b></span>
+  </div>
+</header>
+
+<section class="stack">
+  <div class="note">
+    <div class="eyebrow">Cómo usar esta guía</div>
+    <p>Tenla abierta al lado del notebook. Cada ficha parte con una frase «en simple» que resume la sección. Después dice qué hace el código, qué conviene mirar y qué números salieron. Al final hay errores típicos de lectura y preguntas para comprobar lo que entendiste.</p>
+  </div>
+  <div class="note warn">
+    <div class="eyebrow">Ojo</div>
+    <p>La guía explica los métodos y resume los resultados. No reemplaza las interpretaciones del notebook: esos textos son del autor y son parte de lo que se evalúa.</p>
+  </div>
+</section>
+
+<nav aria-label="Contenido" class="stack">
+  <div class="eyebrow">Contenido</div>
+  <ol>
+    <li><a href="#idea"><span class="n">A</span>La idea en 1 minuto</a></li>
+    <li><a href="#datos"><span class="n">B</span>Con qué datos se trabaja</a></li>
+    <li><a href="#vocab"><span class="n">C</span>Palabras que vas a ver</a></li>
+    <li><a href="#hoja"><span class="n">D</span>La Hoja de decisiones</a></li>
+    <li><a href="#s1"><span class="n">§1</span>Estacionariedad</a></li>
+    <li><a href="#s2"><span class="n">§2</span>Los siete candidatos</a></li>
+    <li><a href="#s3"><span class="n">§3</span>Cómo se eligió</a></li>
+    <li><a href="#s4"><span class="n">§4</span>Revisar los residuos</a></li>
+    <li><a href="#s5"><span class="n">§5</span>Discusión y conclusiones</a></li>
+    <li><a href="#trampas"><span class="n">E</span>Errores típicos</a></li>
+    <li><a href="#auto"><span class="n">F</span>Ponte a prueba</a></li>
+  </ol>
+</nav>
+
+<!-- A -->
+<section id="idea" class="stack-lg">
+  <div class="sec-head">
+    <div class="eyebrow">A · La idea en 1 minuto</div>
+    <h2>Cinco pasos, en orden</h2>
+  </div>
+  <ol class="flow">
+    <li><span class="k">1</span><div><b>Dejar la serie «quieta»</b> <span class="muted">· §1</span><br><span class="q">El consumo sube y tiene un ciclo anual. Los modelos necesitan una serie sin esa tendencia ni ese ciclo, así que se transforma y se diferencia.</span></div></li>
+    <li><span class="k">2</span><div><b>Proponer candidatos</b> <span class="muted">· §2</span><br><span class="q">Los gráficos ACF y PACF sugieren qué modelo probar. Se prueban siete, de todas las familias (AR, MA, ARMA, ARIMA y SARIMA).</span></div></li>
+    <li><span class="k">3</span><div><b>Compararlos con una regla fija</b> <span class="muted">· §3</span><br><span class="q">Gana el de mejor puntaje, pero solo si le gana al pronóstico más simple y si sus residuos están «limpios».</span></div></li>
+    <li><span class="k">4</span><div><b>Revisar al ganador</b> <span class="muted">· §4</span><br><span class="q">¿Sus errores se comportan como ruido? ¿Sus intervalos aciertan?</span></div></li>
+    <li><span class="k">5</span><div><b>Discutir qué significa</b> <span class="muted">· §5</span><br><span class="q">¿Qué se pierde con la regla? ¿Cómo lo usaría la distribuidora para comprar energía?</span></div></li>
+  </ol>
+  <p class="col"><b>Resultado:</b> gana el modelo <b>B</b>, un SARIMA conocido como «modelo de líneas aéreas» (en inglés, <i>airline</i>). No es el que tiene el menor error. Es el único que cumple todas las condiciones de la regla.</p>
+</section>
+
+<!-- B -->
+<section id="datos" class="stack-lg">
+  <div class="sec-head">
+    <div class="eyebrow">B · Los datos</div>
+    <h2>Con qué datos se trabaja</h2>
+  </div>
+  <div class="col stack">
+    <p>Es el consumo eléctrico mensual, en GWh, del segmento comercial de una distribuidora (datos sintéticos del curso). Se usa la versión <b>depurada</b> del archivo, que ya viene con tres arreglos:</p>
+    <ul>
+      <li>3 meses faltantes rellenados (imputados).</li>
+      <li>El dato raro de noviembre de 2017 corregido.</li>
+      <li>Una columna <code>covid</code> que vale 1 entre marzo de 2020 y diciembre de 2021 (22 meses).</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="split" role="img" aria-label="Entrenamiento 2015 a 2022; validación con origen móvil en 2021, 2022 y 2023; validación principal en 2023; 2024 no se usa">
+      <div class="tr">Entrenamiento · 2015 a 2022 · 96 meses</div>
+      <div class="mv">2021</div>
+      <div class="mv">2022</div>
+      <div class="va">2023</div>
+      <div class="no">2024</div>
+    </div>
+    <div class="split-lab"><span>Para estimar los modelos</span><span>móvil</span><span>móvil</span><span>validación</span><span>no se usa</span></div>
+    <figcaption>Los modelos se estiman con 2015-2022 y se prueban pronosticando 2023. Para no depender de un solo año, también se usa una <b>validación con origen móvil</b>: se pronostica 2021 con datos hasta 2020, 2022 con datos hasta 2021 y 2023 con datos hasta 2022. El año 2024 queda guardado para más adelante.</figcaption>
+  </figure>
+</section>
+
+<!-- C -->
+<section id="vocab" class="stack-lg">
+  <div class="sec-head">
+    <div class="eyebrow">C · Vocabulario</div>
+    <h2>Palabras que vas a ver</h2>
+  </div>
+  <dl class="gloss">
+    <dt>Serie estacionaria</dt><dd>Una serie «quieta»: no sube ni baja con el tiempo y su variación es pareja. Es lo que necesitan los modelos ARIMA.</dd>
+    <dt>d y D</dt><dd>Cuántas veces se resta. <code>d</code> compara cada mes con el anterior y quita la tendencia. <code>D</code> compara cada mes con el mismo mes del año pasado y quita el ciclo anual.</dd>
+    <dt>ADF y KPSS</dt><dd>Dos pruebas que preguntan lo mismo al revés. ADF parte suponiendo que la serie <i>no</i> es estacionaria; KPSS parte suponiendo que <i>sí</i> lo es. Se miran juntas.</dd>
+    <dt>λ de Box-Cox</dt><dd>Un número que sugiere cómo transformar la serie. Cerca de 0: usar logaritmo. Cerca de 1: dejarla como está.</dd>
+    <dt>ACF y PACF</dt><dd>Gráficos que muestran cuánto se parece un mes a los meses anteriores. Las barras que se salen de la franja punteada son «significativas».</dd>
+    <dt>AIC y BIC</dt><dd>Notas de ajuste que castigan los modelos con muchos parámetros. Más bajo es mejor.</dd>
+    <dt>RMSE y MAE</dt><dd>Error promedio del pronóstico, en GWh. El RMSE castiga más los errores grandes; el MAE mide el error típico.</dd>
+    <dt>Naive estacional</dt><dd>El pronóstico más simple posible: «este mes será igual al mismo mes del año pasado». Cualquier modelo debería ganarle.</dd>
+    <dt>Ljung-Box</dt><dd>Prueba si en los errores del modelo queda algún patrón. Si p &gt; 0,05, no se detecta patrón: los errores parecen ruido.</dd>
+    <dt>Invertibilidad</dt><dd>Condición técnica de los términos MA. Si un coeficiente MA queda casi en −1, está «en la frontera» y su error estándar deja de ser confiable.</dd>
+    <dt>Intervalo de predicción</dt><dd>El rango donde debería caer el valor real con 95 % de probabilidad. Es distinto de un intervalo de confianza de un parámetro.</dd>
+  </dl>
+</section>
+
+<!-- D -->
+<section id="hoja" class="sec">
+  <div class="sec-head">
+    <div class="eyebrow">D · Al inicio del notebook</div>
+    <h2>Cómo leer la Hoja de decisiones</h2>
+    <div class="cells">Celda 1</div>
+  </div>
+  <div class="col stack">
+    <p>Es una tabla con una fila por criterio de la rúbrica (estacionariedad, identificación, selección y residuos) y cinco columnas. Léela como un resumen de todo el notebook:</p>
+    <ul>
+      <li><b>Decisión:</b> qué se hizo.</li>
+      <li><b>Evidencia clave:</b> los números o figuras que lo justifican.</li>
+      <li><b>Alternativa descartada:</b> qué otra opción había y por qué no se eligió.</li>
+      <li><b>Consecuencia:</b> qué implica esa decisión para lo que viene.</li>
+    </ul>
+    <p>Un buen ejercicio: lee cada fila y busca la cifra en la tabla o figura que menciona. Todas coinciden con los resultados de la ejecución.</p>
+  </div>
+</section>
+
+<!-- §1 -->
+<section id="s1" class="sec">
+  <div class="sec-head">
+    <div class="eyebrow">Ficha §1</div>
+    <h2>Estacionariedad y transformaciones</h2>
+    <div class="cells">Celdas 5–7 · Figuras 1 y 2 · Tabla 1</div>
+  </div>
+  <p class="simple"><b>En simple:</b> la serie no es estacionaria tal como viene. Se le aplica logaritmo y se resta una vez con el mes anterior (d = 1) y otra con el mismo mes del año pasado (D = 1). Así queda «quieta».</p>
+  <div class="parts">
+    <div><h4>Qué hace</h4><ul>
+      <li>Calcula el λ de Box-Cox para decidir si usar logaritmo.</li>
+      <li>Aplica ADF y KPSS a la serie y a tres formas de restarla.</li>
+      <li>Elige la menor resta que deje la serie estacionaria y sin un ciclo anual fuerte (ACF del rezago 12 menor que 0,5).</li>
+    </ul></div>
+    <div><h4>Qué mirar</h4><ul>
+      <li>En la Tabla 1, solo la fila «d = 1 y D = 1» dice «Estacionaria».</li>
+      <li>El KPSS siempre muestra 0,100: es un tope, y significa «0,10 o más».</li>
+      <li>En la Figura 2, cómo la serie diferenciada oscila alrededor de un valor fijo.</li>
+    </ul></div>
+  </div>
+  <div class="facts">
+    <div class="fact"><span class="v">λ = 0,00</span><span class="l">pero su intervalo va de −1,45 a 1,49: por sí solo no decide</span></div>
+    <div class="fact"><span class="v">0,25</span><span class="l">elasticidad: la variabilidad crece poco con el nivel</span></div>
+    <div class="fact"><span class="v">0,391 → &lt; 0,001</span><span class="l">ADF p antes y después de diferenciar</span></div>
+    <div class="fact"><span class="v">d = 1, D = 1</span><span class="l">se pierden 13 meses al inicio por las restas</span></div>
+  </div>
+  <div class="think"><span class="eyebrow">Para pensar</span><p>Si λ no decide por sí solo, ¿por qué igual conviene el logaritmo? Pista: piensa en cómo se lee un efecto como el del COVID-19.</p></div>
+</section>
+
+<!-- §2 -->
+<section id="s2" class="sec">
+  <div class="sec-head">
+    <div class="eyebrow">Ficha §2</div>
+    <h2>Los siete candidatos</h2>
+    <div class="cells">Celdas 8–10 · Figura 3 · Tabla 2</div>
+  </div>
+  <p class="simple"><b>En simple:</b> la ACF y la PACF muestran un «eco» en el mes 12. Eso apunta a un modelo con parte estacional. Para no quedarse con una sola idea, se prueban siete modelos distintos.</p>
+  <div class="parts">
+    <div><h4>Qué hace</h4><ul>
+      <li>Busca barras significativas en la ACF y la PACF (franja de ±0,215).</li>
+      <li>Traduce eso en un modelo sugerido (A) y arma seis candidatos más.</li>
+      <li>Estima todos con la variable <code>covid</code> como regresor.</li>
+    </ul></div>
+    <div><h4>Qué mirar</h4><ul>
+      <li>ACF: solo el rezago 12 es significativo (−0,30). PACF: los rezagos 12 (−0,32) y 24.</li>
+      <li>En la Tabla 2, la columna «mín. |raíz MA|»: cerca de 1 es mala señal.</li>
+      <li>El efecto del COVID-19: una caída de entre 4 % y 7 % según el modelo.</li>
+    </ul></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Modelo</th><th>Familia</th><th>Orden</th><th>Por qué está</th></tr></thead>
+    <tbody>
+      <tr><td><b>A</b></td><td>SARIMA</td><td class="num">(0,1,0)(0,1,1)₁₂</td><td>El que sugieren la ACF y la PACF</td></tr>
+      <tr class="sel"><td><b>B</b></td><td>SARIMA</td><td class="num">(0,1,1)(0,1,1)₁₂</td><td>El clásico «airline»</td></tr>
+      <tr><td><b>C</b></td><td>ARMA</td><td class="num">(1,1,1)(0,1,0)₁₂</td><td>ARMA(1,1) sobre la serie diferenciada</td></tr>
+      <tr class="ref"><td><b>D</b></td><td>ARIMA</td><td class="num">(1,1,1)</td><td>Referencia sin parte estacional</td></tr>
+      <tr><td><b>E</b></td><td>AR</td><td class="num">(1,1,0)(0,1,0)₁₂</td><td>AR(1) puro</td></tr>
+      <tr><td><b>F</b></td><td>MA</td><td class="num">(0,1,1)(0,1,0)₁₂</td><td>MA(1) puro</td></tr>
+      <tr><td><b>G</b></td><td>SARIMA</td><td class="num">(0,1,1)(1,1,0)₁₂</td><td>AR estacional, por el rezago 24 de la PACF</td></tr>
+    </tbody>
+  </table></div>
+  <div class="col stack">
+    <p><b>La «frontera de invertibilidad», en simple.</b> En A, B y C, un coeficiente MA queda casi en −1 (raíz mínima entre 1,002 y 1,013). Si se quita la restricción técnica, llega a −1,00 y el ajuste casi no cambia. Eso significa que el modelo «no sabe bien» dónde poner ese número, por lo que su error estándar no es confiable. Suele indicar un ciclo anual muy regular.</p>
+  </div>
+  <div class="think"><span class="eyebrow">Para pensar</span><p>¿Por qué tiene sentido incluir un modelo sin parte estacional (D) si de antemano sabemos que va a salir mal?</p></div>
+</section>
+
+<!-- §3 -->
+<section id="s3" class="sec">
+  <div class="sec-head">
+    <div class="eyebrow">Ficha §3</div>
+    <h2>Cómo se eligió el modelo</h2>
+    <div class="cells">Celdas 11–13 · Figura 4 · Tabla 3</div>
+  </div>
+  <p class="simple"><b>En simple:</b> cada modelo recibe un puntaje según cuatro notas (AIC, BIC, RMSE y MAE con origen móvil). Pero para ganar no basta con el puntaje: hay que superar al naive estacional y tener residuos «limpios» en Ljung-Box.</p>
+  <figure>
+    <div class="bars" role="img" aria-label="RMSE móvil en GWh: A 5,78; B 7,12; E 7,16; F 7,19; naive 7,72; C 8,30; G 8,51. B es el único elegible.">
+      <div class="legend"><span style="--c: var(--accent)">Elegido (B)</span><span style="--c: var(--muted); --o: 0.45">No elegible</span><span style="--c: var(--blue)">Naive estacional</span></div>
+      <div class="bar-row"><span class="who">A</span><div class="bar-track"><div class="bar-fill" style="width:57.8%"></div><span class="bar-val" style="left:57.8%">5,78</span></div></div>
+      <div class="bar-row"><span class="who"><b>B</b></span><div class="bar-track"><div class="bar-fill sel" style="width:71.2%"></div><span class="bar-val" style="left:71.2%">7,12</span></div></div>
+      <div class="bar-row"><span class="who">E</span><div class="bar-track"><div class="bar-fill" style="width:71.6%"></div><span class="bar-val" style="left:71.6%">7,16</span></div></div>
+      <div class="bar-row"><span class="who">F</span><div class="bar-track"><div class="bar-fill" style="width:71.9%"></div><span class="bar-val" style="left:71.9%">7,19</span></div></div>
+      <div class="bar-row"><span class="who">Naive</span><div class="bar-track"><div class="bar-fill ref" style="width:77.2%"></div><span class="bar-val" style="left:77.2%">7,72</span></div></div>
+      <div class="bar-row"><span class="who">C</span><div class="bar-track"><div class="bar-fill" style="width:83.0%"></div><span class="bar-val" style="left:83.0%">8,30</span></div></div>
+      <div class="bar-row"><span class="who">G</span><div class="bar-track"><div class="bar-fill" style="width:85.1%"></div><span class="bar-val" style="left:85.1%">8,51</span></div></div>
+    </div>
+    <figcaption>RMSE móvil en GWh (promedio de 2021, 2022 y 2023; menor es mejor), escala de 0 a 10. A, E y F no son elegibles porque fallan Ljung-Box; C y G, además, no superan al naive. D, el ARIMA sin estacionalidad, queda fuera de la escala: 25,90 GWh.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <thead><tr><th>Modelo</th><th class="num">AIC</th><th class="num">BIC</th><th class="num">RMSE móvil</th><th class="num">MAE móvil</th><th class="num">Ljung-Box p (24)</th><th class="num">Puntaje</th><th>¿Elegible?</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td class="num">−300,92</td><td class="num">−293,66</td><td class="num">5,78</td><td class="num">5,14</td><td class="num">0,019</td><td class="num">1,00</td><td><span class="pill no">No</span></td></tr>
+      <tr class="sel"><td><b>B</b></td><td class="num">−300,90</td><td class="num">−291,23</td><td class="num">7,12</td><td class="num">6,64</td><td class="num">0,061</td><td class="num">2,50</td><td><span class="pill si">Sí</span></td></tr>
+      <tr><td>E</td><td class="num">−272,20</td><td class="num">−264,94</td><td class="num">7,16</td><td class="num">6,03</td><td class="num">0,031</td><td class="num">4,25</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>F</td><td class="num">−272,26</td><td class="num">−265,01</td><td class="num">7,19</td><td class="num">6,10</td><td class="num">0,030</td><td class="num">4,25</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>C</td><td class="num">−276,20</td><td class="num">−266,52</td><td class="num">8,30</td><td class="num">7,18</td><td class="num">0,047</td><td class="num">4,50</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>G</td><td class="num">−278,94</td><td class="num">−269,27</td><td class="num">8,51</td><td class="num">7,65</td><td class="num">0,003</td><td class="num">4,50</td><td><span class="pill no">No</span></td></tr>
+      <tr class="ref"><td>Naive estacional</td><td class="num">—</td><td class="num">—</td><td class="num">7,72</td><td class="num">6,66</td><td class="num">—</td><td class="num">—</td><td>referencia</td></tr>
+    </tbody>
+  </table></div>
+  <div class="facts">
+    <div class="fact"><span class="v">−7,8 %</span><span class="l">B reduce el RMSE frente al naive (7,12 contra 7,72 GWh)</span></div>
+    <div class="fact"><span class="v">6,64 ≈ 6,66</span><span class="l">en MAE, B y el naive quedan prácticamente iguales</span></div>
+    <div class="fact"><span class="v">25,90</span><span class="l">RMSE móvil del ARIMA sin estacionalidad: el ciclo anual es clave</span></div>
+  </div>
+  <div class="think"><span class="eyebrow">Para pensar</span><p>A pronostica mejor que B y aun así queda fuera. ¿Qué problema práctico tiene un modelo que deja patrones en sus errores?</p></div>
+</section>
+
+<!-- §4 -->
+<section id="s4" class="sec">
+  <div class="sec-head">
+    <div class="eyebrow">Ficha §4</div>
+    <h2>Revisar los residuos del ganador</h2>
+    <div class="cells">Celdas 14–16 · Figura 5 · Tabla 4</div>
+  </div>
+  <p class="simple"><b>En simple:</b> los errores de B no muestran patrones y su variación es pareja. No siguen una curva normal, pero eso pasa casi solo por el inicio del COVID-19, y sus intervalos aciertan en la práctica.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Qué se revisa</th><th>Prueba</th><th class="num">valor-p</th><th>¿Cumple?</th></tr></thead>
+    <tbody>
+      <tr><td>Sin patrones</td><td>Ljung-Box, rezagos 12 y 24</td><td class="num">0,355 · 0,061</td><td>Sí (el 24 queda cerca del límite)</td></tr>
+      <tr><td>Normalidad</td><td>Jarque-Bera · Shapiro-Wilk</td><td class="num">0,001 · 0,019</td><td>No</td></tr>
+      <tr><td>Normalidad sin mar-jun 2020</td><td>Jarque-Bera · Shapiro-Wilk</td><td class="num">0,215 · 0,111</td><td>Sí</td></tr>
+      <tr><td>Variación pareja</td><td>ARCH-LM · F entre mitades</td><td class="num">0,639 · 0,246</td><td>Sí</td></tr>
+      <tr><td>Intervalos que aciertan</td><td>Cobertura del intervalo de predicción del 95 %</td><td class="num">94,4 % · p = 0,701</td><td>Sí</td></tr>
+    </tbody>
+  </table></div>
+  <div class="col stack">
+    <p><b>Cómo leer «cumple».</b> En estas pruebas, un p &gt; 0,05 significa que <i>no se encontró</i> evidencia de un problema. No prueba que el problema no exista. Por eso se dice «no se rechaza que sean ruido blanco» y no «son ruido blanco».</p>
+    <p><b>Las colas pesadas.</b> La curtosis en exceso es 1,83 (en una normal sería 0): hay más meses extremos de lo esperado. Esos meses extremos se concentran al inicio del COVID-19 (marzo a junio de 2020): sin ellos, la normalidad se cumple.</p>
+  </div>
+  <div class="think"><span class="eyebrow">Para pensar</span><p>Si la normalidad falla, ¿por qué igual se puede confiar en los intervalos? Mira la fila de cobertura.</p></div>
+</section>
+
+<!-- §5 -->
+<section id="s5" class="sec">
+  <div class="sec-head">
+    <div class="eyebrow">Ficha §5</div>
+    <h2>Discusión y conclusiones</h2>
+    <div class="cells">Celdas 17–19</div>
+  </div>
+  <p class="simple"><b>En simple:</b> el autor explica qué se sacrifica con la regla, por qué no agregó un indicador extra para el COVID-19 y cómo usaría el modelo una distribuidora.</p>
+  <div class="parts">
+    <div><h4>Lo que discute</h4><ul>
+      <li><b>Candidatos fuera:</b> A, E y F pronostican bien, pero dejan patrones en sus errores. C y G, además, no le ganan al naive.</li>
+      <li><b>Indicador abril-junio 2020:</b> arregla la normalidad (p = 0,226), pero hace aparecer un patrón en el rezago 24 (p = 0,039). Por eso no se usa.</li>
+      <li><b>Uso práctico:</b> B se equivoca unos 6,64 GWh al mes, cerca del 6,2 % del consumo medio (107,65 GWh).</li>
+    </ul></div>
+    <div><h4>Qué mirar</h4><ul>
+      <li>Que cada cifra de la discusión aparece en una tabla o salida anterior.</li>
+      <li>Las limitaciones: solo tres años de validación, un único indicador de COVID-19 y sin temperatura.</li>
+      <li>La mejora propuesta: un modelo con temperatura (SARIMAX).</li>
+    </ul></div>
+  </div>
+  <div class="think"><span class="eyebrow">Para pensar</span><p>Si tú compraras la energía, ¿usarías el pronóstico puntual o el límite superior del intervalo? ¿De qué depende?</p></div>
+</section>
+
+<!-- E -->
+<section id="trampas" class="stack-lg">
+  <div class="sec-head">
+    <div class="eyebrow">E · Errores típicos</div>
+    <h2>Lecturas que confunden</h2>
+  </div>
+  <ul class="traps">
+    <li><b>«El de menor error es el mejor modelo».</b> No siempre. A tiene el menor RMSE, pero deja patrones en sus errores y queda fuera.</li>
+    <li><b>«p &gt; 0,05 confirma la hipótesis».</b> Solo dice que no hay evidencia en contra. Con p = 0,061, B pasa Ljung-Box, pero por poco.</li>
+    <li><b>«λ = 0,00 obliga a usar logaritmo».</b> Su intervalo incluye 0 y 1. El logaritmo se elige también porque facilita la interpretación.</li>
+    <li><b>«KPSS p = 0,100 es exacto».</b> Es un tope de <code>statsmodels</code>: significa 0,10 o más.</li>
+    <li><b>«AIC más negativo, siempre comparable».</b> Solo se comparan modelos con la misma diferenciación. Por eso D queda fuera del puntaje.</li>
+    <li><b>«Intervalo de confianza» por «intervalo de predicción».</b> Aquí se habla del rango para valores futuros: es un intervalo de predicción.</li>
+  </ul>
+</section>
+
+<!-- F -->
+<section id="auto" class="stack-lg">
+  <div class="sec-head">
+    <div class="eyebrow">F · Ponte a prueba</div>
+    <h2>Seis preguntas rápidas</h2>
+  </div>
+  <div>
+    <details><summary>1. ¿Qué hacen d = 1 y D = 1, y cuántos meses se pierden?</summary><p class="ans">d = 1 resta cada mes con el anterior (quita la tendencia) y D = 1 lo resta con el mismo mes del año anterior (quita el ciclo anual). Se pierden 1 + 12 = 13 meses al inicio.</p></details>
+    <details><summary>2. ¿Por qué se incluyó el modelo G?</summary><p class="ans">Porque la PACF también es significativa en el rezago 24, lo que podría indicar un término AR estacional. G lo prueba, aunque al final falla Ljung-Box (p = 0,003).</p></details>
+    <details><summary>3. ¿Cuáles son las dos condiciones para que un modelo sea elegible?</summary><p class="ans">Superar al naive estacional en RMSE móvil y pasar Ljung-Box (p &gt; 0,05) en los rezagos 12 y 24.</p></details>
+    <details><summary>4. E tiene menor MAE móvil que B (6,03 contra 6,64). ¿Por qué no gana?</summary><p class="ans">Porque deja patrones en sus errores (Ljung-Box p = 0,031 en el rezago 24), así que no cumple la condición de residuos limpios.</p></details>
+    <details><summary>5. ¿Qué significa que la cobertura del intervalo sea 94,4 %?</summary><p class="ans">Que en 34 de los 36 meses de la validación con origen móvil el valor real cayó dentro del intervalo de predicción del 95 %. La prueba binomial (p = 0,701) no detecta diferencia con el 95 % esperado.</p></details>
+    <details><summary>6. ¿Por qué no se agregó el indicador de abril-junio de 2020?</summary><p class="ans">Porque, aunque arregla la normalidad, deja un patrón en los errores en el rezago 24 (Ljung-Box p = 0,039). La regla da prioridad a residuos sin patrones.</p></details>
+  </div>
+</section>
+
+<footer>
+  <b>Para profundizar</b>
+  <ul>
+    <li>Hyndman, R. J. y Athanasopoulos, G. (2021). <i>Forecasting: Principles and practice</i> (3.ª ed.), capítulos 5.10 (validación con origen móvil) y 9 (ARIMA). otexts.com/fpp3</li>
+    <li>Box, G. E. P., Jenkins, G. M., Reinsel, G. C. y Ljung, G. M. (2015). <i>Time series analysis: Forecasting and control</i> (5.ª ed.). Wiley.</li>
+  </ul>
+  <p>Guía de apoyo al notebook <code>mcdi505_f2rmoncada.ipynb</code> (MCDI505, Magíster en Ciencia de Datos, UNAB Online). Las cifras provienen de su ejecución completa en octubre de 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
