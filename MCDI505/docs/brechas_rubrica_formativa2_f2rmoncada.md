@@ -1,131 +1,136 @@
-# Validación preliminar — `mcdi505_f2rmoncada.ipynb` frente a la Rúbrica Formativa 2 (f2_s2)
+# Validación — `mcdi505_f2rmoncada.ipynb` frente a la Rúbrica Formativa 2 (f2_s2)
 
-- **Fecha de revisión:** 9 de octubre de 2026
-- **Versión revisada:** commit `8520d5a`, más las correcciones del 9 de octubre descritas en «Actualización» (notebook ejecutado completo, 11/11 celdas de código, sin errores)
+- **Fecha de revisión:** 11 de octubre de 2026, quinta revisión del día (anteriores: 9 y 11 de octubre)
+- **Versión revisada:** archivo de trabajo con los textos del autor, las correcciones de los criterios 1 a 6 y la propuesta de sección «5. Discusión» (sin commit; base `7f9b77c`). Sin marcas `[AUTOR]` ni `[COMPLETAR]`
+- **Ejecución de control:** «Reiniciar kernel y ejecutar todo» (kernel nuevo): **5/5 celdas de código, ejecutadas en orden (1 a 5) y sin errores**
 - **Rúbrica:** `Rúbrica_formativa_f2_s2`, 6 criterios de 9 puntos (total 54)
-- **Alcance:** revisión del contenido ejecutado, más mediciones aparte: extensión, citas, marcas pendientes y coeficientes de los modelos. Es una estimación de cumplimiento, no una nota.
-
-## Actualización (9 de octubre de 2026): brechas resueltas
-
-- **Tabla 2 con coeficientes e invertibilidad:** muestra cada coeficiente con su error estándar y valor-p, y una columna «mín. |raíz MA|». La verificación confirmó la brecha: sin la restricción de invertibilidad, el MA estacional de A y B y el MA regular de C llegan a −1,00, y la log-verosimilitud cambia menos de 0,03. El texto de la sección 2 incluye ahora una nota técnica: los errores estándar de esos términos no son fiables, un MA estacional cercano a −1 indica estacionalidad casi determinista y un MA regular cercano a −1, posible sobrediferenciación (241 palabras, dentro del límite).
-- **Referencias y citas APA:** la lista sigue APA 7 en español: «y» en lugar de «&», editores y páginas en Seabold y Perktold (2010), número 366a en Dickey y Fuller (1979) y la referencia original de Box-Cox (Box y Cox, 1964). Las 13 referencias se citan en el texto: notas de método, Hoja de decisiones y textos de interpretación.
-- **Coma decimal:** todas las tablas y los textos impresos usan coma decimal. Los ejes de los gráficos siguen con el formato de matplotlib.
-- **Transformación con evidencia cuantitativa:** la validación mostró que el λ de Box-Cox (0,00) tiene un IC de 95 % de −1,45 a 1,49, que incluye 0 y 1, y que sin 2020-2021 la variabilidad anual crece poco con el nivel (elasticidad 0,25). El texto de la sección 1 y la Hoja ahora lo dicen, y el logaritmo se justifica por λ ≈ 0 y porque los efectos se leen en porcentaje, no por una variabilidad que crezca con fuerza.
-- **Hoja de decisiones con cifras:** las 5 marcas `[COMPLETAR]` se reemplazaron por las cifras de la ejecución. La celda de apoyo verifica que las 15 cifras clave de la Hoja coincidan con los resultados (hoy coinciden todas).
-- **Selección sin empate:** la regla usa el RMSE y MAE promedio con origen móvil (pronósticos de 2021, 2022 y 2023, reestimando con los datos hasta el año anterior) y exige superar al naive y pasar Ljung-Box en los rezagos 12 y 24. Puntajes: A 1, B 2 y C 3. A queda primero pero no es elegible (Ljung-Box p = 0,019 en el rezago 24), y C tampoco (no supera al naive y p = 0,047). Se elige **B**: RMSE móvil 7,12 frente a 7,72 GWh del naive (7,8 % menos), pero MAE móvil prácticamente igual (6,64 frente a 6,66). El cambio de regla se declara en la Hoja como ajuste respecto de la versión anterior.
-- **Normalidad que falla, analizada:** los residuos de B tienen colas pesadas (curtosis en exceso 1,83). Sin marzo-junio de 2020, Jarque-Bera da p = 0,215 y Shapiro-Wilk p = 0,111: la falta de normalidad se concentra en el inicio del COVID-19, que un solo indicador `covid` no captura. El intervalo de 95 % cubrió 94,4 % de los 36 meses del origen móvil (binomial p = 0,701), así que está bien calibrado en la práctica. Un indicador adicional para abril-junio de 2020 corrige la normalidad (p = 0,226), pero deja autocorrelación en el rezago 24 (p = 0,039); queda en las conclusiones como mejora posible. La Tabla 4, el texto de la sección 4 (202 palabras), la fila 4 de la Hoja y su verificación de cifras están actualizados.
-- **Efecto en la extensión:** con todos los cambios, el notebook pasa de unas 7,6 a unas **9,3 páginas** (3.122 palabras, 5 figuras y 32 filas de tabla, sin contar el código). Sigue por debajo de las 10 que pide la rúbrica.
-
-Las demás brechas siguen abiertas; las tablas siguientes marcan cuáles quedaron resueltas.
+- **Alcance:** corrección de los criterios 1 y 2; validación completa de resultados; concordancia de los textos `[AUTOR]` y de la Hoja de decisiones con la ejecución. Es una estimación de cumplimiento, no una nota.
 
 ## Resumen
 
-| # | Criterio | Nivel probable hoy | Puntaje probable | Brecha principal |
+| # | Criterio | Nivel probable | Puntaje probable | Estado |
 |---|---|---|---|---|
-| 1 | Estacionariedad y transformaciones (ID 2.2) | Excelente / Bueno | 6–9 | **Resuelto:** Hoja con cifras y transformación cuantificada. Pendiente: interpretación propia |
-| 2 | Identificación y estimación (ID 2.1) | Bueno / Excelente | 6–9 | **Resuelto:** coeficientes e invertibilidad reportados y comentados. Pendiente: candidatos AR o MA puros, o explicar por qué no se incluyen |
-| 3 | Selección y comparación (ID 2.1) | Bueno / Excelente | 6–9 | **Resuelto:** sin empate (origen móvil + Ljung-Box) y justificación explícita. Pendiente: la ventaja de B sobre el naive es moderada en RMSE y nula en MAE; discutirlo con palabras propias |
-| 4 | Diagnóstico de residuos (ID 2.2) | Excelente / Bueno | 6–9 | **Resuelto:** causa de la falta de normalidad y calibración de los intervalos, con cifras. Pendiente: interpretación propia |
-| 5 | Ortografía y redacción | Bueno | 6 | Textos aún marcados como «Borrador» y algunos giros poco académicos (la coma decimal ya está corregida) |
-| 6 | Formato y entrega | Insuficiente / Bueno | 3–6 | Extensión de unas 9,3 páginas (pide 10–15), nombre de archivo, celda de apoyo y declaración de IA pendientes (las citas ya están corregidas) |
-| | **Total estimado** | | **33–48 / 54** | |
+| 1 | Estacionariedad y transformaciones (ID 2.2) | Excelente | 9 | **Resuelto.** Error de atribución corregido, elasticidad explicada y KPSS truncado aclarado |
+| 2 | Identificación y estimación (ID 2.1) | Excelente | 9 | **Resuelto.** 7 candidatos que cubren AR, MA, ARMA, ARIMA y SARIMA (incluido el AR estacional que sugiere la PACF), nombres precisos y precisiones del texto corregidas |
+| 3 | Selección y comparación (ID 2.1) | Excelente | 9 | **Resuelto.** Rezago 24 de Ljung-Box, «RMSE móvil de 25,90 GWh» y una frase sobre E y F |
+| 4 | Diagnóstico de residuos (ID 2.2) | Excelente | 9 | **Resuelto.** Tipeo corregido, «no se rechaza que sean ruido blanco» con el rezago 24 cerca del umbral, e «intervalo de predicción» con prueba binomial |
+| 5 | Ortografía y redacción | Excelente | 9 | **Resuelto.** Declaración de IA corregida, «Limitaciones:» en las conclusiones y celda 4 |
+| 6 | Formato y entrega | Bueno | 6 | Extensión (~10,1 páginas), marcas y ejemplo de la Hoja resueltos. Pendientes: reescribir la propuesta de Discusión, encabezado formal y nombre de archivo |
+| | **Total estimado** | | **51 / 54** (54 si se resuelven los pendientes del criterio 6) | |
 
-Las brechas que más pesan ahora están en el **formato** (criterio 6) y en las **interpretaciones propias**, que afectan a los criterios 1 a 5.
-
----
-
-## 1. Análisis de estacionariedad y transformaciones (ID 2.2)
-
-**Lo que cumple**
-- Aplica ADF y KPSS a la serie original, a la serie en logaritmos y a tres diferenciaciones (Tabla 1). Clasifica cada caso con una regla explícita: estacionaria, no estacionaria o discrepante.
-- Decide d = 1 y D = 1 con una regla fijada de antemano (veredicto «estacionaria» y ACF(12) < 0,5). Con esa combinación, ADF da p < 0,001, KPSS p = 0,100 y ACF(12) = −0,30.
-- Justifica el logaritmo con cifras: λ de Box-Cox = 0,00 (IC 95 % de −1,45 a 1,49) y elasticidad de la variabilidad anual = 0,25 (sin 2020-2021), reconociendo que el IC también incluye 1.
-- Verifica visualmente la estacionariedad resultante (Figura 2). La afirmación de que la variabilidad aumenta en el COVID-19 se comprobó: la desviación de la serie diferenciada es 0,039 fuera de ese periodo y 0,065 dentro.
-
-**Brechas**
-| Brecha | Impacto | Acción sugerida |
-|---|---|---|
-| ~~La fila 1 de la Hoja tiene dos `[COMPLETAR]`~~ **Resuelto:** d = 1 y D = 1, con los valores-p, el IC de λ y la elasticidad | — | — |
-| ~~«La variabilidad crece con el nivel» se afirmaba sin cuantificar~~ **Resuelto:** IC de λ y elasticidad en la Tabla 1, la sección 1 y la Hoja | — | — |
-| No se aclara que el KPSS p = 0,100 está truncado («0,10 o más») | Riesgo menor de mala lectura | Una frase bajo la Tabla 1 |
-| Falta la interpretación propia (el texto actual es un borrador generado) | La rúbrica exige *interpretar* | Reescribir con palabras propias |
-
-## 2. Identificación y estimación de modelos (ID 2.1)
-
-**Lo que cumple**
-- ACF y PACF de la serie estacionaria (Figura 3), con banda de ±0,215. Solo el rezago 12 es significativo en la ACF; en la PACF lo son el 12 y el 24.
-- La regla explícita sugiere SARIMA(0,1,0)(0,1,1)₁₂, coherente con la evidencia.
-- Cuatro candidatos, con parte estacional y una referencia sin estacionalidad, todos con el regresor `covid`. Los cuatro convergen.
-
-**Brechas**
-| Brecha | Impacto | Acción sugerida |
-|---|---|---|
-| ~~La Tabla 2 no muestra coeficientes, errores estándar ni valores-p~~ **Resuelto:** la Tabla 2 los muestra, como dice la Hoja | — | — |
-| ~~Términos MA en la frontera de invertibilidad sin comentar~~ **Resuelto:** columna «mín. \|raíz MA\|» (A y B 1,002; C 1,013), reestimación sin restricción (−1,00, Δ log-verosimilitud < 0,03) y nota técnica en la sección 2 | — | Considerar en la reescritura si conviene un modelo con estacionalidad determinista (variables indicadoras de mes) como candidato adicional |
-| No hay modelos AR ni MA puros, y no se prueba un AR estacional pese a que la PACF es significativa en el rezago 24 | La identificación es correcta, pero estrecha frente a «AR, MA, ARMA, ARIMA, SARIMA» | Agregar uno o dos candidatos, por ejemplo SARIMA(0,1,1)(1,1,0)₁₂ o un MA(1), o justificar por qué no se incluyen |
-| C se llama «ARMA(1,1)», pero es ARIMA(1,1,1)(0,1,0)₁₂ | Puede confundir al evaluador | Nombrarlo «ARMA(1,1) sobre la serie diferenciada (d = 1, D = 1)» |
-| ~~La fila 2 de la Hoja tiene un `[COMPLETAR]`~~ **Resuelto:** banda, rezagos significativos, efecto del COVID-19 e invertibilidad | — | — |
-
-## 3. Selección y comparación de modelos (ID 2.1)
-
-**Lo que cumple**
-- Compara AIC, BIC, RMSE y MAE en la validación 2023 y con origen móvil (2021-2023) contra el naive estacional, con Ljung-Box de cada candidato, y restringe AIC y BIC a modelos con la misma diferenciación (Tabla 3).
-- Regla explícita, coherente con la Hoja: mejor puntaje (AIC, BIC, RMSE y MAE móviles) entre los modelos que superan al naive y pasan Ljung-Box. Elegido: **B, SARIMA(0,1,1)(0,1,1)₁₂ «airline»**, porque A, con mejor puntaje, deja autocorrelación.
-
-**Brechas**
-| Brecha | Impacto | Acción sugerida |
-|---|---|---|
-| ~~A, B y C empataban en el puntaje (2,0)~~ **Resuelto:** con origen móvil los puntajes son 1, 2 y 3 | — | — |
-| B supera al naive en RMSE móvil (7,12 frente a 7,72 GWh, 7,8 % menos), pero el MAE móvil es prácticamente igual (6,64 frente a 6,66) | La ventaja sobre la referencia mínima es moderada | El texto ya lo dice; desarrollarlo en la interpretación propia (qué significa para contratar energía) |
-| ~~C pronosticaba mejor en 2023 pese a peor AIC/BIC~~ **Resuelto:** con origen móvil, C es el peor de los comparables (RMSE móvil 8,30) y tampoco pasa Ljung-Box (p = 0,047) | — | — |
-| ~~Validación de solo 12 meses~~ **Resuelto en parte:** origen móvil con tres años; sigue siendo una muestra corta, y así lo indica el texto | — | — |
-| ~~La fila 3 de la Hoja tiene un `[COMPLETAR]`~~ **Resuelto:** regla ajustada, puntajes y métricas móviles | — | — |
-
-## 4. Diagnóstico de residuos y validación de supuestos (ID 2.2)
-
-**Lo que cumple**
-- Diagnóstico completo, como pide la rúbrica: Ljung-Box en los rezagos 12 y 24, con 2 grados de libertad descontados (p = 0,355 y 0,061); normalidad con Jarque-Bera (p = 0,001) y Shapiro-Wilk (p = 0,019); homocedasticidad con ARCH-LM (p = 0,639) y test F (p = 0,246). Hay figura de residuos, histograma, Q-Q y ACF.
-- Concluye sobre la validez: válido para pronosticar; los intervalos de 95 % son aproximados, pero su cobertura empírica fue de 94,4 % (36 meses).
-
-**Brechas**
-| Brecha | Impacto | Acción sugerida |
-|---|---|---|
-| ~~La normalidad falla y no se discute la causa~~ **Resuelto:** colas pesadas (curtosis 1,83) concentradas en marzo-junio de 2020; sin esos meses se cumple (Jarque-Bera p = 0,215); cobertura del IC 95 % de 94,4 % | — | En la interpretación propia, decidir si conviene el indicador de abril-junio de 2020 frente a su costo en Ljung-Box |
-| ~~Ljung-Box en el rezago 24 (p = 0,061) cerca del umbral, sin matizar~~ **Resuelto:** el texto lo menciona | — | — |
-| ~~La fila 4 de la Hoja tiene un `[COMPLETAR]`~~ **Resuelto:** valores-p de Ljung-Box, Jarque-Bera, Shapiro-Wilk, ARCH-LM y F | — | — |
-| Falta la interpretación propia | La rúbrica exige interpretar | Reescribir |
-
-## 5. Ortografía y redacción
-
-| Brecha | Dónde | Acción sugerida |
-|---|---|---|
-| Los 5 textos de interpretación y conclusiones dicen «**Borrador (reescribir con mis palabras)**» | Secciones 1–4 y Conclusiones | Reescribir y quitar la marca |
-| El encabezado está en modo instrucción: «El **miércoles** entregue la Hoja…», «Estado de este borrador» | Celda 0 | Reemplazar por un encabezado formal |
-| ~~Mezcla de punto y coma decimal~~ **Resuelto:** tablas y textos con coma decimal | — | — |
-| Anglicismo «naive» | Varias secciones | Usar «ingenuo estacional» |
-| Giros poco académicos o confusos: «La serie en logaritmos y en nivel recibe el veredicto…», «2023 sigue siendo una validación honesta» | Conclusiones y sección 2 | Revisar en la reescritura |
-
-## 6. Formato y entrega
-
-| Requisito (rúbrica) | Estado | Detalle |
-|---|---|---|
-| Notebook ejecutable (.ipynb) | Cumple | Se ejecuta completo de principio a fin |
-| **Extensión 10–15 páginas equivalentes** | **No cumple** | Unas **9,3 páginas** (3.122 palabras, 5 figuras, 32 filas de tabla; sin contar el código). La celda de apoyo controla otro límite (250 palabras, una tabla y hasta 3 figuras por sección), que **contradice** las 10–15 páginas de la rúbrica |
-| **Nombre de archivo** `sigla_sXinicialapellido` | **Revisar** | El archivo es `mcdi505_f2rmoncada.ipynb`; la rúbrica pide el formato `mcdi505_s2rmoncada`. El encabezado dice «s2», pero ese nombre ya lo usa otro notebook del repositorio |
-| Referencias APA | Cumple | 13 referencias en APA 7 (español), todas citadas en el texto |
-| Marcas pendientes | No cumple | 3 `[COMPLETAR]` en la declaración de IA (la Hoja ya está completa) |
-| Celda de trabajo | No cumple | «Apoyo para el autor (borrar antes de entregar)» sigue en el notebook |
-| Estructura (portada, introducción, criterios, conclusiones, referencias) | Parcial | Falta portada formal (programa, curso, fecha); la introducción es un solo párrafo |
-| Entrega dentro del plazo | Sin verificar | |
+**Resultado de la validación:** todas las cifras de los textos del autor, de la Hoja de decisiones y de la nueva propuesta de Discusión tienen respaldo en las salidas de la ejecución. Se comprobó de forma automática: cada número del texto se buscó en las salidas con el mismo redondeo. Lo pendiente es redacción y formato (criterios 5 y 6).
 
 ---
 
-## Plan de acción priorizado
+## 1. Correcciones aplicadas en esta revisión
 
-1. **Aclarar con el docente la extensión exigida para la Formativa 2:** 10–15 páginas según la rúbrica, o los límites por sección que usa el notebook. Si son 10–15, faltan unas 2,5 páginas, que pueden salir de las interpretaciones propias y de la discusión de la selección.
-2. ~~Completar la Hoja de decisiones~~ **Hecho.** Falta **borrar la celda de apoyo** antes de entregar, después de revisar su verificación de cifras.
-3. **Reescribir con palabras propias** las 4 interpretaciones y las conclusiones, quitando la marca «Borrador». Incluir el empate de la selección, la ventaja mínima sobre el naive y las causas de la falta de normalidad.
-4. ~~Agregar citas en el texto (APA)~~ **Hecho.**
-5. ~~Mostrar los coeficientes y comentar los MA cercanos a −1~~ **Hecho.**
-6. **Corregir formato:** encabezado formal, «ingenuo» en vez de «naive» y nombre de archivo (la coma decimal ya está hecha).
-7. **Completar la declaración de uso de IA** según lo realmente hecho. Revisar que el uso declarado (borrador de código y textos) sea compatible con la norma de la evaluación, que permite la IA solo para organizar ideas o mejorar la redacción.
+### Criterio 1: Estacionariedad y transformaciones
+| Brecha | Corrección | Dónde |
+|---|---|---|
+| ❌ «La **serie original** no fue concluyente (ADF p = 0,391…)»: esas cifras eran de la serie en logaritmos | «La **serie en logaritmos sin diferenciar** no fue concluyente…» | Celdas 7 y 18 (punto 1) |
+| ⚠️ Elasticidad 0,25 sin contexto | «Sin 2020-2021, la elasticidad… es 0,25, es decir, la variabilidad crece poco con el nivel» | Celda 7 |
+| ⚠️ KPSS p = 0,100 truncado sin aclarar | Nota impresa bajo la Tabla 1 y una frase en la interpretación | Celdas 6 y 7 |
+| ⚠️ Redacción | Título «Interpretación de la estacionariedad»; «por sí solo no permite decidir»; «se utiliza **el** λ» y punto final | Celdas 5 y 7 |
+
+### Criterio 2: Identificación y estimación
+| Brecha | Corrección | Dónde |
+|---|---|---|
+| Sin candidatos AR o MA puros ni AR estacional, pese a la PACF significativa en el rezago 24 | Se agregan **E. AR(1)**, **F. MA(1)** y **G. SARIMA(0,1,1)(1,1,0)₁₂** (AR estacional). Los 7 candidatos cubren las cinco familias que pide la rúbrica | Celda 9 (código), Tabla 2 y Tabla 3 |
+| C se llamaba «ARMA(1,1) con la misma diferenciación» | «ARMA(1,1) sobre la serie diferenciada»; igual para E y F | Celda 9 |
+| ⚠️ «rezago significativo en [12]… [12, 24]» (notación de Python) | «La ACF mostró un único rezago significativo, el 12, y la PACF, los rezagos 12 y 24» | Celda 10 |
+| ⚠️ «reducción estimada de -4,2 %» (doble negación) | «reducción estimada de 4,2 %… (6,0 % en el modelo B)» | Celda 10 |
+| ⚠️ «algunos modelos» en la frontera de invertibilidad | «los modelos A, B y C» | Celda 10 |
+| «cuatro modelos» en el texto, las conclusiones y la Hoja | «siete modelos de las familias AR, MA, ARMA, ARIMA y SARIMA» | Celdas 1, 10 y 18 |
+| El PACF = −0,32 del rezago 12 solo se veía en la Figura 3 | La salida de la sección 2 imprime ACF y PACF en el rezago 12 | Celda 9 |
+
+**Efecto de los nuevos candidatos (verificado):** E, F y G se estiman bien: convergen, y F y G están lejos de la frontera de invertibilidad (\|raíz MA\| de 14,7 y 5,4; E no tiene término MA). Sin embargo, **ninguno es elegible**: fallan Ljung-Box en el rezago 24 (E p = 0,031; F p = 0,030; G p = 0,003). La selección **no cambia**: B sigue siendo el único elegible, con las mismas cifras (RMSE móvil 7,12 frente a 7,72 GWh del naive). Puntajes: A 1,0; B 2,5; E y F 4,25; C y G 4,5.
+
+### Criterio 4: Diagnóstico de residuos (tercera revisión)
+| Brecha | Corrección | Dónde |
+|---|---|---|
+| ⚠️ «test F entre mitades p = 0246» | «el test F entre mitades p = 0,246» | Celda 16 |
+| ⚠️ «los residuos pueden considerarse ruido blanco» (afirma la hipótesis nula) | «no se rechaza que los residuos sean ruido blanco, aunque el valor del rezago 24 está cerca del umbral» (p = 0,061) | Celda 16 |
+| ⚠️ «intervalo de confianza del 95 %… (p = 0,701)» | «intervalo de **predicción** del 95 %… en el origen móvil (prueba binomial, p = 0,701)» | Celda 16 |
+| Término distinto en la tabla y la Hoja («IC 95 %») | «Cobertura del intervalo de predicción del 95 %» en la Tabla 4 y en la fila 4 de la Hoja | Celdas 15 y 1 |
+
+### Criterios 3, 5 y 6 (cuarta revisión)
+| Brecha | Corrección | Dónde |
+|---|---|---|
+| Criterio 3: Ljung-Box p = 0,019 sin indicar el rezago | «(Ljung-Box p = 0,019 en el rezago 24)» | Celda 13 |
+| Criterio 3: «alcanzó 25,90 GWh» | «alcanzó un RMSE móvil de 25,90 GWh» | Celda 13 |
+| Criterio 3: nuevos candidatos sin mencionar | «Los modelos E y F también superaron al naive en RMSE móvil (7,16 y 7,19 GWh), pero, al igual que C y G, dejaron autocorrelación en el rezago 24…» | Celda 13 |
+| Criterio 5: «Trabajo solo con consumo_gwh, y el periodo estacional de 12 meses» | «Se trabaja solo con la variable consumo_gwh y el periodo estacional es de 12 meses» (impersonal, como el resto); «nov-2017» → «noviembre de 2017» | Celda 4 |
+| Criterio 6: extensión de unas 9,0 páginas | Propuesta de sección **«5. Discusión»** (~470 palabras), antes de las conclusiones: candidatos no elegibles, indicador abril-junio de 2020 e implicancias para la contratación de energía. Todas sus cifras están en las salidas; se agregó la impresión del consumo medio 2021-2023 (107,65 GWh; MAE móvil de B = 6,2 % de ese nivel) | Celdas 12 y 17 |
+
+### Otras correcciones de concordancia
+| Hallazgo | Corrección |
+|---|---|
+| Las conclusiones (punto 5) citan Jarque-Bera p = 0,226 y Ljung-Box p = 0,039 del indicador abril-junio de 2020, pero la celda que los mostraba fue eliminada | La sección 4 imprime ahora esa sensibilidad: «Jarque-Bera p = 0,226 y Ljung-Box (rezago 24) p = 0,039» |
+| Hoja, filas 2 y 3 | Actualizadas con los 7 candidatos, el rango del efecto COVID-19 (−4,2 % a −6,7 %) y que C, E, F y G no pasan Ljung-Box (p de 0,003 a 0,047) |
+
+---
+
+## 2. Validación de concordancia: textos `[AUTOR]` y Hoja frente a la ejecución
+
+Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta las cifras) · 🔧 corregido en esta revisión
+
+| Celda | Contenido | Cifras verificadas | Estado |
+|---|---|---|---|
+| 1 | Hoja de decisiones | 42 cifras: d = 1 y D = 1; ADF y KPSS; IC de λ (−1,45 a 1,49); elasticidad 0,25; banda ±0,22; ACF −0,30; efecto COVID-19 (−4,2 % a −6,7 %); raíces MA 1,002–1,013; RMSE y MAE móviles; Ljung-Box, Jarque-Bera, ARCH-LM y F; cobertura 94,4 % | ✅ 🔧 (filas 2 y 3) |
+| 4 | Contexto del conjunto de datos | 3 imputados; atípico de noviembre de 2017; `covid` de marzo de 2020 a diciembre de 2021 (22 meses); 96/12 meses; origen móvil 2021-2023 | ✅ 🔧 |
+| 5 | Método, sección 1 | — | ✅ 🔧 |
+| 7 | Interpretación, sección 1 | λ, IC, elasticidad, ADF y KPSS antes y después, ACF(12), 13 observaciones; la variabilidad aumenta en el COVID-19 (desviación 0,039 fuera frente a 0,065 dentro) | ✅ 🔧 |
+| 8 | Método, sección 2 | — | ✅ |
+| 10 | Interpretación, sección 2 | Banda ±0,22; ACF −0,30; PACF −0,32; p = q = P = 0 y Q = 1; efecto 4,2 % (A) y 6,0 % (B); raíces 1,002–1,013; −1,00 y Δ < 0,03 | ✅ 🔧 |
+| 11 | Método, sección 3 | — | ✅ |
+| 13 | Interpretación, sección 3 | A con el mejor puntaje (5,78 GWh); Ljung-Box p = 0,019 (rezago 24); E y F 7,16 y 7,19 GWh; B: AIC −300,9, BIC −291,2, RMSE móvil 7,12; −7,8 % frente al naive (7,72); MAE 6,64 frente a 6,66; ARIMA 25,90 | ✅ 🔧 |
+| 14 | Método, sección 4 | — | ✅ |
+| 16 | Interpretación, sección 4 | Ljung-Box 0,355 y 0,061; Jarque-Bera 0,001; Shapiro-Wilk 0,019; sin mar-jun 2020: 0,215 y 0,111; ARCH-LM 0,639; F 0,246; cobertura 94,4 % (binomial p = 0,701) | ✅ 🔧 |
+| 17 | **5. Discusión (propuesta nueva)** | 22 cifras: A 5,78 y 0,019; E y F 6,03 y 6,10 (MAE), 0,031 y 0,030; C y G 8,30 y 8,51, 0,047 y 0,003; D 25,90; 0,226, 0,001 y 0,039; 94,4 % y 0,701; 6,64 GWh = 6,2 % de 107,65 GWh; −7,8 %; −6,0 % | ✅ Pendiente: reescritura del autor |
+| 19 | Conclusiones (antes celda 18) | Puntos 1 a 5, incluidos 0,226 y 0,039 | ✅ ⚠️ «Limitaciones, la validación…» → «Limitaciones: la validación…» |
+
+---
+
+## 3. Brechas abiertas
+
+### Criterio 5: Ortografía y redacción
+- ~~Ortografía de la declaración de IA~~ **Resuelto** (quinta revisión): «utilizó», «análisis», «reescribieron», «Ejecuté», «sección por sección», «interpreté», «verifiqué», «Además», «rúbrica» y concordancia «Las interpretaciones fueron…».
+- ~~«Limitaciones, la validación…»~~ **Resuelto:** «Limitaciones: la validación…» (celda 19).
+- Opcional: usar un solo término, «ingenuo estacional» o «naive estacional» (hoy aparecen los dos).
+
+### Criterio 6: Formato y entrega
+| Requisito | Estado | Detalle / acción |
+|---|---|---|
+| Notebook ejecutable | ✅ Cumple | 5/5 celdas en orden, sin errores, desde un kernel nuevo |
+| Textos duplicados (borradores generados) | ✅ Resuelto por el autor | Se eliminaron las 5 celdas de borrador |
+| **Extensión 10–15 páginas** | Cumple (justo) | Unas **10,3 páginas** (sin contar código), con la propuesta de Discusión. Al quitar el aviso del recuadro queda en ~10,2; la reescritura no debería acortar la sección |
+| Marcas `[AUTOR]` | ✅ Resuelto | El autor las quitó todas |
+| Encabezado (celda 0) | No cumple | «Estado de este borrador», «El miércoles entregue…» y archivo `mcdi505_s2rmoncada.ipynb`. Hace falta un encabezado formal (programa, curso, fecha) |
+| Ejemplo ilustrativo bajo la Hoja | ✅ Resuelto | El autor lo eliminó |
+| Nombre de archivo | Revisar | `mcdi505_f2rmoncada.ipynb` frente al formato `sigla_sXinicialapellido`; confirmar con el docente |
+| Declaración de IA y coherencia | ⚠️ | Ortografía corregida. Si se conserva parte de la redacción de la propuesta «5. Discusión», la declaración debe mencionarlo |
+| Propuesta «5. Discusión» | Pendiente del autor | Es un borrador destacado en un recuadro rojo con la etiqueta «PROPUESTA PENDIENTE DE REESCRITURA»; al reescribirlo hay que quitar el recuadro. Debe reescribirse con palabras propias, y la declaración de IA debe mencionarlo si se mantiene parte de su redacción |
+| Referencias APA | ✅ Cumple | 13 referencias, todas citadas |
+
+---
+
+## 4. Plan de acción para la entrega
+
+1. **Reescribir la propuesta «5. Discusión»** con palabras propias, quitar su marca y verificar que la extensión se mantenga en ≥ 10 páginas.
+2. ~~Ortografía de la declaración de IA~~ **Hecho.**
+3. ~~Agregar ~1 página de contenido propio~~ **Propuesta agregada** (ver punto 1). ~~«Limitaciones:»~~ **Hecho.**
+4. **Formato:** encabezado formal (programa, curso, fecha; sin «Estado de este borrador» ni instrucciones) y confirmar el nombre de archivo. ~~Marca `[AUTOR]` y ejemplo de la Hoja~~ **Hecho.**
+5. **Reiniciar kernel y ejecutar todo**, guardar y verificar que no haya errores.
+
+---
+
+## Historial de brechas resueltas
+
+- **9 de octubre:** Tabla 2 con coeficientes e invertibilidad; referencias APA 7 citadas en el texto; coma decimal; transformación cuantificada (IC de λ y elasticidad); Hoja de decisiones completa; selección sin empate (origen móvil + Ljung-Box); análisis de la normalidad y cobertura de los intervalos.
+- **11 de octubre (primera revisión):** el autor redactó las 10 celdas `[AUTOR]`; validación de concordancia: todas las cifras correctas salvo la atribución «serie original».
+- **11 de octubre (segunda revisión):** criterios 1 y 2 corregidos (atribución, elasticidad, KPSS truncado, 7 candidatos, nombres y precisiones); sensibilidad y PACF del rezago 12 visibles en las salidas; el autor eliminó los borradores duplicados; ejecución limpia desde un kernel nuevo.
+
+- **11 de octubre (tercera revisión):** criterio 4 corregido (tipeo 0,246, «no se rechaza», intervalo de predicción con prueba binomial y término unificado en la Tabla 4 y la Hoja); ejecución limpia desde un kernel nuevo, con todas las cifras respaldadas.
+- **11 de octubre (cuarta revisión):** criterio 3 (rezago 24, RMSE móvil del ARIMA, mención de E y F) y celda 4 (criterio 5) corregidos; propuesta de sección «5. Discusión» con todas sus cifras respaldadas; extensión estimada de ~10,1 páginas.
+- **11 de octubre (quinta revisión):** ortografía de la declaración de IA y «Limitaciones:» corregidos; el autor quitó las marcas `[AUTOR]` y el ejemplo de la Hoja; ejecución limpia (5/5, sin errores), ~10,1 páginas.
+- **11 de octubre (18:18–18:21):** un guardado desde VS Code sobrescribió el archivo con una versión anterior y se perdieron la sección «5. Discusión» y cinco correcciones (celda 4, celda 13, consumo medio impreso, «Limitaciones:» y ortografía de la declaración). Se repusieron respetando los cambios propios del autor (encabezado de la celda 0 y tercera fila de la declaración, cuya ortografía también se corrigió). La Discusión quedó en la **celda 17**, destacada en un recuadro rojo. Ejecución limpia (5/5), ~10,3 páginas.
