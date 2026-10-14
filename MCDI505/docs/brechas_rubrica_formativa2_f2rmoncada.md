@@ -1,4 +1,4 @@
-# Validación — `mcdi505_f2rmoncada.ipynb` frente a la Rúbrica Formativa 2 (f2_s2)
+# Validación — `mcdi505_s2rmoncada.ipynb` (antes `mcdi505_f2rmoncada.ipynb`) frente a la Rúbrica Formativa 2 (f2_s2)
 
 - **Fecha de revisión:** 11 de octubre de 2026, sexta revisión (anteriores: 9 y 11 de octubre)
 - **Versión revisada:** commit `78937ef` más la sección «5. Discusión» reescrita por el autor (sin commit). Sin marcas `[AUTOR]`, `[COMPLETAR]` ni de propuesta
@@ -120,7 +120,7 @@ Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta
 | Marcas `[AUTOR]` | ✅ Resuelto | El autor las quitó todas |
 | Encabezado (celda 0) | Parcial | El autor agregó programa, curso, archivo y fecha. Queda el párrafo de instrucciones «Este es el único notebook… El miércoles entregue…»; conviene reemplazarlo por una o dos frases de presentación del informe (así no se pierde extensión) |
 | Ejemplo ilustrativo bajo la Hoja | ✅ Resuelto | El autor lo eliminó |
-| Nombre de archivo | Revisar | `mcdi505_f2rmoncada.ipynb` frente al formato `sigla_sXinicialapellido`; confirmar con el docente |
+| Nombre de archivo | ✅ Resuelto | Renombrado a `mcdi505_s2rmoncada.ipynb` (formato `sigla_sXinicialapellido`); el encabezado del notebook ya usa ese nombre. Entrega en `MCDI505/entregas/mcdi505_s2rmoncada.zip` (notebook + CSV depurado), validada al ejecutarse desde una carpeta vacía |
 | Declaración de IA y coherencia | ✅ Cumple | Ortografía corregida; la Discusión está reescrita por el autor, así que la declaración es coherente |
 | Propuesta «5. Discusión» | ✅ Resuelto por el autor | Reescrita con palabras propias, sin recuadro de propuesta; todas sus cifras concuerdan |
 | Referencias APA | ✅ Cumple | 13 referencias, todas citadas |
@@ -149,3 +149,4 @@ Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta
 - **11 de octubre (18:18–18:21):** un guardado desde VS Code sobrescribió el archivo con una versión anterior y se perdieron la sección «5. Discusión» y cinco correcciones (celda 4, celda 13, consumo medio impreso, «Limitaciones:» y ortografía de la declaración). Se repusieron respetando los cambios propios del autor (encabezado de la celda 0 y tercera fila de la declaración, cuya ortografía también se corrigió). La Discusión quedó en la **celda 17**, destacada en un recuadro rojo. Ejecución limpia (5/5), ~10,3 páginas.
 
 - **11 de octubre (sexta revisión):** el autor reescribió la Discusión (326 palabras) y quitó el recuadro; ejecución limpia (5/5) y todas las cifras respaldadas; extensión ~9,9 páginas.
+- **14 de octubre:** notebook renombrado a `mcdi505_s2rmoncada.ipynb` (encabezado actualizado); ejecución limpia (5/5, 5 figuras); ZIP de entrega regenerado y validado desde una carpeta vacía.
