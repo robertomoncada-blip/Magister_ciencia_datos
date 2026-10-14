@@ -292,7 +292,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
       <li>Elige la menor resta que deje la serie estacionaria y sin un ciclo anual fuerte (ACF del rezago 12 menor que 0,5).</li>
     </ul></div>
     <div><h4>Qué mirar</h4><ul>
-      <li>En la Tabla 1, solo la fila «d = 1 y D = 1» dice «Estacionaria».</li>
+      <li>En la Tabla 1, «d = 1 y D = 1» es la menor diferenciación que dice «Estacionaria». Las filas con más diferenciación también pasan, pero su desviación estándar sube (0,065 y 0,079 frente a 0,047): eso delata la sobrediferenciación.</li>
       <li>El KPSS siempre muestra 0,100: es un tope, y significa «0,10 o más».</li>
       <li>En la Figura 2, cómo la serie diferenciada oscila alrededor de un valor fijo.</li>
     </ul></div>
@@ -353,34 +353,34 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   </div>
   <p class="simple"><b>En simple:</b> cada modelo recibe un puntaje según cuatro notas (AIC, BIC, RMSE y MAE con origen móvil). Pero para ganar no basta con el puntaje: hay que superar al naive estacional y tener residuos «limpios» en Ljung-Box.</p>
   <figure>
-    <div class="bars" role="img" aria-label="RMSE móvil en GWh: A 5,78; B 7,12; E 7,16; F 7,19; naive 7,72; C 8,30; G 8,51. B es el único elegible.">
+    <div class="bars" role="img" aria-label="RMSE móvil en GWh: A 5,87; E 7,05; B 7,11; F 7,12; naive 7,72; C 8,27; G 8,44. B es el único elegible.">
       <div class="legend"><span style="--c: var(--accent)">Elegido (B)</span><span style="--c: var(--muted); --o: 0.45">No elegible</span><span style="--c: var(--blue)">Naive estacional</span></div>
-      <div class="bar-row"><span class="who">A</span><div class="bar-track"><div class="bar-fill" style="width:57.8%"></div><span class="bar-val" style="left:57.8%">5,78</span></div></div>
-      <div class="bar-row"><span class="who"><b>B</b></span><div class="bar-track"><div class="bar-fill sel" style="width:71.2%"></div><span class="bar-val" style="left:71.2%">7,12</span></div></div>
-      <div class="bar-row"><span class="who">E</span><div class="bar-track"><div class="bar-fill" style="width:71.6%"></div><span class="bar-val" style="left:71.6%">7,16</span></div></div>
-      <div class="bar-row"><span class="who">F</span><div class="bar-track"><div class="bar-fill" style="width:71.9%"></div><span class="bar-val" style="left:71.9%">7,19</span></div></div>
+      <div class="bar-row"><span class="who">A</span><div class="bar-track"><div class="bar-fill" style="width:58.7%"></div><span class="bar-val" style="left:58.7%">5,87</span></div></div>
+      <div class="bar-row"><span class="who">E</span><div class="bar-track"><div class="bar-fill" style="width:70.5%"></div><span class="bar-val" style="left:70.5%">7,05</span></div></div>
+      <div class="bar-row"><span class="who"><b>B</b></span><div class="bar-track"><div class="bar-fill sel" style="width:71.1%"></div><span class="bar-val" style="left:71.1%">7,11</span></div></div>
+      <div class="bar-row"><span class="who">F</span><div class="bar-track"><div class="bar-fill" style="width:71.2%"></div><span class="bar-val" style="left:71.2%">7,12</span></div></div>
       <div class="bar-row"><span class="who">Naive</span><div class="bar-track"><div class="bar-fill ref" style="width:77.2%"></div><span class="bar-val" style="left:77.2%">7,72</span></div></div>
-      <div class="bar-row"><span class="who">C</span><div class="bar-track"><div class="bar-fill" style="width:83.0%"></div><span class="bar-val" style="left:83.0%">8,30</span></div></div>
-      <div class="bar-row"><span class="who">G</span><div class="bar-track"><div class="bar-fill" style="width:85.1%"></div><span class="bar-val" style="left:85.1%">8,51</span></div></div>
+      <div class="bar-row"><span class="who">C</span><div class="bar-track"><div class="bar-fill" style="width:82.7%"></div><span class="bar-val" style="left:82.7%">8,27</span></div></div>
+      <div class="bar-row"><span class="who">G</span><div class="bar-track"><div class="bar-fill" style="width:84.4%"></div><span class="bar-val" style="left:84.4%">8,44</span></div></div>
     </div>
-    <figcaption>RMSE móvil en GWh (promedio de 2021, 2022 y 2023; menor es mejor), escala de 0 a 10. A, E y F no son elegibles porque fallan Ljung-Box; C y G, además, no superan al naive. D, el ARIMA sin estacionalidad, queda fuera de la escala: 25,90 GWh.</figcaption>
+    <figcaption>RMSE móvil en GWh (promedio de 2021, 2022 y 2023; menor es mejor), escala de 0 a 10. A, E y F no son elegibles porque fallan Ljung-Box; C y G, además, no superan al naive. D, el ARIMA sin estacionalidad, queda fuera de la escala: 31,95 GWh. Los pronósticos usan corrección de sesgo al volver a GWh.</figcaption>
   </figure>
   <div class="tbl"><table>
     <thead><tr><th>Modelo</th><th class="num">AIC</th><th class="num">BIC</th><th class="num">RMSE móvil</th><th class="num">MAE móvil</th><th class="num">Ljung-Box p (24)</th><th class="num">Puntaje</th><th>¿Elegible?</th></tr></thead>
     <tbody>
-      <tr><td>A</td><td class="num">−300,92</td><td class="num">−293,66</td><td class="num">5,78</td><td class="num">5,14</td><td class="num">0,019</td><td class="num">1,00</td><td><span class="pill no">No</span></td></tr>
-      <tr class="sel"><td><b>B</b></td><td class="num">−300,90</td><td class="num">−291,23</td><td class="num">7,12</td><td class="num">6,64</td><td class="num">0,061</td><td class="num">2,50</td><td><span class="pill si">Sí</span></td></tr>
-      <tr><td>E</td><td class="num">−272,20</td><td class="num">−264,94</td><td class="num">7,16</td><td class="num">6,03</td><td class="num">0,031</td><td class="num">4,25</td><td><span class="pill no">No</span></td></tr>
-      <tr><td>F</td><td class="num">−272,26</td><td class="num">−265,01</td><td class="num">7,19</td><td class="num">6,10</td><td class="num">0,030</td><td class="num">4,25</td><td><span class="pill no">No</span></td></tr>
-      <tr><td>C</td><td class="num">−276,20</td><td class="num">−266,52</td><td class="num">8,30</td><td class="num">7,18</td><td class="num">0,047</td><td class="num">4,50</td><td><span class="pill no">No</span></td></tr>
-      <tr><td>G</td><td class="num">−278,94</td><td class="num">−269,27</td><td class="num">8,51</td><td class="num">7,65</td><td class="num">0,003</td><td class="num">4,50</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>A</td><td class="num">−300,92</td><td class="num">−293,66</td><td class="num">5,87</td><td class="num">5,15</td><td class="num">0,019</td><td class="num">1,00</td><td><span class="pill no">No</span></td></tr>
+      <tr class="sel"><td><b>B</b></td><td class="num">−300,90</td><td class="num">−291,23</td><td class="num">7,11</td><td class="num">6,62</td><td class="num">0,061</td><td class="num">2,75</td><td><span class="pill si">Sí</span></td></tr>
+      <tr><td>E</td><td class="num">−272,20</td><td class="num">−264,94</td><td class="num">7,05</td><td class="num">6,00</td><td class="num">0,031</td><td class="num">4,00</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>F</td><td class="num">−272,26</td><td class="num">−265,01</td><td class="num">7,12</td><td class="num">6,10</td><td class="num">0,030</td><td class="num">4,25</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>C</td><td class="num">−276,20</td><td class="num">−266,52</td><td class="num">8,27</td><td class="num">7,15</td><td class="num">0,047</td><td class="num">4,50</td><td><span class="pill no">No</span></td></tr>
+      <tr><td>G</td><td class="num">−278,94</td><td class="num">−269,27</td><td class="num">8,44</td><td class="num">7,60</td><td class="num">0,003</td><td class="num">4,50</td><td><span class="pill no">No</span></td></tr>
       <tr class="ref"><td>Naive estacional</td><td class="num">—</td><td class="num">—</td><td class="num">7,72</td><td class="num">6,66</td><td class="num">—</td><td class="num">—</td><td>referencia</td></tr>
     </tbody>
   </table></div>
   <div class="facts">
-    <div class="fact"><span class="v">−7,8 %</span><span class="l">B reduce el RMSE frente al naive (7,12 contra 7,72 GWh)</span></div>
-    <div class="fact"><span class="v">6,64 ≈ 6,66</span><span class="l">en MAE, B y el naive quedan prácticamente iguales</span></div>
-    <div class="fact"><span class="v">25,90</span><span class="l">RMSE móvil del ARIMA sin estacionalidad: el ciclo anual es clave</span></div>
+    <div class="fact"><span class="v">−7,9 %</span><span class="l">B reduce el RMSE frente al naive (7,11 contra 7,72 GWh)</span></div>
+    <div class="fact"><span class="v">6,62 ≈ 6,66</span><span class="l">en MAE, B y el naive quedan prácticamente iguales</span></div>
+    <div class="fact"><span class="v">31,95</span><span class="l">RMSE móvil del ARIMA sin estacionalidad: el ciclo anual es clave</span></div>
   </div>
   <div class="think"><span class="eyebrow">Para pensar</span><p>A pronostica mejor que B y aun así queda fuera. ¿Qué problema práctico tiene un modelo que deja patrones en sus errores?</p></div>
 </section>
@@ -422,7 +422,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
     <div><h4>Lo que discute</h4><ul>
       <li><b>Candidatos fuera:</b> A, E y F pronostican bien, pero dejan patrones en sus errores. C y G, además, no le ganan al naive.</li>
       <li><b>Indicador abril-junio 2020:</b> arregla la normalidad (p = 0,226), pero hace aparecer un patrón en el rezago 24 (p = 0,039). Por eso no se usa.</li>
-      <li><b>Uso práctico:</b> B se equivoca unos 6,64 GWh al mes, cerca del 6,2 % del consumo medio (107,65 GWh).</li>
+      <li><b>Uso práctico:</b> B se equivoca unos 6,62 GWh al mes, cerca del 6,2 % del consumo medio (107,65 GWh).</li>
     </ul></div>
     <div><h4>Qué mirar</h4><ul>
       <li>Que cada cifra de la discusión aparece en una tabla o salida anterior.</li>
@@ -445,6 +445,8 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
     <li><b>«λ = 0,00 obliga a usar logaritmo».</b> Su intervalo incluye 0 y 1. El logaritmo se elige también porque facilita la interpretación.</li>
     <li><b>«KPSS p = 0,100 es exacto».</b> Es un tope de <code>statsmodels</code>: significa 0,10 o más.</li>
     <li><b>«AIC más negativo, siempre comparable».</b> Solo se comparan modelos con la misma diferenciación. Por eso D queda fuera del puntaje.</li>
+    <li><b>«Si ADF rechaza, la diferenciación es correcta».</b> Una serie diferenciada de más también pasa ADF. En la Tabla 1, d = 2 y D = 2 pasan, pero su variación es mayor: el criterio de varianza detecta el exceso.</li>
+    <li><b>«Basta con exp() para volver a GWh».</b> exp() del pronóstico en logaritmos da la mediana. Para la media hay que corregir el sesgo con exp(μ + σ²/2), como hace el notebook en la sección 3.</li>
     <li><b>«Intervalo de confianza» por «intervalo de predicción».</b> Aquí se habla del rango para valores futuros: es un intervalo de predicción.</li>
   </ul>
 </section>
@@ -459,7 +461,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
     <details><summary>1. ¿Qué hacen d = 1 y D = 1, y cuántos meses se pierden?</summary><p class="ans">d = 1 resta cada mes con el anterior (quita la tendencia) y D = 1 lo resta con el mismo mes del año anterior (quita el ciclo anual). Se pierden 1 + 12 = 13 meses al inicio.</p></details>
     <details><summary>2. ¿Por qué se incluyó el modelo G?</summary><p class="ans">Como contraste. Si la parte estacional fuera autorregresiva, la PACF se cortaría después del rezago 12 y la ACF decaería en los rezagos 12, 24 y 36. Los datos muestran lo contrario: la ACF se corta en el 12 y la PACF sigue siendo significativa en el 24, el patrón de un MA estacional. G confirma que la alternativa AR no funciona: falla Ljung-Box (p = 0,003).</p></details>
     <details><summary>3. ¿Cuáles son las dos condiciones para que un modelo sea elegible?</summary><p class="ans">Superar al naive estacional en RMSE móvil y pasar Ljung-Box (p &gt; 0,05) en los rezagos 12 y 24.</p></details>
-    <details><summary>4. E tiene menor MAE móvil que B (6,03 contra 6,64). ¿Por qué no gana?</summary><p class="ans">Porque deja patrones en sus errores (Ljung-Box p = 0,031 en el rezago 24), así que no cumple la condición de residuos limpios.</p></details>
+    <details><summary>4. E tiene menor RMSE y MAE móviles que B (7,05 y 6,00 contra 7,11 y 6,62). ¿Por qué no gana?</summary><p class="ans">Porque deja patrones en sus errores (Ljung-Box p = 0,031 en el rezago 24), así que no cumple la condición de residuos limpios.</p></details>
     <details><summary>5. ¿Qué significa que la cobertura del intervalo sea 94,4 %?</summary><p class="ans">Que en 34 de los 36 meses de la validación con origen móvil el valor real cayó dentro del intervalo de predicción del 95 %. La prueba binomial (p = 0,701) no detecta diferencia con el 95 % esperado.</p></details>
     <details><summary>6. ¿Por qué no se agregó el indicador de abril-junio de 2020?</summary><p class="ans">Porque, aunque arregla la normalidad, deja un patrón en los errores en el rezago 24 (Ljung-Box p = 0,039). La regla da prioridad a residuos sin patrones.</p></details>
   </div>
