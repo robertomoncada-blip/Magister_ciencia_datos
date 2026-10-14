@@ -11,7 +11,7 @@
 | # | Criterio | Nivel probable | Puntaje probable | Estado |
 |---|---|---|---|---|
 | 1 | Estacionariedad y transformaciones (ID 2.2) | Excelente | 9 | **Resuelto.** Error de atribución corregido, elasticidad explicada y KPSS truncado aclarado |
-| 2 | Identificación y estimación (ID 2.1) | Excelente | 9 | **Resuelto.** 7 candidatos que cubren AR, MA, ARMA, ARIMA y SARIMA (incluido el AR estacional que sugiere la PACF), nombres precisos y precisiones del texto corregidas |
+| 2 | Identificación y estimación (ID 2.1) | Excelente | 9 | **Resuelto.** 7 candidatos que cubren AR, MA, ARMA, ARIMA y SARIMA (incluido un AR estacional como contraste), nombres precisos y precisiones del texto corregidas |
 | 3 | Selección y comparación (ID 2.1) | Excelente | 9 | **Resuelto.** Rezago 24 de Ljung-Box, «RMSE móvil de 25,90 GWh» y una frase sobre E y F |
 | 4 | Diagnóstico de residuos (ID 2.2) | Excelente | 9 | **Resuelto.** Tipeo corregido, «no se rechaza que sean ruido blanco» con el rezago 24 cerca del umbral, e «intervalo de predicción» con prueba binomial |
 | 5 | Ortografía y redacción | Excelente | 9 | **Resuelto.** Declaración de IA corregida, «Limitaciones:» en las conclusiones y celda 4 |
@@ -48,7 +48,7 @@
 ### Criterio 2: Identificación y estimación
 | Brecha | Corrección | Dónde |
 |---|---|---|
-| Sin candidatos AR o MA puros ni AR estacional, pese a la PACF significativa en el rezago 24 | Se agregan **E. AR(1)**, **F. MA(1)** y **G. SARIMA(0,1,1)(1,1,0)₁₂** (AR estacional). Los 7 candidatos cubren las cinco familias que pide la rúbrica | Celda 9 (código), Tabla 2 y Tabla 3 |
+| Sin candidatos AR o MA puros ni AR estacional como contraste | Se agregan **E. AR(1)**, **F. MA(1)** y **G. SARIMA(0,1,1)(1,1,0)₁₂** (AR estacional). Los 7 candidatos cubren las cinco familias que pide la rúbrica | Celda 9 (código), Tabla 2 y Tabla 3 |
 | C se llamaba «ARMA(1,1) con la misma diferenciación» | «ARMA(1,1) sobre la serie diferenciada»; igual para E y F | Celda 9 |
 | ⚠️ «rezago significativo en [12]… [12, 24]» (notación de Python) | «La ACF mostró un único rezago significativo, el 12, y la PACF, los rezagos 12 y 24» | Celda 10 |
 | ⚠️ «reducción estimada de -4,2 %» (doble negación) | «reducción estimada de 4,2 %… (6,0 % en el modelo B)» | Celda 10 |
@@ -150,3 +150,4 @@ Leyenda: ✅ concuerda · ⚠️ pendiente de redacción o precisión (no afecta
 
 - **11 de octubre (sexta revisión):** el autor reescribió la Discusión (326 palabras) y quitó el recuadro; ejecución limpia (5/5) y todas las cifras respaldadas; extensión ~9,9 páginas.
 - **14 de octubre:** notebook renombrado a `mcdi505_s2rmoncada.ipynb` (encabezado actualizado); ejecución limpia (5/5, 5 figuras); ZIP de entrega regenerado y validado desde una carpeta vacía.
+- **14 de octubre (corrección de lectura del rezago 24):** se corrigió la justificación del modelo G en la §2, en la fila 2 de la Hoja y en su nombre («contraste» en vez de «PACF en el rezago 24»). La PACF significativa en el rezago 24, junto con la ACF que se corta en el 12, es el patrón de un MA estacional y no de un AR estacional; G se mantiene como contraste de esa alternativa. Esa lectura incorrecta había sido introducida por el asistente en la segunda revisión del 11 de octubre. Se corrigió también la guía de lectura. ZIP de entrega regenerado.

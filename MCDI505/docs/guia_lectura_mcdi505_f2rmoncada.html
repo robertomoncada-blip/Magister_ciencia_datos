@@ -335,7 +335,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
       <tr class="ref"><td><b>D</b></td><td>ARIMA</td><td class="num">(1,1,1)</td><td>Referencia sin parte estacional</td></tr>
       <tr><td><b>E</b></td><td>AR</td><td class="num">(1,1,0)(0,1,0)₁₂</td><td>AR(1) puro</td></tr>
       <tr><td><b>F</b></td><td>MA</td><td class="num">(0,1,1)(0,1,0)₁₂</td><td>MA(1) puro</td></tr>
-      <tr><td><b>G</b></td><td>SARIMA</td><td class="num">(0,1,1)(1,1,0)₁₂</td><td>AR estacional, por el rezago 24 de la PACF</td></tr>
+      <tr><td><b>G</b></td><td>SARIMA</td><td class="num">(0,1,1)(1,1,0)₁₂</td><td>AR estacional, como contraste (los datos no respaldan esa alternativa)</td></tr>
     </tbody>
   </table></div>
   <div class="col stack">
@@ -457,7 +457,7 @@ footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   </div>
   <div>
     <details><summary>1. ¿Qué hacen d = 1 y D = 1, y cuántos meses se pierden?</summary><p class="ans">d = 1 resta cada mes con el anterior (quita la tendencia) y D = 1 lo resta con el mismo mes del año anterior (quita el ciclo anual). Se pierden 1 + 12 = 13 meses al inicio.</p></details>
-    <details><summary>2. ¿Por qué se incluyó el modelo G?</summary><p class="ans">Porque la PACF también es significativa en el rezago 24, lo que podría indicar un término AR estacional. G lo prueba, aunque al final falla Ljung-Box (p = 0,003).</p></details>
+    <details><summary>2. ¿Por qué se incluyó el modelo G?</summary><p class="ans">Como contraste. Si la parte estacional fuera autorregresiva, la PACF se cortaría después del rezago 12 y la ACF decaería en los rezagos 12, 24 y 36. Los datos muestran lo contrario: la ACF se corta en el 12 y la PACF sigue siendo significativa en el 24, el patrón de un MA estacional. G confirma que la alternativa AR no funciona: falla Ljung-Box (p = 0,003).</p></details>
     <details><summary>3. ¿Cuáles son las dos condiciones para que un modelo sea elegible?</summary><p class="ans">Superar al naive estacional en RMSE móvil y pasar Ljung-Box (p &gt; 0,05) en los rezagos 12 y 24.</p></details>
     <details><summary>4. E tiene menor MAE móvil que B (6,03 contra 6,64). ¿Por qué no gana?</summary><p class="ans">Porque deja patrones en sus errores (Ljung-Box p = 0,031 en el rezago 24), así que no cumple la condición de residuos limpios.</p></details>
     <details><summary>5. ¿Qué significa que la cobertura del intervalo sea 94,4 %?</summary><p class="ans">Que en 34 de los 36 meses de la validación con origen móvil el valor real cayó dentro del intervalo de predicción del 95 %. La prueba binomial (p = 0,701) no detecta diferencia con el 95 % esperado.</p></details>
