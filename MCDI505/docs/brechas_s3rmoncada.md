@@ -6,6 +6,234 @@
 - **Referencias de control:** notebook de la S2 (`mcdi505_s2rmoncada.ipynb`), plantilla del profesor (`S3eje_profe/mcdi505_s3_plantilla.ipynb`) y guía de compañía de la Semana 3 (`S3eje_profe/MCDI505_S3_guia_de_compania.pdf`), incluida su tabla «Errores frecuentes de la IA en esta unidad»
 - **Fuera de alcance:** el PDF de instrucciones de la Formativa y la Sumativa 3, que no está en el repositorio. Según la guía es el único documento evaluativo y prevalece sobre todo lo demás; revisar contra él la extensión, el formato y el nombre del archivo.
 
+---
+
+# Sexta revisión (16 de octubre): reinicio de kernel + ejecutar todo y verificación de las instrucciones específicas
+
+**Ejecución:** kernel reiniciado y «ejecutar todo» **sobre el archivo**: 9/9 celdas de código, en orden (1 a 9) y sin errores. Las salidas quedaron guardadas.
+
+### Instrucciones específicas, punto por punto
+
+| Criterio | Lo que pide la instrucción | Dónde se cumple | Estado |
+|---|---|---|---|
+| 1 | ACF de los residuos hasta el rezago 36 | Figura 1b | ✅ |
+| 1 | Hurst y d = H − 0,5 | H = 0,652; d = 0,152 | ✅ |
+| 1 | Interpretar considerando el tamaño de la muestra | Simulación de 500 ruidos blancos con n = 83 (Figura 2) | ✅ |
+| 1 | ARFIMA(0,d,0) sobre los residuos, como contraste | «estimado como contraste»; −0,24 GWh | ✅ |
+| 1 | Concluir sobre presencia o ausencia | «no hay evidencia de memoria larga» | ✅ |
+| 2 | ACF de los residuos² | Figura 3b | ✅ |
+| 2 | Ljung-Box (12) y ARCH-LM sobre los cuadrados | p = 0,485 y 0,639 | ✅ |
+| 2 | GARCH(1,1): ω, α, β y α + β | 0,457; 0,066; 0,442; 0,509 | ✅ |
+| 2 | Revisar los residuos estandarizados | Ljung-Box z 0,562, z² 0,654; ARCH-LM 0,832 (Figura 4) | ✅ |
+| 2 | Interpretar en el contexto del consumo eléctrico | Párrafo sobre el segmento comercial y el covid como cambio de nivel | ✅ |
+| 3 | Tabla: SARIMA, SARIMA + ARFIMA y naive con RMSE y MAE en GWh | Tabla 1 (única) | ✅ |
+| 3 | Cobertura y ancho del IC 95 %: SARIMA frente a SARIMA + GARCH | Tabla 1 | ✅ |
+| 3 | Qué mejora cada aspecto, qué diferencias son sustantivas y qué limitaciones conserva cada uno | Párrafos 2-4 | ✅ |
+| 4 | Selección que integra dependencia, volatilidad, métricas y diagnóstico (no una sola métrica) | Párrafo 2 | ✅ |
+| 4 | Pronóstico 2023 con su intervalo | Tabla 2 y Figura 6 | ✅ |
+| 4 | Interpretarlo en el contexto del caso | Párrafo 3 con cifras (sesgo de 5,9 %, intervalo de 26 %) | ✅ (opcional: implicancia para DEL) |
+| 4 | Limitaciones; modelo para la Semana 4 | Párrafo 4 | ✅ |
+| 6 | Hoja primero; punto de partida; 4 secciones; conclusiones; referencias; declaración | Estructura | ✅ |
+| 6 | ≤ 3 figuras, 1 tabla y ≤ 250 palabras por sección | §1: 2 / 0 / 200 · §2: 2 / 0 / 245 · §3: 1 / 1 / 244 · §4: 1 / 1 / 231 | ✅ |
+| 6 | Nombre `mcdi505_s3inicialapellido`; APA | `mcdi505_s3rmoncada.ipynb`; 11 referencias, todas citadas | ✅ |
+
+### Criterios de la rúbrica
+
+| # | Criterio | Nivel probable | Puntaje |
+|---|---|---|---|
+| 1 | Memoria larga | Excelente | 9 |
+| 2 | Volatilidad | Excelente | 9 |
+| 3 | Contraste | Excelente | 9 |
+| 4 | Selección | Excelente | 9 |
+| 5 | Redacción | Excelente, con 3 detalles menores | 9 |
+| 6 | Formato | Excelente | 9 |
+| | **Total estimado** | | **~54 / 54** |
+
+**Resuelto desde la quinta revisión:** las 255 palabras de la §3 (ahora 244), la conclusión 5 reescrita, el «Por ello» de la §4 movido, «Por otro lado,», el «;;» de la Hoja, «−0,981» en la §4 y la coma de «Claude Code,».
+
+**Pendientes (con borrador en el notebook solo en estas 3 secciones):**
+1. Punto de partida: «(-0,981)» → «(−0,981)».
+2. §4: «con datos 2015-2023» → «con datos de 2015-2023». Opcional: una frase corta sobre la implicancia para DEL.
+3. Declaración: «guias» → «guías»; «Sin embargo las» → «Sin embargo, las»; mencionar las propuestas de corrección del asistente.
+
+**Fuera de lo verificable aquí:** que la Hoja incorpore la retroalimentación de la Formativa 3 (no está en el repositorio) y la entrega en plazo (domingo 18, 23:59).
+
+---
+
+# Quinta revisión (16 de octubre): rúbrica de la Sumativa 3, tras las correcciones del autor
+
+**Ejecución de control:** con kernel nuevo, sobre una copia: 9/9 celdas sin errores. Todas las cifras coinciden con las salidas.
+
+| # | Criterio | Nivel probable | Puntaje | Estado |
+|---|---|---|---|---|
+| 1 | Memoria larga | Excelente | 9 | ✅ Completo: ACF, H y d, simulación por tamaño de muestra, ARFIMA como contraste y Ljung-Box con parámetros descontados |
+| 2 | Volatilidad | Excelente | 9 | ✅ **C2 resuelto por el autor** (contexto del consumo eléctrico); C3 citado. Queda una coma mal puesta |
+| 3 | Contraste | Excelente | 9 | ✅ **C4 resuelto** (limitaciones de cada modelo y MAE del naive); tabla única |
+| 4 | Selección | Excelente | 9 | ✅ **C5 resuelto** (pronóstico 2023 con cifras). Detalle: el «Por ello, se descartan…» quedó después del párrafo del pronóstico |
+| 5 | Redacción | Bueno → Excelente | 6-9 | 7 detalles menores (ver abajo) |
+| 6 | Formato | **Bueno** | **6** | ⚠️ **§3 tiene 255 palabras (máximo 250)**. Lo demás cumple: una tabla y ≤ 3 figuras por sección, Hoja primero, referencias APA todas citadas |
+| | **Total estimado** | | **~48-51 / 54** | **54** con los ajustes |
+
+**Resueltas desde la cuarta revisión:** C1, C2, C3, C4, C5, F2, B3, R1-R5, la fila 3 de la Hoja (sentido y cobertura del 100 %) y las cifras cruzadas de la §2. Se eliminaron las referencias sin cita (Sheppard; Hyndman et al., 2026).
+
+**Pendientes (todos con «Donde dice / Debe decir» en el borrador bajo cada sección):**
+1. **§3: 255 palabras.** Acortar la frase de la Semana 2 y «anchos de intervalo»; quedan 244 (verificado).
+2. **Conclusión 5:** quedó copiada la instrucción «Agregar otras limitaciones:» y falta el punto final.
+3. **§4:** mover «Por ello, se descartan…» al final del segundo párrafo; «datos de 2015-2023»; «−0,981».
+4. **§2:** «Por otro, lado» → «Por otro lado,».
+5. **Hoja, fila 3:** «;;» y «Tabla 1» repetida.
+6. **Punto de partida:** «−0,981».
+7. **Declaración:** «Claude Code, como apoyo», «guías», «Sin embargo, las» y mencionar las propuestas de corrección del asistente.
+
+---
+
+# Cuarta revisión (16 de octubre): cambios de código aplicados y propuestas «Donde dice / Debe decir»
+
+**Código aplicado por el asistente** (ejecutado completo con kernel nuevo, 9/9 celdas sin errores):
+
+| Brecha | Cambio | Resultado |
+|---|---|---|
+| C1 | Ljung-Box de los residuos con `model_df=2`, como en la S2 | p = 0,355 / 0,061 / 0,076 |
+| C3 | Ljung-Box sobre los residuos estandarizados en nivel | p = 0,562 / 0,121 |
+| F2 | Una sola tabla de contraste en la §3 (RMSE, MAE, ΔRMSE, cobertura, ancho, meses dentro); la tabla de la §4 pasa a ser la Tabla 2 | Ver Tabla 1 |
+| M3 | **No aplicado**: la rúbrica no lo exige y se mantiene exp(μ), como en la plantilla. Se propone reconocer en el texto que el naive tiene menor MAE | — |
+
+**Propuestas en el notebook:** 9 celdas destacadas, una bajo cada sección (Hoja, punto de partida, §1-§4, conclusiones, referencias y declaración). Cada una tiene una tabla «Donde dice / Debe decir / Motivo» construida sobre el texto actual del autor, y cada «Donde dice» se verificó como texto literal. El contenido que falta según la rúbrica (C2, C4, C5) aparece como filas **[AUTOR]** con ideas y cifras, no como texto redactado.
+
+**Hallazgos nuevos en las ediciones del autor:**
+- **Hoja, fila 3, «Alternativa descartada»:** el sentido quedó invertido. «Se consideró una mejora si el RMSE disminuyó…» dice que sí se consideró mejora, y el RMSE del ARFIMA subió.
+- **Hoja, fila 3, evidencia:** «cobertura del 95 % (12/12)» es incorrecto: 12/12 es 100 %.
+- **§2, cifras cruzadas:** el párrafo de los residuos² (Figura 3) cita las pruebas de los residuos estandarizados (0,654 / 0,562 / 0,832); corresponden 0,485 y 0,639.
+- ✅ La fila 1 de la Hoja ya tiene 5 columnas (F1b resuelta por el autor).
+
+---
+
+# Tercera revisión: rúbrica de la Sumativa 3 (16 de octubre, tras las ediciones del autor)
+
+- **Ejecución de control:** con kernel nuevo, sobre una copia: 9/9 celdas sin errores. Las cifras de los textos coinciden con las salidas
+- **Cambios del autor desde la segunda revisión:** queda **una sola Hoja**, con redacción propia en las filas 1 y 2. La **declaración de IA** ahora nombra Claude Code y menciona borradores. El código, las interpretaciones y las conclusiones no cambiaron
+- **Propuestas en el notebook:** la propuesta única del final se reemplazó por **8 celdas destacadas, una bajo cada sección con brecha**: Hoja, §1, §2, §3, §4, Conclusiones, Referencias y Declaración. Las celdas del autor no se modificaron (verificado). Las propuestas traen correcciones de redacción, cambios de código e **ideas y cifras para organizar** los textos que faltan (C2, C4 y C5), no párrafos redactados, de acuerdo con la regla de uso de IA de las instrucciones
+
+| # | Criterio | Nivel probable | Puntaje | Cambio respecto de la segunda revisión |
+|---|---|---|---|---|
+| 1 | Memoria larga | Excelente | 9 | Sin cambios: C1 y R1 pendientes |
+| 2 | Volatilidad | Bueno | 6 | Sin cambios: C2 y C3 pendientes |
+| 3 | Contraste | Bueno | 6 | Sin cambios: C4 y F2 pendientes |
+| 4 | Selección | Bueno | 6-9 | Sin cambios: C5 pendiente |
+| 5 | Redacción | Bueno | 6 | R1-R6, más «guias» y «Sin embargo las» en la declaración |
+| 6 | Formato | **Bueno** | **6** (antes 3) | ✅ Una sola Hoja. ⚠️ **Fila 1 de la Hoja rota** (4 columnas, F1b); F2; B3 |
+| | **Total estimado** | | **~39-42 / 54** | **~54** si se resuelven las brechas |
+
+**Brecha nueva, F1b:** en la fila 1 de la Hoja falta la barra `|` entre la evidencia y «Agregar un ARFIMA(0,d,0) con d = 0,152». La fila queda con 4 columnas y la tabla se desplaza.
+
+**Declaración de IA (D):** mejoró. Queda una precisión: dice «borrador de ideas y guías de interpretación», pero el asistente preparó borradores de texto completos de la Hoja, el punto de partida, las interpretaciones y las conclusiones, y la lista de referencias. Las filas 3 y 4 de la Hoja conservan frases idénticas al borrador.
+
+---
+
+# Segunda revisión: rúbrica de la Sumativa 3 (instrucciones v2)
+
+- **Fecha:** 16 de octubre de 2026. Plazo de entrega: domingo 18 a las 23:59
+- **Versión revisada:** archivo de trabajo con las interpretaciones, el punto de partida y las conclusiones ya reescritos por el autor (sin commit)
+- **Ejecución de control:** con kernel nuevo, sobre una copia: **9/9 celdas de código, en orden y sin errores**
+- **Documento de referencia:** `MCDI505_Sumativa3_instrucciones_v2.pdf`, con 6 criterios de 9 puntos (total 54). Reemplaza la «Fuera de alcance» de la primera revisión
+- **Cifras:** todas las cifras de los textos del autor coinciden con las salidas. La excepción es Ljung-Box, que queda bien con la salida actual pero no con la S2 (C1)
+
+## Resumen
+
+| # | Criterio | Nivel probable | Puntaje | Brechas que lo limitan |
+|---|---|---|---|---|
+| 1 | Memoria larga (ID 3.1) | Excelente | 9 | C1 (Ljung-Box sin descontar parámetros) y R1 (frase rota) |
+| 2 | Volatilidad (ID 3.1) | **Bueno** | **6** | C2: falta interpretar la dinámica de volatilidad **en el contexto del consumo eléctrico**, que la instrucción pide expresamente; C3: Ljung-Box sobre z |
+| 3 | Contraste (ID 3.1) | **Bueno** | **6** | C4: falta explicar «qué limitaciones conserva cada uno» (el sesgo de 12/12 desapareció del texto de la §3) y reconocer que en MAE el naive le gana al SARIMA; F2: dos tablas en la sección |
+| 4 | Selección (ID 3.2) | **Bueno** | **6-9** | C5: el pronóstico 2023 no se interpreta «en el contexto del caso»; C1 («p ≥ 0,10») |
+| 5 | Ortografía y redacción | Bueno | 6 | R1 a R6 |
+| 6 | Formato y entrega | **Insuficiente** | **3** | F1: **dos Hojas de decisiones** (la [BORRADOR] completa y la [AUTOR] vacía); F2; B3 (citas) |
+| | **Total estimado** | | **~36-39 / 54** | **~54** si se resuelven las brechas |
+
+Aparte de la rúbrica sigue pendiente **A2, la declaración de IA**: es copia de la S2, no nombra la herramienta y no menciona que los textos partieron de borradores del asistente.
+
+## Estado de las brechas de la primera revisión
+
+| # | Brecha | Estado |
+|---|---|---|
+| A1 | Celdas [AUTOR] | ⚠️ **Parcial.** Punto de partida, las 4 interpretaciones y las conclusiones están reescritas y sin marcas. **Falta la Hoja** (F1) |
+| A2 | Declaración de IA | ❌ Pendiente (sección D) |
+| M1 | Ljung-Box con `model_df=2` | ❌ Pendiente, ahora **C1** |
+| M2 | Ljung-Box sobre z en nivel | ❌ Pendiente, ahora **C3** |
+| M3 | Retransformación exp(μ) frente a la de la S2 | ❌ Pendiente, se integra en **C4** |
+| B1 | Raíz MA 1,002 frente a −0,981 | ✅ Resuelta: el texto solo cita −0,981 |
+| B2 | ADF y memoria larga | Opcional, sin cambios |
+| B3 | Citas APA | ❌ Pendiente: «Notebook S3, §…» aparece 4 veces (celdas 15 y 18) sin entrada que coincida; Seabold y Perktold (2010), Sheppard (s. f.) y Hyndman et al. (2026) no se citan |
+
+## Brechas de contenido (criterios 1 a 4)
+
+**C1. Ljung-Box de los residuos (criterios 1 y 4).** La celda 11 no descuenta los 2 parámetros MA, como sí hizo la S2. Con `acorr_ljungbox(residuos, lags=[12, 24, 36], model_df=2)` los valores p pasan de 0,526 / 0,102 / 0,115 a **0,355 / 0,061 / 0,076**. Hay que actualizarlos en:
+- la Hoja, fila 1;
+- la celda 12;
+- la celda 21 y la conclusión 1, donde dice «Ljung-Box p ≥ 0,10». Con el descuento esto ya no es cierto: usar «p ≥ 0,06; no rechaza en ningún rezago».
+
+**C2. Volatilidad en el contexto del consumo eléctrico (criterio 2).** La instrucción pide «interprete la dinámica de volatilidad en el contexto del consumo eléctrico». La celda 15 interpreta las pruebas, pero no relaciona el resultado con el fenómeno. Preguntas para responder con tus palabras:
+- ¿Por qué el consumo mensual de un segmento comercial, a diferencia de un precio financiero, no tendría rachas de volatilidad?
+- ¿Qué papel cumple el indicador covid, que absorbe el shock de 2020-2021 como cambio de nivel y no como volatilidad?
+- ¿Qué significan α ≈ 0,07 y un factor de escala que vuelve a 1,00 en 2 o 3 meses?
+
+**C3. Ljung-Box sobre z en nivel (criterio 2).** La rúbrica pide revisar los residuos estandarizados «y sus cuadrados». Agregar en la celda 14 `acorr_ljungbox(z, lags=[12, 24])`, que da p = 0,562 y 0,121, y citarlo en la celda 15 y en la Hoja.
+
+**C4. Contraste: aspectos, diferencias sustantivas y limitaciones (criterio 3).** La instrucción pide explicar «qué modelo mejora cada aspecto, qué diferencias son sustantivas y qué limitaciones conserva cada uno». A la celda 18 le falta:
+- **Limitaciones de cada modelo**, sobre todo el sesgo del SARIMA: 12/12 errores positivos, +6,68 GWh. Ya se imprime en la celda 17, pero el autor lo sacó de la §3. También la del naive (sin intervalos) y la del ARFIMA (la corrección va en sentido contrario al error).
+- **El naive tiene menor MAE** que el SARIMA (6,53 frente a 6,68) con exp(μ). Hay que reconocerlo o aplicar la corrección de sesgo de la S2 (M3: SARIMA 6,85 / 6,40 frente a 7,26 / 6,53 del naive). La frase en primera persona «usé corrección… aquí uso exp(μ)» se puede reformular o, con M3, eliminar.
+
+**C5. Interpretar el pronóstico 2023 en el contexto del caso (criterio 4).** La celda 21 presenta la Tabla 3 y la Figura 6, pero no las interpreta para DEL. Pregunta guía: ¿qué significa para la compra de energía que el modelo subestime todos los meses en unos 6,7 GWh (~6 % del consumo mensual) y que, aun así, los 12 meses queden dentro del intervalo?
+
+## Brechas de formato (criterio 6)
+
+**F1. Dos Hojas de decisiones.** La celda 1 sigue siendo la Hoja **[BORRADOR]** completa del asistente y la celda 2 es la Hoja **[AUTOR]** vacía. Hay que completar la celda 2 con tus palabras y las cifras corregidas (C1, C3 y, si aplica, M3), borrar la celda 1 y quitar las marcas «[AUTOR]» y «_(completar…)_». La Hoja debe ser la primera sección.
+
+**F2. Una tabla por sección.** La §3 tiene dos tablas (Tabla 1, puntual, y Tabla 2, intervalos). La instrucción pide «una tabla que compare» ambos aspectos. Se pueden unir en una sola: filas SARIMA, SARIMA + ARFIMA, SARIMA + GARCH y naive; columnas RMSE, MAE, cobertura y ancho, con «—» donde no aplique. Al hacerlo, renumerar la Tabla 3 de la §4 como Tabla 2.
+
+| Requisito de formato | Estado |
+|---|---|
+| Ejecutable desde un kernel reiniciado | ✅ 9/9 |
+| Estructura: Hoja → punto de partida → 4 secciones → conclusiones → referencias → declaración | ⚠️ Orden correcto, pero con dos Hojas (F1) |
+| Hasta 3 figuras por sección | ✅ §1: 2 · §2: 2 · §3: 1 · §4: 1 |
+| Una tabla por sección | ⚠️ §3 tiene 2 (F2) |
+| Hasta 250 palabras de interpretación | ✅ §1 185 · §2 153 · §3 166 · §4 155 (hay margen para C2, C4 y C5) |
+| Nombre `mcdi505_s3inicialapellido` | ✅ |
+| Referencias APA citadas | ⚠️ B3 |
+
+## Redacción (criterio 5)
+
+| # | Celda | Texto actual | Corrección |
+|---|---|---|---|
+| R1 | 12 | «Luego se calculo el exponente de Hurst fue H = 0,652» | «Luego se calculó el exponente de Hurst, que fue H = 0,652» (tilde y frase rota) |
+| R2 | 18 | «porque usé corrección de sesgo… aquí uso exp(μ)» | Unificar en impersonal («se usó…, aquí se usa…») o eliminar con M3 |
+| R3 | 21 | «**Modelo seleccionado,** se mantiene el SARIMA…» | «Como modelo seleccionado se mantiene el SARIMA…» |
+| R4 | 15 | «(Ljung-Box p = 0,654; ARCH-LM p = 0,832) (Notebook S3, §3.5; Figura 4)» | Unir en un solo paréntesis |
+| R5 | 18 | «Conclusión:» sin negrita | «**Conclusión:**», como en las demás secciones |
+| R6 | 24 | «autocontenido.  Además» y «resultados.  Por último» | Quitar dobles espacios |
+| — | 9, 21 | «-300,9», «-6,0 %», «-0,981» con guion | Opcional: signo menos «−», como en las celdas 12 y 22 |
+
+## D. Declaración de uso de IA (A2)
+
+Las instrucciones permiten la IA «únicamente para organizar ideas o mejorar la redacción, siempre que se declare su uso en la entrega». La celda 24 es copia de la S2 y tiene tres problemas:
+- No nombra la herramienta (Claude, en Claude Code).
+- No dice que el asistente preparó el código de los bloques 1 a 4 y **borradores de todos los textos**, que luego reescribiste.
+- La Hoja actual (celda 1) sigue siendo el borrador del asistente.
+
+Reescribir la Hoja (F1) antes de cerrar la declaración, y que la declaración describa con exactitud lo que se hizo.
+
+## Orden sugerido
+
+1. Código: C1 (`model_df=2`), C3 (Ljung-Box sobre z) y decidir M3; luego F2 (una tabla en la §3). Ejecutar todo.
+2. Textos: C2, C4 y C5 con las cifras nuevas; R1 a R6; B3.
+3. Hoja [AUTOR] completa y borrar la [BORRADOR] (F1).
+4. Declaración de IA (D).
+5. Reiniciar el kernel, ejecutar todo y revisar el conteo de palabras (≤ 250 por sección).
+
+---
+
+# Primera revisión (14 de octubre)
+
 ## Resumen
 
 | Prioridad | # | Brecha | Celdas | Estado |
