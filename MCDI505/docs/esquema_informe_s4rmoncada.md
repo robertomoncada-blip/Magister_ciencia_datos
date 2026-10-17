@@ -57,14 +57,15 @@ Reglas de formato: PDF o DOCX; **sin código** en el informe; figuras numeradas;
 | Sesgo 2023 | 12/12 errores positivos; +6,68 GWh (exp(μ)) o +6,40 (con corrección) | Depende de M3 |
 | Decisión | Se mantiene B; ARFIMA y GARCH no aportan | |
 
-### Semana 4: prueba 2024 (pendiente; plantilla S4)
+### Semana 4: prueba 2024 (preliminar: `notebooks/mcdi505_s4rmoncada_anexo_preliminar.ipynb`; confirmar con la plantilla oficial)
 | Métrica | Modelo B (reestimado 2015-2023) | Naive estacional |
 |---|---|---|
-| RMSE 2024 (GWh) | — | — |
-| MAE 2024 (GWh) | — | — |
-| MASE 2024 | — | — |
-| Cobertura IC 95 % (meses dentro / 12) | — | n. a. |
-| ¿Persiste el sesgo de nivel de 2023? | — | — |
+| RMSE 2024 (GWh) | 4,96 (4,87 con corrección de sesgo) | 8,19 |
+| MAE 2024 (GWh) | 4,07 (4,00) | 6,67 |
+| MASE 2024 | 0,626 (0,614) | 1,024 |
+| Cobertura IC 95 % (meses dentro / 12) | 12/12; ancho medio 29,7 GWh | n. a. |
+| ¿Persiste el sesgo de nivel de 2023? | Se reduce: +3,15 GWh (2,6 % del consumo medio de 2024); 9/12 errores positivos | — |
+| Modelo reestimado | AIC −350,3; covid −6,6 %; ma.S.L12 = −0,994 (más cerca de la frontera); Ljung-Box p = 0,541 / 0,383; ARCH-LM p = 0,450 | — |
 
 ## 3. Preguntas guía para redactar (respuestas del autor)
 
