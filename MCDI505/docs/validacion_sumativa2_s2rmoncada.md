@@ -6,6 +6,62 @@
 - **Documento de referencia:** `MCDI505_Sumativa2_instrucciones_v2.pdf`, con 6 criterios de 9 puntos cada uno (total 54)
 - **Alcance:** cumplimiento de cada criterio, concordancia de las cifras del texto con las salidas, extensión y estructura, y declaración de uso de IA. Es una estimación de cumplimiento, no una nota.
 
+## Cuarta revisión (17 de octubre): validación final tras el feedback
+
+**Ejecución de control:** con kernel nuevo, sobre una copia: 5/5 celdas en orden, sin errores; 5 figuras. Todas las cifras del texto, incluidas las del feedback, se imprimen en las salidas.
+
+| # | Criterio | Nivel probable | Puntaje |
+|---|---|---|---|
+| 1 | Estacionariedad (ADF y KPSS con estadísticos) | Excelente | 9 |
+| 2 | Identificación | Excelente | 9 |
+| 3 | Selección (regla de Ljung-Box revisada) | Excelente | 9 |
+| 4 | Diagnóstico | Excelente | 9 |
+| 5 | Redacción | Excelente | 9 |
+| 6 | Formato | Excelente | 9 |
+| | **Total estimado** | | **~54 / 54** |
+
+**Extensión:** §1 236 · §2 245 · §3 248 · §4 199 palabras (máximo 250); 1 tabla y como máximo 2 figuras por sección.
+
+**Resueltas desde la tercera revisión:** la §3 (248 palabras, punto final, un solo «Por último» en la sección), la evidencia de B recuperada en la fila 3 de la Hoja y «Cambiar a A» como alternativa, la fila 1 (logaritmo, ACF(12) < 0,5, espacio), la conclusión 1 con estadísticos, «noviembre de 2017», «Como ambos», «la prueba ARCH-LM», los dobles espacios y el nombre de la herramienta.
+
+**Pendientes menores (con [BORRADOR]):**
+1. **Conclusión 3:** falta el punto final y la unidad: «El modelo A tuvo mejor RMSE móvil (5,87 GWh)…».
+2. **Declaración:** falta la coma en «en Claude Code, como apoyo». Por exactitud, conviene mencionar que el asistente agregó el código del feedback y propuso correcciones de redacción.
+3. Opcional: unificar «-» → «−» en los negativos (Hoja, §3: «AIC = -300,9»).
+4. **ZIP:** regenerarlo con la versión final.
+
+---
+
+## Tercera revisión (17 de octubre): feedback del profesor incorporado
+
+> **Feedback:** «Para la Sumativa, agregue los estadísticos de ADF y KPSS y revise si la regla de elegibilidad por Ljung-Box no está descartando el mejor modelo de pronóstico.»
+
+**Decisión del autor:** opción 1, mantener B y justificar la revisión de la regla con evidencia. El autor actualizó la Hoja (filas 1 y 3), la §1 y la §3.
+
+**Código actualizado por el asistente** para que las cifras nuevas del texto tengan respaldo (ejecución completa, 5/5 celdas sin errores):
+- **Tabla 1:** estadístico ADF y KPSS con su valor crítico al 5 %, además del valor-p, con la regla de rechazo en el título. Los veredictos no cambian.
+- **§3, tres líneas impresas** (sin agregar otra tabla): con Ljung-Box al 1 % serían elegibles A, B, E y F y se elegiría A; ACF del residuo en el rezago 24: A −0,23 y B −0,22; RMSE por origen (2021: 3,79 / 3,45; 2022: 6,47 / 11,04; 2023: 7,35 / 6,85); Diebold-Mariano A frente a B: DM = −1,71, p = 0,095.
+
+| # | Criterio | Nivel probable | Puntaje | Estado |
+|---|---|---|---|---|
+| 1 | Estacionariedad | Excelente | 9 | ✅ Feedback 1 resuelto: estadísticos y críticos en la Tabla 1, la §1 y la Hoja |
+| 2 | Identificación | Excelente | 9 | — |
+| 3 | Selección | Excelente | 9 | ✅ Feedback 2 resuelto: se reconoce que la regla descarta a A y se justifica mantener B con Diebold-Mariano y la validación 2023 |
+| 4 | Diagnóstico | Excelente | 9 | 2 detalles de redacción |
+| 5 | Redacción | Bueno → Excelente | 6-9 | ~8 detalles menores (con [BORRADOR]) |
+| 6 | Formato | **Bueno** | **6** | ⚠️ **§3 tiene 251 palabras** (máximo 250); con la propuesta queda en 248 |
+| | **Total estimado** | | **~48-51 / 54** | **54** con los ajustes |
+
+**Pendientes (con [BORRADOR] bajo cada sección):**
+1. **§3:** 251 palabras; falta el punto final en «se mantiene B»; hay un salto de línea a mitad del párrafo y «Por último» aparece dos veces.
+2. **Hoja, fila 3:** al reemplazar la evidencia **se perdieron las cifras del modelo elegido** (B: RMSE móvil 7,11 frente a 7,72 del naive). Hay que juntar ambas cosas. Opcional: agregar «Cambiar a A» como alternativa descartada.
+3. **Hoja, fila 1:** «Se aplicó el logaritmo», condición ACF(12) < 0,5 y «ADF. |».
+4. **Conclusión 1:** todavía usa los valores-p del ADF y el KPSS; conviene usar los estadísticos (feedback 1).
+5. **Menores:** «noviembre de 2017», «Como ambos», «la prueba ARCH-LM», dobles espacios (conclusión 3 y declaración) y el nombre de la herramienta en la declaración.
+6. **ZIP:** regenerarlo después de aplicar los cambios.
+
+---
+
 ## Segunda revisión (14 de octubre, después de las correcciones del autor)
 
 **Ejecución de control:** con kernel nuevo, sobre una copia: 5/5 celdas sin errores. El autor eliminó la celda de propuesta, así que el notebook vuelve a tener 21 celdas y la Hoja es la primera sección. Todas las cifras siguen coincidiendo con las salidas.
