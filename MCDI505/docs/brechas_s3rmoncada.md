@@ -8,6 +8,55 @@
 
 ---
 
+# Octava revisión (17 de octubre): validación tras aplicar el feedback
+
+**Hallazgo:** el autor actualizó todos los textos con la media corregida (Hoja, §1, §3, §4 y conclusiones), pero **el código seguía con exp(μ)**: la Tabla 1 y la Tabla 2 mostraban 7,13 / 6,68 mientras el texto decía 6,85 / 6,40. El asistente aplicó el cambio de código propuesto: `pron_sarima` y `pron_arfima` con `+ sd_log ** 2 / 2`, el título de la Tabla 1 y la línea de referencia con la mediana. Luego ejecutó el notebook completo (9/9 celdas sin errores, 6 figuras).
+
+**Concordancia texto–salidas:** ✅ total. SARIMA 6,854 / 6,398; ARFIMA 7,063 / 6,643; naive 7,263 / 6,528; ΔRMSE +0,21; efecto ARFIMA −0,25 GWh; sesgo +6,40 GWh (12/12); errores de +1,47 (feb) a +10,15 (may); referencia exp(μ) 7,13 / 6,68.
+
+| # | Criterio | Nivel probable | Puntaje |
+|---|---|---|---|
+| 1 | Memoria larga | Excelente | 9 |
+| 2 | Volatilidad | Excelente | 9 |
+| 3 | Contraste (métricas comparables con la S2) | Excelente | 9 |
+| 4 | Selección | Excelente | 9 |
+| 5 | Redacción | Excelente | 9 |
+| 6 | Formato | Excelente | 9 |
+| | **Total estimado** | | **~54 / 54** |
+
+**Extensión:** §1 200 · §2 245 · §3 236 · §4 232 palabras; 1 tabla y como máximo 2 figuras por sección.
+
+**Pendiente menor (con [BORRADOR]):** por exactitud, la declaración de IA podría mencionar que el asistente aplicó el ajuste de código del feedback. **Antes de entregar:** borrar el borrador y regenerar el ZIP de la S3.
+
+---
+
+# Séptima revisión (17 de octubre): feedback del profesor sobre la media corregida por sesgo
+
+> **Feedback:** «Para la Sumativa 3, vuelva a la media corregida por sesgo de la Sumativa 2 para que las métricas sean comparables entre semanas.»
+
+Es la brecha **M3** de la primera revisión, que en su momento quedó como opcional.
+
+**Verificación** (mismo código, cambiando solo la retransformación del pronóstico puntual a exp(μ + σ²/2)):
+
+| | exp(μ) (actual) | Media corregida |
+|---|---|---|
+| SARIMA: RMSE / MAE | 7,13 / 6,68 | **6,85 / 6,40** (= Semana 2) |
+| SARIMA + ARFIMA: RMSE / MAE | 7,34 / 6,93 | **7,06 / 6,64** |
+| Naive estacional | 7,26 / 6,53 | 7,26 / 6,53 |
+| ΔRMSE ARFIMA | +0,21 | +0,21 (3,1 %) |
+| Efecto medio del ARFIMA | −0,24 GWh | −0,25 GWh |
+| Sesgo medio del SARIMA | +6,68 (12/12; 5,9 %) | **+6,40 (12/12; 5,6 %)** |
+| Error mínimo / máximo | +1,58 (feb) / +10,36 (jun) | +1,47 (feb) / **+10,15 (may)** |
+| Intervalos (cobertura y ancho) | 12/12; 29,4 / 29,3 GWh | Sin cambio (en la S2 tampoco se corrigieron) |
+
+**Lo que cambia en la lectura:** con la media corregida el SARIMA supera al naive **también en MAE**, así que la frase de la §3 «su MAE es menor» deja de ser cierta. Las conclusiones de la semana (no hay memoria larga, no hay volatilidad, se mantiene B) **no cambian**.
+
+**Propuestas en el notebook:** 7 celdas [BORRADOR], una bajo cada sección (Hoja, §1 con el cambio de código, §2 sin cambios, §3 con el código y la tabla de verificación, §4, conclusiones y declaración), con «Donde dice / Debe decir». Extensión después de los cambios: §1 200 · §3 236 · §4 232 palabras.
+
+**Efecto en la S4:** el anexo preliminar de la S4 usa exp(μ) y deja la versión corregida solo como referencia (RMSE 4,87; MAE 4,00; MASE 0,614). Para que las tres semanas sean comparables, conviene usar también la media corregida en la S4.
+
+---
+
 # Sexta revisión (16 de octubre): reinicio de kernel + ejecutar todo y verificación de las instrucciones específicas
 
 **Ejecución:** kernel reiniciado y «ejecutar todo» **sobre el archivo**: 9/9 celdas de código, en orden (1 a 9) y sin errores. Las salidas quedaron guardadas.
