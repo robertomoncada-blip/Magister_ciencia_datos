@@ -7,7 +7,7 @@
 | # | Pendiente | Por qué bloquea |
 |---|---|---|
 | 1 | **Plantilla `mcdi505_s4_plantilla.ipynb`** (Canvas): no está en el repositorio | Con ella se reestima el modelo con 2015-2023, se pronostica 2024 con su IC 95 % y se calculan RMSE, MAE y MASE frente al naive estacional. Sin esas cifras falta la evidencia de prueba que piden los criterios 2 y 3 |
-| 2 | **Sumativa 3 cerrada**: celdas [AUTOR] y brechas M1-M3 (`docs/brechas_s3rmoncada.md`) | El informe debe usar el modelo y las cifras **finales** de la S3. Si se aplica M3 (corrección de sesgo), cambian el RMSE, el MAE y el sesgo de 2023 citados abajo |
+| 2 | ~~Sumativa 3 cerrada~~ ✅ Resuelto: S3 final con M1-M3 aplicados y media corregida por sesgo (commit `f20de26`) | Las cifras de abajo ya son las finales de la S3 |
 | 3 | Retroalimentación del borrador de la Formativa 4 | Las instrucciones piden incorporarla |
 
 ## 1. Mapa rúbrica → secciones (5 a 7 páginas)
@@ -48,23 +48,23 @@ Reglas de formato: PDF o DOCX; **sin código** en el informe; figuras numeradas;
 | Memoria larga: Hurst R/S | H = 0,652 → d = 0,152 | |
 | Sesgo del R/S (n = 83) | Ruido blanco: H medio 0,612; IC 95 % [0,392; 0,823]; 37 % supera 0,652 | Argumento central del «no» |
 | ACF de residuos | Solo el rezago 24 (−0,22) toca la banda ±0,215 | |
-| Ljung-Box de residuos | 0,355 / 0,061 / 0,076 (12/24/36), con `model_df=2` | Depende de M1 |
+| Ljung-Box de residuos | 0,355 / 0,061 / 0,076 (12/24/36), con `model_df=2` | Aplicado en la S3 |
 | Efecto ARFIMA | −0,24 GWh medio; ΔRMSE 2023 = +0,21 GWh (empeora) | |
 | Volatilidad | Ljung-Box residuos² p = 0,485; ARCH-LM p = 0,639 | |
 | GARCH(1,1) | ω = 0,457; α = 0,066; β = 0,442; α + β = 0,509 | |
 | Residuos estandarizados | Ljung-Box z² p = 0,654; ARCH-LM p = 0,832 | |
 | Bandas GARCH frente a SARIMA | Cobertura 12/12 en ambos; ancho 29,3 frente a 29,4 GWh | |
-| Sesgo 2023 | 12/12 errores positivos; +6,68 GWh (exp(μ)) o +6,40 (con corrección) | Depende de M3 |
+| Sesgo 2023 | 12/12 errores positivos; +6,40 GWh (5,6 %), con media corregida | Feedback aplicado en la S3 |
 | Decisión | Se mantiene B; ARFIMA y GARCH no aportan | |
 
 ### Semana 4: prueba 2024 (preliminar: `notebooks/mcdi505_s4rmoncada_anexo_preliminar.ipynb`; confirmar con la plantilla oficial)
 | Métrica | Modelo B (reestimado 2015-2023) | Naive estacional |
 |---|---|---|
-| RMSE 2024 (GWh) | 4,96 (4,87 con corrección de sesgo) | 8,19 |
-| MAE 2024 (GWh) | 4,07 (4,00) | 6,67 |
-| MASE 2024 | 0,626 (0,614) | 1,024 |
+| RMSE 2024 (GWh), media corregida por sesgo como en S2 y S3 | **4,87** (4,96 sin corrección) | 8,19 |
+| MAE 2024 (GWh) | **4,00** (4,07) | 6,67 |
+| MASE 2024 | **0,614** (0,626) | 1,024 |
 | Cobertura IC 95 % (meses dentro / 12) | 12/12; ancho medio 29,7 GWh | n. a. |
-| ¿Persiste el sesgo de nivel de 2023? | Se reduce: +3,15 GWh (2,6 % del consumo medio de 2024); 9/12 errores positivos | — |
+| ¿Persiste el sesgo de nivel de 2023? | Se reduce de +6,40 a **+2,89 GWh** (2,4 % del consumo medio de 2024); 9/12 errores positivos | — |
 | Modelo reestimado | AIC −350,3; covid −6,6 %; ma.S.L12 = −0,994 (más cerca de la frontera); Ljung-Box p = 0,541 / 0,383; ARCH-LM p = 0,450 | — |
 
 ## 3. Preguntas guía para redactar (respuestas del autor)
