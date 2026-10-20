@@ -6,7 +6,7 @@
 
 | # | Pendiente | Por qué bloquea |
 |---|---|---|
-| 1 | **Plantilla `mcdi505_s4_plantilla.ipynb`** (Canvas): no está en el repositorio | Con ella se reestima el modelo con 2015-2023, se pronostica 2024 con su IC 95 % y se calculan RMSE, MAE y MASE frente al naive estacional. Sin esas cifras falta la evidencia de prueba que piden los criterios 2 y 3 |
+| 1 | ~~Plantilla oficial de la S4~~ ✅ Resuelto: `notebooks/mcdi505_s4rmoncada.ipynb`, construido sobre `mcdi505_s4_plantilla.ipynb` con `consumo_electrico_litoral_depurado_s4.csv` | Las cifras de 2024 de abajo salen de ese notebook (cifras finales) |
 | 2 | ~~Sumativa 3 cerrada~~ ✅ Resuelto: S3 final con M1-M3 aplicados y media corregida por sesgo (commit `f20de26`) | Las cifras de abajo ya son las finales de la S3 |
 | 3 | Retroalimentación del borrador de la Formativa 4 | Las instrucciones piden incorporarla |
 
@@ -57,7 +57,7 @@ Reglas de formato: PDF o DOCX; **sin código** en el informe; figuras numeradas;
 | Sesgo 2023 | 12/12 errores positivos; +6,40 GWh (5,6 %), con media corregida | Feedback aplicado en la S3 |
 | Decisión | Se mantiene B; ARFIMA y GARCH no aportan | |
 
-### Semana 4: prueba 2024 (preliminar: `notebooks/mcdi505_s4rmoncada_anexo_preliminar.ipynb`; confirmar con la plantilla oficial)
+### Semana 4: prueba 2024 (`notebooks/mcdi505_s4rmoncada.ipynb`, plantilla oficial)
 | Métrica | Modelo B (reestimado 2015-2023) | Naive estacional |
 |---|---|---|
 | RMSE 2024 (GWh), media corregida por sesgo como en S2 y S3 | **4,87** (4,96 sin corrección) | 8,19 |
