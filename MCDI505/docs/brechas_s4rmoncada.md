@@ -5,6 +5,59 @@
 - **Ejecución de control:** con kernel nuevo, sobre una copia: **9/9 celdas de código, en orden y sin errores**; 1 figura (Figura 1)
 - **Plazo de la Formativa 4:** **viernes 23 de octubre**, 23:59. La guía movió la fecha desde el miércoles: «si algún otro documento indica el miércoles, rige esta fecha»
 
+## Décima revisión (21 de octubre): PDF regenerado con la «Cadena de evidencia»
+
+Se regeneró `entregas/mcdi505_s4rmoncada.pdf` incorporando al **bloque 2**, de forma **literal**, el párrafo «Cadena de evidencia» del autor (§2 del notebook). Sigue en 2 páginas y el texto completo cabe en la página 1.
+
+- ✅ **Criterio 2 resuelto:** el bloque 2 ahora muestra la evidencia acumulada que pide la rúbrica: dependencia temporal (ADF −8,82 frente a −2,90; KPSS 0,040 frente a 0,463; H = 0,652, compatible con ruido blanco), volatilidad (ARCH-LM p = 0,639) y pronóstico (MASE 0,61). Nivel probable: **Excelente (9)**.
+- **Rúbrica de la Formativa 4: 27 / 27 estimado.**
+- **Pendiente del autor:** la declaración de IA debe decir que el asistente **armó el PDF** (diagramación, figura y tabla) con sus textos. Opcional: explicar «cuantil 75 %» sin jerga. Si cambia algún texto en el notebook, regenerar el PDF.
+
+---
+
+## Novena revisión (21 de octubre): PDF de la Formativa 4 (`entregas/mcdi505_s4rmoncada.pdf`)
+
+**Cómo se armó:** con los **textos del autor copiados literalmente** de la §4 del notebook (bloques 1 a 3) y de la declaración de IA. La Figura 1 se regeneró con el mismo código del anexo y la Tabla 1 se reformateó desde la Tabla 2 del anexo (mismas cifras, redondeadas a 2 decimales). Únicos cambios de forma: se quitó la referencia interna «**Tabla 2 (§2).**» del bloque 2 y se agregaron el título, la línea de datos (curso, autor, fecha, archivo y anexo), los títulos de bloque, las notas de figura y tabla, y una línea que remite a la Tabla 1. Verificado: 2 páginas; las cifras de la Tabla 1 coinciden con el anexo.
+
+### A. Instrucciones específicas
+
+| Instrucción | En el PDF | Estado |
+|---|---|---|
+| Borrador de una página con 3 bloques, en el orden de la rúbrica | Página 1: bloques 1, 2 y 3 | ✅ |
+| **Bloque 1:** párrafo de apertura de 5 a 8 líneas, sin jerga | 8 líneas: decisión, costo en ambas direcciones, datos, metodología y solución | ✅ |
+| **Bloque 1:** figura clave (serie, pronóstico 2024 e intervalo) | Figura 1, página 2 | ✅ |
+| **Bloque 2:** tabla del modelo final, las alternativas descartadas en S2 y S3 y el naive, con métricas 2023 y 2024 | Tabla 1: B, A, B + ARFIMA, B + GARCH y naive; RMSE, MAE y MASE en 2023 y 2024, más cobertura 2024 | ✅ |
+| **Bloque 2:** una frase de por qué se eligió el modelo final | Frase con cifra (RMSE 6,85; empate en 2024; único que pasó Ljung-Box en la S2) | ✅ |
+| **Bloque 3:** recomendación en 1-2 frases con su cifra y la limitación más importante | Cuantil 75 % = 1.499,3 GWh (+4,1 %); −39 % de costo en 2024; limitación: costo 3 a 1 y 12 meses | ✅ |
+
+### B. Aspectos formales
+
+| Requisito | Estado |
+|---|---|
+| PDF o DOCX | ✅ PDF |
+| Una página (la tabla y la figura pueden ocupar una segunda) | ✅ Página 1 = texto; página 2 = figura y tabla. ⚠️ La **declaración de IA** también va en la página 2: no está prevista en ese espacio, pero la entrega debe declarar el uso de IA. Riesgo bajo; alternativa: acortarla y ponerla al pie de la página 1 |
+| Nombre `mcdi505_s4inicialapellido` | ✅ `mcdi505_s4rmoncada.pdf` |
+| Plazo | ⚠️ El PDF de instrucciones dice **miércoles 21 de octubre, 23:59** (hoy); la guía de compañía lo movió al viernes 23 |
+| Anexo (guía) | ✅ `notebooks/mcdi505_s4rmoncada.ipynb`, ejecutado 9/9 |
+
+### C. Cruce con la rúbrica (3 criterios de contenido)
+
+| # | Criterio | Evidencia en el PDF | Nivel probable | Brecha |
+|---|---|---|---|---|
+| 1 | Problema, metodología y solución | Narrativa clara para la Gerencia + Figura 1 | **Excelente** (9) | Opcional: en el bloque 3, «cuantil 75 %» es jerga para la Gerencia; explicarlo en palabras simples (p. ej., «un volumen que cubre el consumo en 3 de cada 4 escenarios») |
+| 2 | Sustento técnico | Tabla 1 + frase con cifra | **Bueno → Excelente** (6-9) | ⚠️ El descriptor de la rúbrica pide la evidencia **acumulada (dependencia temporal y volatilidad)**. El PDF solo muestra métricas: no dice **por qué** se descartaron ARFIMA y GARCH (H = 0,652, compatible con ruido blanco; ARCH-LM p = 0,639). Ya existe un texto propio que lo dice: el párrafo «**Cadena de evidencia**» de la §2 del notebook. Llevarlo al bloque 2 (cabe en la página 1) |
+| 3 | Conclusiones y recomendaciones | Recomendación con cifra + limitación | **Excelente** (9) | — |
+| | **Total estimado** | | **24-27 / 27** | |
+
+### D. Pendientes del autor
+
+1. **Declaración de IA (exactitud):** dice «se generó el PDF ejecutivo», pero no que el asistente **armó el PDF** (diagramación, figura y tabla) a partir de los textos del autor. Conviene agregarlo en «¿En qué partes específicas?».
+2. **Criterio 2:** agregar al bloque 2 el párrafo propio «Cadena de evidencia» (o una frase con H = 0,652 y ARCH-LM p = 0,639).
+3. Opcional: explicar «cuantil 75 %» sin jerga; ubicar la declaración al pie de la página 1.
+4. Si se cambia algún texto en el notebook, regenerar el PDF para que ambos coincidan.
+
+---
+
 ## Octava revisión (21 de octubre): validación final de ortografía y de correlación texto–resultados
 
 **Ejecución de control:** con kernel nuevo, sobre una copia: 9/9 celdas en orden, sin errores; 1 figura; **Tablas 1 a 4 con título** (numeración continua).
