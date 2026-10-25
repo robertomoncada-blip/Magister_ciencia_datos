@@ -5,6 +5,39 @@
 - **Ejecución de control:** con kernel nuevo, sobre una copia: **9/9 celdas de código, en orden y sin errores**; 1 figura (Figura 1)
 - **Plazo de la Formativa 4:** **viernes 23 de octubre**, 23:59. La guía movió la fecha desde el miércoles: «si algún otro documento indica el miércoles, rige esta fecha»
 
+## Decimocuarta revisión (25 de octubre): informe ejecutivo de la Sumativa 4 en PDF
+
+**Cómo se armó:** con `scripts/construir_informe_s4.py` (ReportLab, Calibri 11, carta), que lee el notebook en cada ejecución. Los **textos se copian literalmente** de las celdas del autor (§1, §2, §3, §3.1, bloques 1 a 3 de la §4, Referencias y declaración de IA); las celdas `[BORRADOR]` se ignoran. Se comprobó por programa que **todos los párrafos y viñetas del autor están en el PDF**; solo se omiten los rótulos internos del notebook («(§1)», «(§3, criterio 3)», «Notas para el informe», «**Tabla 2 (§2).**»). Tablas y figuras se recalculan con el mismo código del anexo, con la **misma numeración** (Tablas 1 a 5, Figuras 1 y 2), para que las referencias del texto sigan valiendo. **Agregado por el asistente** (forma, no contenido): título y subtítulo, encabezado, títulos de sección según la rúbrica, títulos y notas APA de tablas y figuras (unidades y fuente), pie de página. Para regenerar tras cambiar un texto: `../.venv/Scripts/python.exe -I scripts/construir_informe_s4.py` desde `MCDI505/`.
+
+### A. Instrucciones específicas
+
+| Criterio | En el PDF | Estado |
+|---|---|---|
+| 1. Problema, datos, metodología y solución, para audiencias estratégicas y operativas, con visualizaciones | §1: bloque 1, Figura 1, evaluación 2023 y 2024, Tabla 1 | ✅ |
+| 2. Sustento técnico con la evidencia de las semanas 2 a 4 (dependencia, volatilidad, ajuste, pronóstico 2023 y 2024); por qué no aportan los modelos avanzados | §2: bloque 2, «¿Por qué se eligió…?», Tabla 2 (B, A, ARFIMA, GARCH y naive), Cadena de evidencia (ADF, KPSS, H, ARCH-LM, MASE) | ✅ |
+| 3. Conclusiones y recomendaciones accionables, con cifras, limitaciones y alcances | §3: recomendación con cifra, prueba 2024 (Tabla 3), plan 2025 (Tabla 4), sensibilidad (Tabla 5 y Figura 2), cinco limitaciones | ✅ (una sola recomendación accionable: decisión del autor) |
+| Incorporar la retroalimentación del borrador | Sensibilidad del cuantil y referencias | ✅ |
+
+### B. Aspectos formales
+
+| Requisito | Estado |
+|---|---|
+| PDF o DOCX de 5 a 7 páginas | ✅ PDF de **6 páginas** |
+| Anexo: notebook ejecutado | ✅ `notebooks/mcdi505_s4rmoncada.ipynb` (11/11 celdas, sin errores); entregarlo junto al PDF |
+| Estructura sugerida (encabezado; síntesis; sustento; conclusiones; referencias; declaración de IA) | ✅ En ese orden |
+| Sin código; figuras numeradas; tablas reformateadas; interpretación en prosa | ✅ Sin código (búsqueda automática); Figuras 1-2 y Tablas 1-5 con formato APA |
+| APA en citas y referencias | ✅ 13 referencias, todas citadas, con sangría francesa |
+| Nombre `mcdi505_s4inicialapellido` | ✅ `entregas/mcdi505_s4rmoncada.pdf` (reemplaza el PDF de la Formativa 4, que sigue en el historial: commit `1bcfc39`) |
+| Plazo | ⚠️ Según el PDF, **hoy domingo 25 de octubre, 23:59**; confirmar en Canvas |
+
+### C. Pendientes del autor antes de entregar
+
+1. **P1 · Declaración de IA:** el PDF reproduce la declaración actual, que **no describe todo el apoyo**: código de las Tablas 2 a 5 y las Figuras 1 y 2, verificación de cifras, preguntas guía de la §3.1, correcciones «dice / debe decir», lista de referencias y **armado de este PDF** (diagramación, tablas, figuras y notas de tabla con los textos del autor). Además, «se generó el PDF ejecutivo» no dice quién lo generó. Corregirla en el notebook y regenerar el PDF; si hay dudas sobre el código hecho por la IA, consultar al docente.
+2. **P3 · Repeticiones:** la §1 y la §3 repiten ideas de los bloques 1 y 3 (por ejemplo, el «≈ 40 % menos de error» y el «39 % menos de costo»). Si se quiere, acortar alguno de los dos textos en el notebook.
+3. Regenerar `entregas/mcdi505_s4rmoncada.zip` con el PDF, el notebook final y el CSV, y validarlo descomprimiendo en una carpeta vacía.
+
+---
+
 ## Decimotercera revisión (25 de octubre): 3.ª ronda contra la Sumativa 4
 
 > Revisión con la skill `validador-notebooks-rubrica` contra `MCDI505_Sumativa4_instrucciones_v2.pdf`. Los niveles son **estimaciones**, no una calificación. Los textos del autor no se modificaron; las 5 correcciones nuevas están en `[BORRADOR] Correcciones «Dice / Debe decir» (3.ª ronda)`, antes de la declaración de IA, y sus 5 «Dice» se verificaron como texto literal.
