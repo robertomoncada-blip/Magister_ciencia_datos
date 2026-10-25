@@ -5,6 +5,85 @@
 - **Ejecución de control:** con kernel nuevo, sobre una copia: **9/9 celdas de código, en orden y sin errores**; 1 figura (Figura 1)
 - **Plazo de la Formativa 4:** **viernes 23 de octubre**, 23:59. La guía movió la fecha desde el miércoles: «si algún otro documento indica el miércoles, rige esta fecha»
 
+## Undécima revisión (25 de octubre) · BORRADOR: validación contra la Sumativa 4 y feedback del profesor
+
+> **Modo borrador.** Revisión hecha con la skill `validador-notebooks-rubrica` contra `MCDI505_Sumativa4_instrucciones_v2.pdf` (5 criterios, 9 puntos cada uno, 25 % de la nota). Los niveles son **estimaciones**, no una calificación. Lo calificado en la Sumativa es el **informe ejecutivo de 5 a 7 páginas**; el notebook es su anexo y «no se califica por separado». Los textos del autor no se modificaron: las propuestas están en celdas `[BORRADOR]` del notebook.
+
+**Feedback del profesor a la Formativa 4:** «Para la Sumativa, agregue la sensibilidad del cuantil a la razón de costos y si hay referencias».
+
+### A. Qué se agregó al notebook
+
+| Celda | Contenido | Tipo |
+|---|---|---|
+| §3.1 (título) | «Sensibilidad del cuantil a la razón de costos», con la regla q* = c_u / (c_u + c_o) y su cita (Arrow et al., 1951; Gneiting, 2011) | Código / encabezado |
+| §3.1, **Tabla 5** | Para k = c_u / c_o = 1; 1,5; 2; 2,5; 3; 3,5; 4; 5; 6: q*, volumen 2025, % sobre la media, **costo esperado 2025** (distribución predictiva log-normal, fórmula cerrada) contratando q*, el 75 % o la media, y **costo real 2024** (prueba retrospectiva) con q* y con la media. Imprime además el **punto de cruce** k = 1,75 | Código |
+| §3.1, **Figura 2** | Izquierda: volumen 2025 según k. Derecha: sobrecosto esperado de fijar el 75 % o la media si la razón real es otra. Rango del caso (2 a 4) sombreado | Código |
+| [BORRADOR] Ideas §3.1 | Cifras y 4 preguntas para que el autor redacte la interpretación | Borrador (borrar antes de entregar) |
+| [BORRADOR] Dice / Debe decir | 7 correcciones (abajo, sección D) | Borrador |
+| [BORRADOR] Referencias (APA 7) | 15 referencias; DOI de Arrow et al. (1951) y Gneiting (2011) verificados en Crossref | Borrador |
+
+**Controles de la Tabla 5:** con k = 2, 3 y 4 reproduce la Tabla 3 (62,3 / 89,3; 79,8 / 130,6; 95,5 / 171,9) y con k = 3 el plan 2025 (1.499,3 GWh). La fórmula cerrada del costo esperado se contrastó con Monte Carlo (4 millones de draws): 7,763 frente a 7,759.
+
+### B. Resultado de Run All
+
+| Regla | Estado | Detalle |
+|---|---|---|
+| Ejecución limpia (carpeta nueva con notebook + CSV, kernel nuevo) | ✅ OK | `nbclient`, 0 errores |
+| Orden y estado guardado | ✅ OK | `execution_count` = 1..11; todas las celdas con salida; 2 figuras |
+| Portabilidad | ✅ OK | Ruta relativa al CSV; `SEMILLA = 505` |
+| Consistencia (N1) | ✅ OK tras revisión manual | 0,001; 0,040; 0,463; 0,639; 0,652; 8,82 están citadas a la S2 o la S3; 0,03 es derivada de la Tabla 2; «3,56» es un falso positivo (color CSS de los recuadros) |
+| Dependencias | ✅ OK | numpy, pandas, matplotlib, scipy (se agrega `brentq`), statsmodels del `.venv` |
+| R6 advertencias | ℹ️ OBS | `filterwarnings("ignore")` viene de la plantilla oficial |
+| A2 APA | ℹ️ OBS | Falso positivo: el «guion» está dentro de un DOI (`Majora-92bf1922-011`) |
+| C1 / S1 | No aplican | Reglas de la Sumativa 1 (celdas 0, 2 y 5 sin comentarios son de la plantilla; no hay ACF ni descomposición en la S4) |
+
+**Veredicto: APROBADO** (motor `nbclient`).
+
+### C. Cruce con la rúbrica de la Sumativa 4
+
+| # | Criterio | Evidencia citada (anexo) | Nivel estimado | Brecha para subir o asegurar el nivel |
+|---|---|---|---|---|
+| 1 | Informe ejecutivo: problema, metodología y solución (ID 4.1) | §4, bloque 1: «Decisión: elegir cuánta energía contratar para el año siguiente.» · «se analizaron 10 años de consumo mensual (2015-2024)» · Figura 1 | **Sin evidencia** en formato de informe: el PDF actual es el borrador de 2 páginas de la Formativa. Potencial **Excelente** si el informe desarrolla estos textos | Redactar la síntesis (≈ 1½ pág.) con 1-2 figuras numeradas (esquema, §1) |
+| 2 | Sustento técnico (ID 3.2) | §2, Cadena de evidencia: «ADF = −8,82 (frente al valor crítico −2,90) y KPSS = 0,040 (frente a 0,463)… (H = 0,652, compatible con ruido blanco) ni volatilidad condicional (ARCH-LM p = 0,639; S3)… (MASE 0,61, S4)» · Tabla 2 | Potencial **Excelente** (9) | En el informe, explicar con cifras **por qué** H = 0,652 no es memoria larga (S3: con ruido blanco, IC 95 % [0,392; 0,823]) y la persistencia GARCH α + β = 0,509. Citar los métodos (corrección 5) |
+| 3 | Conclusiones y recomendaciones (ID 4.1) | §3: «el cuantil 75 % redujo los faltantes a 13,8 GWh en 3 meses y disminuyó el costo a 79,8, cerca de 39 % menos» · cinco limitaciones con efecto · §4, bloque 3 · **Tabla 5 y Figura 2 (nuevas)** | **Bueno → Excelente** (6-9) | ⚠️ Falta la **interpretación del autor** de la §3.1 (feedback del profesor). La rúbrica pide recomendaciones en plural: hoy hay una (contratar el 75 %). Ideas que el autor puede evaluar: revisar k cada año con los precios spot; reestimar el modelo al cerrar cada año; vigilar el sesgo positivo (9/12 meses en 2024) |
+| 4 | Ortografía y redacción | Textos del anexo sin errores relevantes (octava revisión); 3 precisiones nuevas (correcciones 1, 3 y 7) | Potencial **Excelente** (9) | Revisar el informe nuevo con el mismo control |
+| 5 | Formato y entrega | Nombre ✅; anexo ejecutado ✅; **referencias: el notebook no tenía** sección ni citas APA en el texto (regla A1: 0 citas) | **Insuficiente → Excelente** según lo que falte al entregar | Informe de **5 a 7 páginas** en PDF o DOCX, sin código; lista APA con solo lo citado; citas en el texto (correcciones 2, 4 y 5); plazo |
+
+### D. Correcciones «Dice / Debe decir» (en la celda [BORRADOR] del notebook; los 7 «Dice» se verificaron como texto literal)
+
+| # | Celda | Dice | Debe decir | Prioridad |
+|---|---|---|---|---|
+| 1 | Encabezado | «…se incluyeron tres secciones de apoyo para el informe: … y notas de apoyo para la Formativa 4.» | «…se incluyeron cuatro secciones de apoyo…, su sensibilidad a la razón de costos y notas de apoyo para el informe de la Sumativa 4.» | P3 |
+| 2 | §3, párrafo 1 | «80 % (4:1) (Notebook S2, §8).» | «80 % (4:1), según la regla del vendedor de diarios, q* = c_u / (c_u + c_o) (Arrow et al., 1951; Universidad Andrés Bello, s. f.-b).» | **P1** (feedback) |
+| 3 | §3, Limitaciones | «el cuantil óptimo pasa de 67 % a 80 %.» | «el cuantil óptimo pasa a 67 % o a 80 %, respectivamente (Tabla 5).» | P2 |
+| 4 | §3, Limitaciones | «(Jarque-Bera p = 0,001, Semana 2)» | «(…, Semana 2; Jarque y Bera, 1987)» | P3 |
+| 5 | §2, Cadena de evidencia | «ADF = −8,82 (frente al valor crítico −2,90) y KPSS = 0,040 (frente a 0,463).» | Agregar «Dickey y Fuller, 1979» y «Kwiatkowski et al., 1992» | P2 |
+| 6 | Declaración de IA | «Se utilizó como borrador y apoyo práctico para el código de las secciones, borrador de ideas y guías de interpretación.» | Describir con exactitud: el asistente programó las Tablas 2 a 5 y las Figuras 1 y 2, verificó cifras, propuso las correcciones y la lista de referencias, y armó el PDF de la Formativa 4 | **P1** |
+| 7 | Declaración de IA | «\|Se utilizó» | «\| Se utilizó» | P3 |
+
+### E. Cifras de la sensibilidad (Tabla 5) para el autor
+
+| k = c_u / c_o | q* | Volumen 2025 (GWh) | Sobre la media | Sobrecosto esperado del 75 % | Sobrecosto esperado de la media | Ahorro 2024 de q* frente a la media |
+|---|---|---|---|---|---|---|
+| 2 | 66,7 % | 1.476,7 | +2,5 % | +2,9 % | +8,2 % | 30,2 % |
+| 3 | 75,0 % | 1.499,3 | +4,1 % | 0,0 % | +22,8 % | 38,9 % |
+| 4 | 80,0 % | 1.514,9 | +5,2 % | +1,5 % | +38,6 % | 44,4 % |
+
+Fuera del rango: con k = 1 el 75 % cuesta +22,5 % (la media, +0,1 %); con k = 6, +8,9 %. La media solo conviene con k < 1,75.
+
+### F. Pendientes que solo el autor puede resolver
+
+1. ⚠️ **Plazo:** el PDF dice «hasta las 23:59 hrs. del domingo de la Semana 4», que es **hoy, domingo 25 de octubre**; la guía de compañía dice «plazo publicado en Canvas». Confirmar en Canvas.
+2. **Redactar el informe de 5 a 7 páginas** (no existe aún) con el esquema de `docs/esquema_informe_s4rmoncada.md`, incluida la interpretación de la Tabla 5 y la Figura 2.
+3. Decidir las correcciones 1 a 7 y **borrar las tres celdas `[BORRADOR]`** antes de entregar; volver a ejecutar el notebook desde un kernel reiniciado.
+4. **Declaración de IA:** redactarla con todo el apoyo recibido, incluido este (código de la §3.1, lista de referencias). Si hay dudas sobre el código hecho por la IA, consultar al docente en el foro.
+5. Año de Box et al.: la guía usa 2016; las Sumativas 2 y 3, 2015. Usar uno solo.
+6. Regenerar el ZIP de entrega (`entregas/mcdi505_s4rmoncada.zip`) con el notebook final, el CSV y el PDF del informe.
+
+**El notebook se modificó en disco:** si está abierto en VS Code, recargarlo sin guardar el buffer abierto.
+
+---
+
 ## Décima revisión (21 de octubre): PDF regenerado con la «Cadena de evidencia»
 
 Se regeneró `entregas/mcdi505_s4rmoncada.pdf` incorporando al **bloque 2**, de forma **literal**, el párrafo «Cadena de evidencia» del autor (§2 del notebook). Sigue en 2 páginas y el texto completo cabe en la página 1.
