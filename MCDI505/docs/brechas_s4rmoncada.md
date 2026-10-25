@@ -5,6 +5,56 @@
 - **Ejecución de control:** con kernel nuevo, sobre una copia: **9/9 celdas de código, en orden y sin errores**; 1 figura (Figura 1)
 - **Plazo de la Formativa 4:** **viernes 23 de octubre**, 23:59. La guía movió la fecha desde el miércoles: «si algún otro documento indica el miércoles, rige esta fecha»
 
+## Decimotercera revisión (25 de octubre): 3.ª ronda contra la Sumativa 4
+
+> Revisión con la skill `validador-notebooks-rubrica` contra `MCDI505_Sumativa4_instrucciones_v2.pdf`. Los niveles son **estimaciones**, no una calificación. Los textos del autor no se modificaron; las 5 correcciones nuevas están en `[BORRADOR] Correcciones «Dice / Debe decir» (3.ª ronda)`, antes de la declaración de IA, y sus 5 «Dice» se verificaron como texto literal.
+
+### A. Qué cambió el autor desde la duodécima revisión
+
+| Cambio | Estado |
+|---|---|
+| Correcciones 1 a 6 de la 2.ª ronda (§3.1 y bloque 3) | ✅ Aplicadas. La viñeta 1 ya concuerda con la Tabla 5 (q* de 66,7 % a 80 %; 75 % cuesta ≤ 2,9 % sobre el óptimo) |
+| Correcciones 7 a 15 (referencias) | ✅ Nota del asistente borrada; Hurst, Engle, Hyndman y Koehler, Ljung y Box, Box et al., UNAB s. f.-a e Hyndman y Athanasopoulos citados; Bollerslev y Seabold eliminados. **Las 13 entradas de la lista se citan en el texto y todas las citas tienen entrada** |
+| Corrección 16 (año de Box et al.) | ✅ Se mantuvo 2015, igual que en las Sumativas 2 y 3 |
+| Correcciones 17 y 18 (declaración de IA) | ❌ Sin aplicar (siguen pendientes desde la 1.ª ronda) |
+| Recuadro `[BORRADOR]` de la 1.ª ronda | ⚠️ **Reapareció** (probablemente al guardar desde un buffer de VS Code sin recargar). Se quitó: sus «Dice» ya no eran texto actual |
+| Código y salidas | Sin cambios |
+
+### B. Resultado de Run All
+
+**APROBADO** (`nbclient`, carpeta limpia, kernel nuevo, 0 errores, 11/11 celdas en orden, 2 figuras). N1: las cifras sin coincidencia literal son las ya conciliadas (S2, S3 o derivadas de la Tabla 2) y «3,56», que venía del CSS del recuadro antiguo. A2: falso positivo (DOI de Kwiatkowski et al., `90104-Y`). C1, S1 y E1 no aplican al anexo de la S4.
+
+### C. Cruce con la rúbrica de la Sumativa 4
+
+| # | Criterio | Evidencia citada (anexo) | Nivel estimado | Brecha |
+|---|---|---|---|---|
+| 1 | Informe ejecutivo | §4, bloque 1 y Figura 1 | **Sin evidencia**: el informe de 5 a 7 páginas no existe (`entregas/` solo tiene el PDF y el ZIP de la Formativa, del 21 de octubre) | Redactar el informe |
+| 2 | Sustento técnico | §2, Cadena de evidencia: «(H = 0,652, compatible con ruido blanco; Hurst, 1951) ni volatilidad condicional (ARCH-LM p = 0,639; S3; Engle, 1982)… (MASE 0,61, S4; Hyndman y Koehler, 2006)» · Tabla 2 | Potencial **Excelente** (9) | Llevarlo al informe con sus cifras |
+| 3 | Conclusiones y recomendaciones | §3.1: «Aunque el cuantil óptimo varía entre 66,7 % y 80 % (1.476,7 a 1.514,9 GWh), contratar el 75 % cuesta como máximo 2,9 % más que el óptimo» · bloque 3 con la limitación cuantificada · cinco limitaciones (§3) | Potencial **Excelente** (9) | Sigue habiendo **una** recomendación accionable (contratar el 75 %); la rúbrica habla de recomendaciones. Decisión del autor |
+| 4 | Ortografía y redacción | Textos sin errores relevantes; dos ajustes de forma (correcciones 4 y 5) | Potencial **Excelente** (9) | — |
+| 5 | Formato y entrega | Nombre ✅; anexo ejecutado ✅; **referencias APA completas y todas citadas** ✅ | Anexo **Excelente**; el criterio completo depende del informe, el plazo y la declaración | Informe de 5 a 7 páginas en PDF o DOCX, sin código, con las mismas referencias |
+
+### D. Correcciones de la 3.ª ronda
+
+| Prioridad | # | Ubicación | Problema |
+|---|---|---|---|
+| **P1** | 1 | Declaración de IA | No describe todo el apoyo recibido |
+| **P1** | 2 | Declaración de IA | «se generó el PDF ejecutivo» se refiere al PDF de la Formativa; ajustarlo al informe de la Sumativa |
+| P3 | 3 | Declaración de IA | Espacio después de la barra |
+| P3 | 4 | §3.1, viñeta 3 | «sería menor y … y …»: repetición y doble «y» |
+| P3 | 5 | §3.1, viñeta 1 | «k = 2-4» → «k = 2 a 4» |
+
+### E. Pendientes que solo el autor puede resolver
+
+1. ⚠️ **Plazo:** según el PDF vence **hoy, domingo 25 de octubre, a las 23:59**; la guía remite a Canvas.
+2. **Redactar el informe de 5 a 7 páginas**: el anexo ya está listo como respaldo.
+3. Redactar la declaración de IA (correcciones 1 y 2); si hay dudas sobre el código hecho por la IA, consultar al docente.
+4. **Borrar la celda `[BORRADOR]`**, ejecutar desde un kernel reiniciado y regenerar `entregas/mcdi505_s4rmoncada.zip` con el notebook, el CSV y el PDF del informe.
+
+**Antes de editar en VS Code:** recargar el notebook desde el disco. Si se guarda el buffer antiguo, vuelven a aparecer celdas borradas o se pierde la celda nueva.
+
+---
+
 ## Duodécima revisión (25 de octubre): validación de los cambios del autor contra la Sumativa 4
 
 > Revisión con la skill `validador-notebooks-rubrica` contra `MCDI505_Sumativa4_instrucciones_v2.pdf`. Los niveles son **estimaciones**, no una calificación. Los textos del autor no se modificaron: las 18 correcciones nuevas están en la celda `[BORRADOR] Correcciones «Dice / Debe decir» (2.ª ronda)`, antes de la declaración de IA; los 17 «Dice» con cita se verificaron como texto literal.
