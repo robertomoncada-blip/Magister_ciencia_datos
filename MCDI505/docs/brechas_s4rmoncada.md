@@ -5,6 +5,57 @@
 - **Ejecución de control:** con kernel nuevo, sobre una copia: **9/9 celdas de código, en orden y sin errores**; 1 figura (Figura 1)
 - **Plazo de la Formativa 4:** **viernes 23 de octubre**, 23:59. La guía movió la fecha desde el miércoles: «si algún otro documento indica el miércoles, rige esta fecha»
 
+## Duodécima revisión (25 de octubre): validación de los cambios del autor contra la Sumativa 4
+
+> Revisión con la skill `validador-notebooks-rubrica` contra `MCDI505_Sumativa4_instrucciones_v2.pdf`. Los niveles son **estimaciones**, no una calificación. Los textos del autor no se modificaron: las 18 correcciones nuevas están en la celda `[BORRADOR] Correcciones «Dice / Debe decir» (2.ª ronda)`, antes de la declaración de IA; los 17 «Dice» con cita se verificaron como texto literal.
+
+### A. Qué cambió el autor desde la undécima revisión
+
+| Cambio | Estado |
+|---|---|
+| Correcciones 1 a 5 de la 1.ª ronda (encabezado, cita de Arrow et al. y UNAB, «pasa a 67 % o a 80 %», Jarque y Bera, Dickey y Fuller y Kwiatkowski et al.) | ✅ Aplicadas tal cual |
+| Conclusiones propias de la §3.1 (3 viñetas) | ✅ Escritas. ⚠️ La viñeta 1 no coincide con la Tabla 5 (corrección 2) |
+| Recuadros `[BORRADOR]` de la 1.ª ronda | ✅ Borrados; la lista de referencias quedó como sección «Referencias (APA 7)» |
+| Correcciones 6 y 7 (declaración de IA) | ❌ Sin aplicar |
+| Código y salidas | Sin cambios: `execution_count` 1..11 y salidas de la ejecución anterior |
+
+### B. Resultado de Run All
+
+**APROBADO** (`nbclient`, carpeta limpia con el notebook y el CSV, kernel nuevo, 0 errores, 11/11 celdas en orden, 2 figuras). N1: 0,001; 0,040; 0,463; 0,639; 0,652 y 8,82 están citadas a la S2 o la S3; 0,03 es derivada de la Tabla 2. Las cifras nuevas del autor (1,5 %, 2,9 %, 1,75) aparecen en la salida de la Tabla 5. Reglas que no aplican al anexo de la S4: C1, S1 y E1 (heurística de 10 a 15 páginas de la Sumativa 1). A2 es un falso positivo (DOI de Seabold y Perktold).
+
+### C. Cruce con la rúbrica de la Sumativa 4
+
+| # | Criterio | Evidencia citada (anexo) | Nivel estimado | Brecha |
+|---|---|---|---|---|
+| 1 | Informe ejecutivo | §4, bloque 1 y Figura 1 | **Sin evidencia**: el informe de 5 a 7 páginas no existe aún (`entregas/` solo tiene el PDF y el ZIP de la Formativa, del 21 de octubre) | Redactar el informe |
+| 2 | Sustento técnico | §2, Cadena de evidencia (ahora con citas de ADF y KPSS) · Tabla 2 | Potencial **Excelente** (9) | Citar Hurst, Engle, Hyndman y Koehler y Ljung y Box donde se usan (correcciones 8 a 11) |
+| 3 | Conclusiones y recomendaciones | §3.1: «La recomendación del 75 % es robusta dentro del rango k = 2-4.» · «un sobrecosto estimado entre 1,5 % y 2,9 %» · «La recomendación cambiaría si la relación de precios spot bajara de k < 1,75.» · §3: cinco limitaciones | **Bueno → Excelente** (6-9) | ⚠️ **P1:** la viñeta 1 dice que «el nivel óptimo prácticamente no cambia», pero q* va de 66,7 % a 80 % (1.476,7 a 1.514,9 GWh); lo robusto es el costo del 75 % (≤ 2,9 % sobre el óptimo). La viñeta 2 propone reformular la limitación, pero el bloque 3 sigue igual (corrección 6). Sigue habiendo una sola recomendación accionable |
+| 4 | Ortografía y redacción | Textos sin errores relevantes; precisiones en las correcciones 1, 3, 4 y 5 | Potencial **Excelente** (9) | Viñeta 2 en formato pregunta–respuesta («Sí, conviene…») |
+| 5 | Formato y entrega | Nombre ✅; anexo ejecutado ✅; **referencias:** 15 en la lista y **solo 6 citadas** (Arrow, Gneiting, Dickey, Kwiatkowski, Jarque, UNAB s. f.-b); queda una nota del asistente en la celda de Referencias | **Insuficiente → Bueno** hoy; **Excelente** con el informe y las correcciones 7 a 16 | Citar o eliminar las 9 entradas sin cita; borrar la nota (corrección 7); unificar el año de Box et al. |
+
+### D. Correcciones priorizadas (detalle en la celda `[BORRADOR]` del notebook)
+
+| Prioridad | # | Ubicación | Problema |
+|---|---|---|---|
+| **P1** | 2 | §3.1, viñeta 1 | Afirmación que contradice la Tabla 5 (q* sí cambia) |
+| **P1** | 7 | Referencias | Párrafo del asistente dentro de la celda final |
+| **P1** | 17 | Declaración de IA | No describe todo el apoyo (código de las Tablas 2 a 5 y las Figuras 1 y 2, preguntas guía de la §3.1, referencias, PDF) |
+| P2 | 3, 4, 6 | §3.1 y §4, bloque 3 | Precisión de la sensibilidad; coherencia de la limitación con la Tabla 5 |
+| P2 | 8 a 14 | §2, §3, §4 y encabezado | Citas APA para que las referencias de la lista queden citadas |
+| P3 | 1, 5, 15, 16, 18 | Varias | Forma: título, «cobertura», Bollerslev y Seabold, año de Box et al., espacio en la tabla |
+
+### E. Pendientes que solo el autor puede resolver
+
+1. ⚠️ **Plazo:** según el PDF vence **hoy, domingo 25 de octubre, a las 23:59**; la guía remite a Canvas. Confirmar.
+2. **Redactar el informe de 5 a 7 páginas** (PDF o DOCX, sin código), con la §3.1 y solo las referencias citadas.
+3. Decidir las 18 correcciones, **borrar la celda `[BORRADOR]`** y ejecutar el notebook desde un kernel reiniciado.
+4. Redactar la declaración de IA con todo el apoyo recibido; si hay dudas sobre el código hecho por la IA, consultar al docente.
+5. Regenerar `entregas/mcdi505_s4rmoncada.zip` con el notebook final, el CSV y el PDF del informe.
+
+**El notebook se modificó en disco** (se agregó una celda de markdown): si está abierto en VS Code, recargarlo sin guardar el buffer abierto, o se perderá la celda nueva al guardar.
+
+---
+
 ## Undécima revisión (25 de octubre) · BORRADOR: validación contra la Sumativa 4 y feedback del profesor
 
 > **Modo borrador.** Revisión hecha con la skill `validador-notebooks-rubrica` contra `MCDI505_Sumativa4_instrucciones_v2.pdf` (5 criterios, 9 puntos cada uno, 25 % de la nota). Los niveles son **estimaciones**, no una calificación. Lo calificado en la Sumativa es el **informe ejecutivo de 5 a 7 páginas**; el notebook es su anexo y «no se califica por separado». Los textos del autor no se modificaron: las propuestas están en celdas `[BORRADOR]` del notebook.
