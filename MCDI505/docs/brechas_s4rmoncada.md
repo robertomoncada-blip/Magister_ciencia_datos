@@ -34,7 +34,7 @@
 
 1. **P1 · Declaración de IA:** el PDF reproduce la declaración actual, que **no describe todo el apoyo**: código de las Tablas 2 a 5 y las Figuras 1 y 2, verificación de cifras, preguntas guía de la §3.1, correcciones «dice / debe decir», lista de referencias y **armado de este PDF** (diagramación, tablas, figuras y notas de tabla con los textos del autor). Además, «se generó el PDF ejecutivo» no dice quién lo generó. Corregirla en el notebook y regenerar el PDF; si hay dudas sobre el código hecho por la IA, consultar al docente.
 2. **P3 · Repeticiones:** la §1 y la §3 repiten ideas de los bloques 1 y 3 (por ejemplo, el «≈ 40 % menos de error» y el «39 % menos de costo»). Si se quiere, acortar alguno de los dos textos en el notebook.
-3. Regenerar `entregas/mcdi505_s4rmoncada.zip` con el PDF, el notebook final y el CSV, y validarlo descomprimiendo en una carpeta vacía.
+3. ✅ **ZIP regenerado (25 de octubre):** `entregas/mcdi505_s4rmoncada.zip` con `mcdi505_s4rmoncada.pdf` (6 páginas), `mcdi505_s4rmoncada.ipynb` (sin celdas `[BORRADOR]`) y `consumo_electrico_litoral_depurado_s4.csv`. Validado descomprimiendo en una carpeta vacía y ejecutando con kernel nuevo: 11/11 celdas en orden, 0 errores, 2 figuras, cifras clave iguales. ⚠️ Incluye la declaración de IA **sin corregir** (punto 1): si se corrige, regenerar el PDF y el ZIP.
 
 ---
 
